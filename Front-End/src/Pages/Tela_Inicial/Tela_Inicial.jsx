@@ -5,18 +5,18 @@ export default function Inicial (){
         return(
             <div className={styles.containerPrincipal}>
                 <div className={styles.tituloContainer}>
-                    <h3 className={styles.tituloPequeno}>VAMOS JOGAR JUNTOS</h3>
-                    <h1 className={styles.tituloGrande}>GuriQuiz</h1>
+                    <h3><img className={styles.tituloPequeno} src="/images/jogarJuntos.png" alt="" /></h3>
+                    <h1><img className={styles.tituloGuri} src="/images/tituloGuri.png" alt="" /></h1>
                 </div>
                 <div className={styles.botoesContainer}>
                     <button className={`${styles.botao} ${styles.botaoPrimario}`}>
                         <Link to="/login" className={styles.loginLink}>
-                            Login
+                            <img className={styles.btnLogin} src="/images/botaoLogin.png" alt="" />
                         </Link>
                     </button>
                     <button className={`${styles.botao} ${styles.botaoSecundario}`}>
                         <Link to="/cadastrar" className={styles.cadastroLink}>
-                            Cadastrar
+                            <img className={styles.btnCadastro} src="/images/botaoCadastro.png" alt="" />
                         </Link>
                     </button>
                 </div>

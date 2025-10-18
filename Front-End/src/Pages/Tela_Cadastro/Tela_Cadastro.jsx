@@ -3,7 +3,7 @@ import styles from './Tela_Cadastro.module.css'
 export default function Cadastro() {
 
     return (
-        <div className={styles.container}>
+        <div className={styles.containerCadastro}>
             <h1 className={styles.title}>CADASTRO</h1>
             <form className={styles.form}>
                 <div className={styles.field}>

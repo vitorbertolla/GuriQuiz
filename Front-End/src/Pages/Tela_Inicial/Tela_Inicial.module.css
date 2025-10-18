@@ -1,8 +1,53 @@
-body{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-image: ('../../public/images/BackgroundInicio.jpeg');
-    width: 100%;
+}
 
+button {
+  all: unset;         
+  cursor: pointer;       
+  display: inline-block;  
+}
+
+.containerPrincipal {
+  height: 100vh;
+  width: 100%;
+  background-image: url("/images/BackgroundInicio.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+  image-rendering: pixelated;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btnLogin,
+.btnCadastro {
+    height: 100px;
+}
+
+.botoesContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.tituloGuri {
+  display: block;
+  margin: 0 auto;     
+  padding-bottom: 30px;
+  border: 0;
+  max-width: 60%;      
+  height: auto;       
+}
+
+.tituloPequeno{
+  display: block;
+  margin: 0 auto;     
+  padding-bottom: 50px;
+  border: 0;
+  max-width: 30%;      
+  height: auto;     
 }

@@ -2,7 +2,7 @@ import styles from './Tela_Login.module.css'
 
 export default function Login (){
         return(
-            <div>
+            <div className={styles.containerLogin}>
                 <h1 className={styles.title}>LOGIN</h1>
                 <form className={styles.form}>
                     <div className={styles.field}>
