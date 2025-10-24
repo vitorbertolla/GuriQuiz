@@ -1,7 +1,7 @@
 import styles from './Tela_Inicial.module.css'
 import { Link } from 'react-router-dom';
 
-export default function Inicial (){
+export default function Tela_Inicial (){
         return(
             <div className={styles.containerPrincipal}>
                 <div className={styles.tituloContainer}>

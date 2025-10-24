@@ -6,7 +6,7 @@ import {registrarComEmail} from "../../services/authentication";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 
-export default function Cadastro() {
+export default function Tela_Cadastro() {
     const [email, setEmail] = useState("");
     const [nick, setNick] = useState("");
     const [senha, setSenha] = useState("");

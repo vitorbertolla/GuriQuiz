@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../services/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import {loginComEmail, loginComGoogle,} from "../../services/authentication";
-export default function Login (){
+export default function Tela_Login (){
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
