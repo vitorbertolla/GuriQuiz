@@ -5,7 +5,7 @@ import Tela_Cadastro from './Pages/Tela_Cadastro/Tela_Cadastro.jsx';
 import Tela_Start from './Pages/Tela_Start/Tela_Start.jsx';
 import Tela_Menu from './Pages/Tela_Menu/Tela_Menu.jsx';
 import Tela_Ranking from './Pages/Tela_Ranking/Tela_Ranking.jsx';
-import Tela_Cadastro_Pergunta from './pages/Tela_Cadastro_Pergunta/Tela_Cadastro_Pergunta.jsx';
+import Tela_Cadastro_Pergunta from './Pages/Tela_Cadastro_Pergunta/Tela_Cadastro_Pergunta.jsx';
 import Tela_Config_Quiz from './Pages/Tela_Config_Quiz/Tela_Config_Quiz.jsx';
 import Tela_Jogo from './Pages/Tela_Jogo/Tela_Jogo.jsx';
 import Tela_Fim_Jogo from './Pages/Tela_Fim_Jogo/Tela_Fim_Jogo.jsx';

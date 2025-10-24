@@ -2,23 +2,24 @@ import styles from './Tela_Menu.module.css'
 
 export default function Tela_Menu () {
     return (
-        <div className="tela-menu">
-            <header className="tela-menu__header">
-                <button className="tela-menu__exit-button">Exit</button>
-                <h1 className="tela-menu__title">Menu</h1>
-            </header>
-
-            <main className="tela-menu__main">
-                <section className="tela-menu__controls">
-                    <div className="tela-menu__options">
-                        <button className="tela-menu__option-button">Cadastro de Perguntas</button>
-                        <button className="tela-menu__option-button">Raking</button>
-                    </div>
-                    <div className="tela-menu__play">
-                        <button className="tela-menu__play-button">Jogar</button>
-                    </div>
-                </section>
-            </main>
+        <div className={styles.container}>
+            <div className={styles.telaMenuMenu}>
+                <header className={styles.telaMenuHeader}>
+                    <button ><img className={styles.telaMenuBtnExit} src="/images/botaoExit.png" alt="" /></button>
+                    <h1><img className={styles.telaMenuTitle} src="/images/tituloMenu.png" alt="" /></h1>
+                </header>
+                <main className={styles.telaMenuMain}>
+                    <section className={styles.telaMenuControls}>
+                        <div className={styles.telaMenuOptions}>
+                            <button><img className={styles.telaMenuBtnOption} src="/images/botaoCadastroPerguntas.png" alt="" /></button>
+                            <button><img className={styles.telaMenuBtnOption} src="/images/botaoRanking.png" alt="" /></button>
+                        </div>
+                        <div className={styles.telaMenuPlay}>
+                            <button><img className={styles.telaMenuBtnPlay} src="/images/botaoJogar.png" alt="" /></button>
+                        </div>
+                    </section>
+                </main>
+            </div>
         </div>
     )
 }
