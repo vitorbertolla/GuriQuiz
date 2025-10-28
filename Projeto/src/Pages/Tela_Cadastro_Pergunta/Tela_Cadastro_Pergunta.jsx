@@ -1,26 +1,49 @@
 import styles from './Tela_Cadastro_Pergunta.module.css'
+import { useState } from 'react'
+import addPergunta from './Tela_Cadastro_Pergunta_Function.jsx'
 
-export default function Tela_Cadastro_Pergunta () {
-    return(
-        <div className="tela-cadastro-pergunta">
-            <header className="tela-cadastro-pergunta__header">
-                <button className="tela-cadastro-pergunta__exit-button">Exit</button>
-                <h1 className="tela-cadastro-pergunta__title">Cadastro de Perguntas</h1>
+export default function Tela_Cadastro_Pergunta() {
+    const [pergunta, setPergunta] = useState('')
+    const [dificuldade, setDificuldade] = useState('')
+    const [materia, setMateria] = useState('')
+    const [alternativas, setAlternativas] = useState([])   
+    const [novaAlternativa, setNovaAlternativa] = useState('')
+    const [modalAberto, setModalAberto] = useState(false) 
+
+    function submit(e) {
+        e.preventDefault()
+        if (!pergunta || !dificuldade || !materia) {
+            alert('Por favor, preencha todos os campos obrigatórios.')
+            return
+        }
+        addPergunta(pergunta, dificuldade, materia)
+    }
+
+    return (
+        <div className={styles['tela-cadastro-pergunta']}>
+            <header className={styles['tela-cadastro-pergunta__header']}>
+                <button className={styles['tela-cadastro-pergunta__exit-button']}>Exit</button>
+                <h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>
             </header>
 
-            <main className="tela-cadastro-pergunta__main">
-                <form className="tela-cadastro-pergunta__form" action="">
-                    <div className="tela-cadastro-pergunta__form-row">
+            <main className={styles['tela-cadastro-pergunta__main']}>
+                <form
+                    className={styles['tela-cadastro-pergunta__form']}
+                    onSubmit={submit}
+                >
+                    <div className={styles['tela-cadastro-pergunta__form-row']}>
                         <input
-                            className="tela-cadastro-pergunta__input tela-cadastro-pergunta__input--pergunta"
+                            className={`${styles['tela-cadastro-pergunta__input']} ${styles['tela-cadastro-pergunta__input--pergunta']}`}
                             type="text"
                             placeholder="Pergunta"
+                            value={pergunta}
+                            onChange={(e) => setPergunta(e.target.value)}
                         />
 
                         <select
-                            className="tela-cadastro-pergunta__select tela-cadastro-pergunta__select--dificuldade"
-                            name="Dificuldade"
-                            id="Dificuldade"
+                            className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
+                            value={dificuldade}
+                            onChange={(e) => setDificuldade(e.target.value)}
                         >
                             <option value="">Selecione dificuldade</option>
                             <option value="facil">Fácil</option>
@@ -29,9 +52,9 @@ export default function Tela_Cadastro_Pergunta () {
                         </select>
 
                         <select
-                            className="tela-cadastro-pergunta__select tela-cadastro-pergunta__select--materia"
-                            name="Materia"
-                            id="Materia"
+                            className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--materia']}`}
+                            value={materia}
+                            onChange={(e) => setMateria(e.target.value)}
                         >
                             <option value="">Selecione matéria</option>
                             <option value="matematica">Matemática</option>
@@ -40,22 +63,23 @@ export default function Tela_Cadastro_Pergunta () {
 
                         <button
                             type="button"
-                            className="tela-cadastro-pergunta__button tela-cadastro-pergunta__button--alternativas"
+                            className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}
+                            onClick={() => setModalAberto(true)}
                         >
                             Alternativas
                         </button>
                     </div>
 
-                    <div className="tela-cadastro-pergunta__actions">
+                    <div className={styles['tela-cadastro-pergunta__actions']}>
                         <button
                             type="button"
-                            className="tela-cadastro-pergunta__button tela-cadastro-pergunta__button--ai"
+                            className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
                         >
                             Criar com IA
                         </button>
                         <button
                             type="submit"
-                            className="tela-cadastro-pergunta__button tela-cadastro-pergunta__button--submit"
+                            className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--submit']}`}
                         >
                             Cadastrar Pergunta
                         </button>
