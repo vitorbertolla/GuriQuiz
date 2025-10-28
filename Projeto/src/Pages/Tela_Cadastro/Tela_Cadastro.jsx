@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react'
 import { auth } from "../../services/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import {registrarComEmail} from "../../services/authentication";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, query, setDoc, getDocs, where, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
+
+
 
 export default function Tela_Cadastro() {
     const [email, setEmail] = useState("");
@@ -23,12 +25,21 @@ export default function Tela_Cadastro() {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!passwordValidation()) return;
 
     console.log("Iniciando cadastro...", email, nick);
 
+    //validação de senha
     if (senha !== confirmarSenha){
         setAlertSenhasDiferentes(true);
         console.log("Senhas diferentes");
+        return;
+    }
+
+     // validação do nome
+    const nickInDB = await nickValidation(nick);
+        if (nickInDB) {
+        alert("Esse nome de usuário já está em uso. Escolha outro.");
         return;
     }
 
@@ -57,6 +68,25 @@ const handleSubmit = async (e) => {
     }
 };
 
+const passwordValidation = () => {
+    if(senha.length < 8){
+        alert("A senha deve conter pelo menos 8 dígitos")
+        return false
+    }
+    else{return true}
+};
+
+const nickValidation = async (nick) => {
+    const nickRef = collection(db, "usuarios");
+    const q = query(nickRef, where("nick", "==", nick))
+    const querySnapshot = await getDocs(q);
+
+  return !querySnapshot.empty; // retorna true se o nome já existe
+};
+
+
+
+
 
     return (
         <div className={styles.container}>
@@ -78,7 +108,12 @@ const handleSubmit = async (e) => {
                         {alertSenhasDiferentes && <span className={styles.alert}>As senhas não coincidem!</span>}
                     </div>
                     <div className={styles.actions}>
-                        <button type="submit"><img className={styles.botao} src="/images/botaoCadastrar.png" alt="" /></button>
+                        <button
+                        type="submit">
+                            <img className={styles.botao} 
+                            src="/images/botaoCadastrar.png" 
+                            alt="" 
+                        /></button>
                     </div>
                 </form>
             </div>
