@@ -43,6 +43,13 @@ const handleSubmit = async (e) => {
         return;
     }
 
+    // validação do email
+    const emailInDB = await emailValidation(email);
+        if (emailInDB) {
+        alert("Esse email de usuário já está em uso. Escolha outro.");
+        return;
+    }
+
     try {
         const userCredential = await registrarComEmail(email, senha, nick);
 
@@ -82,6 +89,14 @@ const nickValidation = async (nick) => {
     const querySnapshot = await getDocs(q);
 
   return !querySnapshot.empty; // retorna true se o nome já existe
+};
+
+const emailValidation = async (email) => {
+    const emailRef = collection(db, "usuarios");
+    const q = query(emailRef, where("email", "==", email))
+    const querySnapshot = await getDocs(q);
+
+  return !querySnapshot.empty; // retorna true se o email já existe
 };
 
 
