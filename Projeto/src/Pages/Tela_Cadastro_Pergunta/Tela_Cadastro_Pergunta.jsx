@@ -7,7 +7,11 @@ export default function Tela_Cadastro_Pergunta() {
     const [dificuldade, setDificuldade] = useState('')
     const [materia, setMateria] = useState('')
     const [alternativas, setAlternativas] = useState([])   
-    const [novaAlternativa, setNovaAlternativa] = useState('')
+    const [alternativaA, setAlternativaA] = useState('')
+    const [alternativaB, setAlternativaB] = useState('')
+    const [alternativaC, setAlternativaC] = useState('')
+    const [alternativaD, setAlternativaD] = useState('')
+    const [correta, setCorreta] = useState('')
     const [modalAberto, setModalAberto] = useState(false) 
 
     function submit(e) {
@@ -16,7 +20,31 @@ export default function Tela_Cadastro_Pergunta() {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
-        addPergunta(pergunta, dificuldade, materia)
+        if (alternativas.length === 0) {
+            alert('Adicione as alternativas antes de cadastrar a pergunta.')
+            return
+        }
+        addPergunta(pergunta, dificuldade, materia, alternativas, correta)
+        
+        // Resetar os campos após o cadastro
+        setPergunta('')
+        setDificuldade('')
+        setMateria('')
+        setAlternativas([])
+        setAlternativaA('')
+        setAlternativaB('')
+        setAlternativaC('')
+        setAlternativaD('')
+        setCorreta('')
+    }
+    function confirmarAlternativas() {
+        setAlternativas([
+            { letra: 'A', texto: alternativaA },
+            { letra: 'B', texto: alternativaB },
+            { letra: 'C', texto: alternativaC },
+            { letra: 'D', texto: alternativaD },
+        ])
+        setModalAberto(false)
     }
 
     return (
@@ -64,10 +92,12 @@ export default function Tela_Cadastro_Pergunta() {
                         <button
                             type="button"
                             className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}
-                            onClick={() => setModalAberto(true)}
+                            onClick={() => setModalAberto(true) }   
                         >
                             Alternativas
                         </button>
+
+                        
                     </div>
 
                     <div className={styles['tela-cadastro-pergunta__actions']}>
@@ -84,6 +114,36 @@ export default function Tela_Cadastro_Pergunta() {
                             Cadastrar Pergunta
                         </button>
                     </div>
+                    {modalAberto && (
+                            <div>
+                                <h3>Alternativas</h3>
+                                <input type="text"  
+                                placeholder='Digite a alternativa A' 
+                                value={alternativaA} onChange={(e) => 
+                                setAlternativaA(e.target.value)} />
+                                <button type='button' onClick={() =>setCorreta("A")}>certa</button>
+                                
+                                <input type="text"  
+                                placeholder='Digite a alternativa B' 
+                                value={alternativaB} onChange={(e) => 
+                                setAlternativaB(e.target.value)} />
+                                <button type='button' onClick={() =>setCorreta("B")}>certa</button>
+
+                                <input type="text"  
+                                placeholder='Digite a alternativa C' 
+                                value={alternativaC} onChange={(e) => 
+                                setAlternativaC(e.target.value)} />
+                                <button type='button' onClick={() =>setCorreta("C")}>certa</button>
+
+                                <input type="text"  
+                                placeholder='Digite a alternativa D' 
+                                value={alternativaD} onChange={(e) => 
+                                setAlternativaD(e.target.value)} />
+                                <button type='button' onClick={() =>setCorreta("D")}>certa</button>
+
+                                <button type='button' onClick={confirmarAlternativas}>Confirmar</button>
+                            </div>
+                        )}
                 </form>
             </main>
         </div>
