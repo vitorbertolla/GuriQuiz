@@ -25,10 +25,22 @@ export default function Tela_Login (){
   const handleLoginComEmail = async (e) => {
     e.preventDefault()
     try {
-        await loginComEmail(email, senha)
+      await loginComEmail(email, senha)
     } catch (err) {
-        console.log(err)
-        alert('Email ou senha incorretos')
+      console.error('Login error:', err)
+      const code = err?.code || ''
+
+      if (code === 'auth/wrong-password' || code === 'auth/user-not-found') {
+        alert('Email ou senha incorretos. Por favor, verifique suas credenciais.')
+      } else if (code === 'auth/invalid-email') {
+        alert('Formato de email inválido.')
+      } else if (code === 'auth/too-many-requests') {
+        alert('Muitas tentativas incorretas. Por favor, tente novamente mais tarde.')
+      } else if (code === 'auth/user-disabled') {
+        alert('Conta desativada. Contate o suporte.')
+      } else {
+        alert('Erro ao fazer login: ' + (err?.message || 'Erro desconhecido'))
+      }
     }
   }
 
