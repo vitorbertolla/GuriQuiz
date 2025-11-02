@@ -63,6 +63,7 @@ export const loginComEmail = async (email, senha) => {
     return userCredential
   } catch (error) {
     console.error("Erro ao logar:", error);
+    throw error;
   }
 };
 
