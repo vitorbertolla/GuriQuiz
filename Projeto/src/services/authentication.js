@@ -2,6 +2,7 @@ import { auth, googleProvider } from "./firebaseConfig";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut} from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import { use } from "react";
 
 // Login com Google
 export const loginComGoogle = async () => {
@@ -58,9 +59,11 @@ export async function registrarComEmail(email, senha, nick) {
 // Login com email/senha
 export const loginComEmail = async (email, senha) => {
   try {
-    await signInWithEmailAndPassword(auth, email, senha);
+    const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+    return userCredential
   } catch (error) {
     console.error("Erro ao logar:", error);
+    throw error;
   }
 };
 
