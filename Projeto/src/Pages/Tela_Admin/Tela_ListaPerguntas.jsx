@@ -26,6 +26,7 @@ const ListaPerguntas = ({ pergunta, removerPergunta, editarPergunta }) => {
           perguntaInicial={pergunta}
           onClose={() => setEditarPerguntaAtiva(false)}
           editar={true}
+          editarPergunta={editarPergunta}
         />
       )}
     </div>

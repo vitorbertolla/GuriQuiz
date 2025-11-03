@@ -2,17 +2,21 @@ import styles from './Tela_Cadastro_Pergunta.module.css'
 import { useState } from 'react'
 import {usePerguntas} from '../../services/crudPerguntas'
 
-export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false}) {
-    const {adicionarPergunta, editarPergunta} = usePerguntas()
+export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
+    // preferir funções passadas pelo pai (quando o componente for usado como modal dentro da lista, para edição, garantindo assim que os componentes pais atualizem a lista)
+    // caso contrário, usar o hook de perguntas (quando o componente for usado como página independente para cadastro)
+    const hooks = usePerguntas()
+    const adicionarPergunta = adicionarPerguntaProp || hooks.adicionarPergunta
+    const editarPergunta = editarPerguntaProp || hooks.editarPergunta
     const [descricao, setDescricao] = useState(perguntaInicial?.descricao || '');
     const [dificuldade, setDificuldade] = useState(perguntaInicial?.dificuldade || '');
     const [materia, setMateria] = useState(perguntaInicial?.materia || '');
     const [alternativas, setAlternativas] = useState(perguntaInicial?.alternativas || []);
     const [correta, setCorreta] = useState(perguntaInicial?.correta || ''); 
-    const [alternativaA, setAlternativaA] = useState(perguntaInicial?.alternativas[0].texto || '')
-    const [alternativaB, setAlternativaB] = useState(perguntaInicial?.alternativas[1].texto || '')
-    const [alternativaC, setAlternativaC] = useState(perguntaInicial?.alternativas[2].texto || '')
-    const [alternativaD, setAlternativaD] = useState(perguntaInicial?.alternativas[3].texto || '')
+    const [alternativaA, setAlternativaA] = useState(perguntaInicial?.alternativas?.[0]?.texto || '')
+    const [alternativaB, setAlternativaB] = useState(perguntaInicial?.alternativas?.[1]?.texto || '')
+    const [alternativaC, setAlternativaC] = useState(perguntaInicial?.alternativas?.[2]?.texto || '')
+    const [alternativaD, setAlternativaD] = useState(perguntaInicial?.alternativas?.[3]?.texto || '')
     const [modalAberto, setModalAberto] = useState(false) 
 
     function submit(e) {
@@ -104,6 +108,8 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             <option value="">Selecione matéria</option>
                             <option value="matematica">Matemática</option>
                             <option value="portugues">Português</option>
+                            <option value="fisica">Física</option>
+                            <option value="conhecimentosGerais">Conhecimentos Gerais</option>
                         </select>
 
                         <button
