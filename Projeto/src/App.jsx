@@ -10,7 +10,7 @@ import Tela_Config_Quiz from './Pages/Tela_Config_Quiz/Tela_Config_Quiz.jsx';
 import Tela_Jogo from './Pages/Tela_Jogo/Tela_Jogo.jsx';
 import Tela_Fim_Jogo from './Pages/Tela_Fim_Jogo/Tela_Fim_Jogo.jsx';
 import Tela_Resultados from './Pages/Tela_Resultados/Tela_Resultados.jsx';
-import Admin from './Pages/Admin/Admin.jsx';
+import Tela_Admin from './Pages/Tela_Admin/Tela_Admin.jsx';
 
 function App() {
 
@@ -28,7 +28,7 @@ function App() {
       <Route path="/jogo" element={<Tela_Jogo/>} />
       <Route path="/fimJogo" element={<Tela_Fim_Jogo/>} />
       <Route path="/resultados" element={<Tela_Resultados/>} />
-      <Route path="/admin" element={<Admin/>} />
+      <Route path="/admin" element={<Tela_Admin/>} />
 
     </Routes>
     </>

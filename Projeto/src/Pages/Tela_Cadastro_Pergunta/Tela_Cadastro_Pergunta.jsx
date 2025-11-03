@@ -1,6 +1,6 @@
 import styles from './Tela_Cadastro_Pergunta.module.css'
 import { useState } from 'react'
-import addPergunta from './Tela_Cadastro_Pergunta_Function.jsx'
+import addPergunta from './Tela_Cadastro_Pergunta_Function.js'
 
 export default function Tela_Cadastro_Pergunta() {
     const [pergunta, setPergunta] = useState('')
