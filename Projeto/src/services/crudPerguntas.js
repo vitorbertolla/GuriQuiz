@@ -1,17 +1,44 @@
+import { useEffect, useState } from "react";
 import { db } from "./firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import {collection, getDocs, addDoc, updateDoc, deleteDoc, doc} from "firebase/firestore"; 
+export function usePerguntas() {
+  const [perguntas, setPerguntas] = useState([]);
 
-export const adicionarPergunta = async (pergunta, dificuldade, materia, alternativas, correta) => {
-  try {
+  const carregarPerguntas = async () => {
+    const querySnapshot = await getDocs(collection(db, "perguntas"));
+    const lista = querySnapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+    setPerguntas(lista);
+  };
+
+  useEffect(() => {
+    carregarPerguntas();
+  }, []);
+
+  const adicionarPergunta = async (descricao, dificuldade, materia, alternativas, correta) => {
     await addDoc(collection(db, "perguntas"), {
-      pergunta: pergunta,
-      materia: materia,
-      dificuldade: dificuldade,
-      alternativas: alternativas,
-      correta: correta
+      descricao,
+      dificuldade,
+      materia,
+      alternativas,
+      correta,
     });
-    console.log("Pergunta adicionado com sucesso!");
-  } catch (erro) {
-    console.error("Erro ao adicionar:", erro);
-  }
+    carregarPerguntas();
+  };
+
+  const editarPergunta = async (id, novosDados) => {
+    const ref = doc(db, "perguntas", id);
+    await updateDoc(ref, novosDados);
+    carregarPerguntas();
+  };
+
+  const removerPergunta = async (id) => {
+    const ref = doc(db, "perguntas", id);
+    await deleteDoc(ref);
+    carregarPerguntas();
+  };
+
+  return { perguntas, adicionarPergunta, editarPergunta, removerPergunta };
 }

@@ -1,33 +1,50 @@
 import styles from './Tela_Cadastro_Pergunta.module.css'
 import { useState } from 'react'
-import {adicionarPergunta} from '../../services/crudPerguntas'
+import {usePerguntas} from '../../services/crudPerguntas'
 
-export default function Tela_Cadastro_Pergunta() {
-    const [pergunta, setPergunta] = useState('')
-    const [dificuldade, setDificuldade] = useState('')
-    const [materia, setMateria] = useState('')
-    const [alternativas, setAlternativas] = useState([])   
-    const [alternativaA, setAlternativaA] = useState('')
-    const [alternativaB, setAlternativaB] = useState('')
-    const [alternativaC, setAlternativaC] = useState('')
-    const [alternativaD, setAlternativaD] = useState('')
-    const [correta, setCorreta] = useState('')
+export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false}) {
+    const {adicionarPergunta, editarPergunta} = usePerguntas()
+    const [descricao, setDescricao] = useState(perguntaInicial?.descricao || '');
+    const [dificuldade, setDificuldade] = useState(perguntaInicial?.dificuldade || '');
+    const [materia, setMateria] = useState(perguntaInicial?.materia || '');
+    const [alternativas, setAlternativas] = useState(perguntaInicial?.alternativas || []);
+    const [correta, setCorreta] = useState(perguntaInicial?.correta || ''); 
+    const [alternativaA, setAlternativaA] = useState(perguntaInicial?.alternativas[0].texto || '')
+    const [alternativaB, setAlternativaB] = useState(perguntaInicial?.alternativas[1].texto || '')
+    const [alternativaC, setAlternativaC] = useState(perguntaInicial?.alternativas[2].texto || '')
+    const [alternativaD, setAlternativaD] = useState(perguntaInicial?.alternativas[3].texto || '')
     const [modalAberto, setModalAberto] = useState(false) 
 
     function submit(e) {
         e.preventDefault()
-        if (!pergunta || !dificuldade || !materia) {
+        if (!descricao || !dificuldade || !materia || !alternativas ) {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
-        if (alternativas.length === 0) {
-            alert('Adicione as alternativas antes de cadastrar a pergunta.')
+        if (alternativas.some(a => !a.texto || a.texto.trim() === '')) {
+            alert('Adicione todas as alternativas antes de cadastrar a pergunta.')
             return
         }
-        adicionarPergunta(pergunta, dificuldade, materia, alternativas, correta)
-        
+        if (!correta) {
+            alert('Selecione a alternativa correta.')
+            return
+        }
+        const dados = {
+            descricao,
+            dificuldade,
+            materia,
+            alternativas,
+            correta
+            }
+        if (editar && perguntaInicial) {
+            editarPergunta(perguntaInicial.id, dados);
+          } else {
+            adicionarPergunta(descricao, dificuldade, materia, alternativas, correta);
+          }
+      
+          onClose?.();
         // Resetar os campos após o cadastro
-        setPergunta('')
+        setDescricao('')
         setDificuldade('')
         setMateria('')
         setAlternativas([])
@@ -50,8 +67,8 @@ export default function Tela_Cadastro_Pergunta() {
     return (
         <div className={styles['tela-cadastro-pergunta']}>
             <header className={styles['tela-cadastro-pergunta__header']}>
-                <button className={styles['tela-cadastro-pergunta__exit-button']}>Exit</button>
-                <h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>
+                {!editar && (<button className={styles['tela-cadastro-pergunta__exit-button']}>Exit</button>)}
+                <h1 className={styles['tela-cadastro-pergunta__title']}>{editar?"Edição de Perguntas" : "Cadastro de Pergunta"}</h1>
             </header>
 
             <main className={styles['tela-cadastro-pergunta__main']}>
@@ -64,8 +81,8 @@ export default function Tela_Cadastro_Pergunta() {
                             className={`${styles['tela-cadastro-pergunta__input']} ${styles['tela-cadastro-pergunta__input--pergunta']}`}
                             type="text"
                             placeholder="Pergunta"
-                            value={pergunta}
-                            onChange={(e) => setPergunta(e.target.value)}
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
                         />
 
                         <select
@@ -99,21 +116,32 @@ export default function Tela_Cadastro_Pergunta() {
 
                         
                     </div>
-
-                    <div className={styles['tela-cadastro-pergunta__actions']}>
-                        <button
-                            type="button"
-                            className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
-                        >
-                            Criar com IA
-                        </button>
-                        <button
-                            type="submit"
-                            className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--submit']}`}
-                        >
-                            Cadastrar Pergunta
-                        </button>
-                    </div>
+                    {!editar &&(
+                        <div className={styles['tela-cadastro-pergunta__actions']}>
+                            <button
+                                type="button"
+                                className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
+                            >
+                                Criar com IA
+                            </button>
+                            <button
+                                type="submit"
+                                className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--submit']}`}
+                            >
+                                Cadastrar Pergunta
+                            </button>
+                        </div>
+                    )}
+                    {editar && (
+                        <div>
+                            <button type="submit" className={styles['tela-cadastro-pergunta__button']}>
+                                Salvar Alterações
+                            </button>
+                            <button type="button" onClick={onClose} className={styles['tela-cadastro-pergunta__button--cancel']}>
+                            Cancelar
+                            </button>
+                        </div>
+                    )}
                     {modalAberto && (
                             <div>
                                 <h3>Alternativas</h3>
