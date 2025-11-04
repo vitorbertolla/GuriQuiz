@@ -1,0 +1,66 @@
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: url("/images/BackgroundInicio.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+  image-rendering: pixelated;
+
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tituloGuri {
+  display: block;
+  margin: 0 auto;     
+  padding-bottom: 30px;
+  border: 0;
+  max-width: 60%;      
+  height: auto;       
+}
+
+.tituloPequeno{
+  display: block;
+  margin: 0 auto;     
+  padding-bottom: 50px;
+  border: 0;
+  max-width: 30%;      
+  height: auto;     
+}
+
+.btnStart {
+    height: 100px;
+}
+
+.iconeJogador {
+    height: 50px;
+}
+
+.jogador {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.botoesContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.telaStartHeader {
+  position: absolute; /* fica preso dentro do container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  z-index: 10; /* garante que fica acima do fundo */
+}
