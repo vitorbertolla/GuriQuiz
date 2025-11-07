@@ -1,309 +1,112 @@
-/* Tela_Cadastro_Pergunta.module.css */
-
-/* Variáveis */
-:root {
-  --bg: #fafafa;
-  --card: #ffffff;
-  --muted: #6b7280;
-  --primary: #2563eb;
-  --primary-600: #1e40af;
-  --success: #16a34a;
-  --danger: #ef4444;
-  --border: #e6e6e9;
-  --shadow: 0 8px 24px rgba(16,24,40,0.06);
-  --radius: 12px;
-  --gap: 12px;
-}
-
-/* Container */
-.tela-cadastro-pergunta {
-  min-height: 100vh;
-  background: linear-gradient(180deg, var(--bg) 0%, #f5f7fb 100%);
-  padding: 28px;
-  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-  color: #0f172a;
-  box-sizing: border-box;
-}
-
-/* Card / Conteúdo */
-.tela-cadastro-pergunta__header {
+.container {
+  background-image: url("/images/backgroundAnoitecer.png");
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center;
+  image-rendering: pixelated;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
+}
+
+.tela-cadastro-pergunta {
+  background-color: #9cdbff;
+  border: 7px solid #2a2d74;
+  border-radius: 30px;
+  height: 80vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .tela-cadastro-pergunta__title {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.tela-cadastro-pergunta__exit-button {
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background 0.15s, color 0.15s;
-}
-.tela-cadastro-pergunta__exit-button:hover {
-  background: rgba(15,23,42,0.04);
-  color: #0b1220;
-}
-
-/* Main card area */
-.tela-cadastro-pergunta__main {
-  max-width: 920px;
-  margin: 0 auto;
-  background: var(--card);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  color: #2a2d74;
+  background-color: white;
+  border: 7px solid #2a2d74;
+  border-radius: 30px;
+  font-weight: 100;
   padding: 20px;
-  border: 1px solid var(--border);
+  font-size: 70px;
 }
 
-/* Form layout */
-.tela-cadastro-pergunta__form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.tela-cadastro-pergunta__select {
+  background-color: white;
+  color: #2a2d74;
+  border: 5px solid #2a2d74;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 30px;
+  width: 300px;
+  height: 70px;
+  text-align: center;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.tela-cadastro-pergunta__input { 
+  background-color: white;
+  color: #2a2d74;
+  border: 5px solid #2a2d74;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 30px;
+  width: 300px;
+  height: 70px;
+  text-align: center;
+}
+
+.tela-cadastro-pergunta__input input::placeholder {
+  color: #2a2d74;
+  opacity: 1;
+}
+
+.tela-cadastro-pergunta__button--alternativas {
+  background-color: white;
+  color: #2a2d74;
+  border: 5px solid #2a2d74;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 30px;
+  width: 280px;
+  height: 50px;
+  text-align: center;
 }
 
 .tela-cadastro-pergunta__form-row {
   display: flex;
-  gap: var(--gap);
   flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  gap: 10px;
+  padding: 10px;
+  padding-top: 20px;
 }
 
-/* Inputs & selects */
-.tela-cadastro-pergunta__input,
-.tela-cadastro-pergunta__select {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #fff;
-  box-sizing: border-box;
-  font-size: 14px;
-  outline: none;
-  transition: box-shadow 0.12s, border-color 0.12s, transform 0.06s;
+.tela-cadastro-pergunta__exit-button {
+  height: 70px;
+  position: absolute;
+  top: 85px;
+  left: 170px;
 }
 
-/* input wide for pergunta */
-.tela-cadastro-pergunta__input--pergunta {
-  flex: 1 1 460px;
-  min-width: 220px;
+.tela-cadastro-pergunta__btn-cadastrar-pergunta{
+  height: 100px;
 }
 
-/* selects */
-.tela-cadastro-pergunta__select--dificuldade,
-.tela-cadastro-pergunta__select--materia {
-  flex: 0 0 160px;
+.tela-cadastro-pergunta__btn-criar-com-ia {
+  height: 100px;
 }
 
-/* focus state */
-.tela-cadastro-pergunta__input:focus,
-.tela-cadastro-pergunta__select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 4px 18px rgba(37,99,235,0.12);
-}
-
-/* Buttons */
-.tela-cadastro-pergunta__button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.08s, box-shadow 0.12s, opacity 0.12s;
-}
-
-/* Variants */
-.tela-cadastro-pergunta__button--alternativas {
-  background: #f3f4f6;
-  color: #0b1220;
-  border: 1px solid transparent;
-}
-.tela-cadastro-pergunta__button--alternativas:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
-}
-
-.tela-cadastro-pergunta__button--ai {
-  background: #111827;
-  color: #fff;
-}
-.tela-cadastro-pergunta__button--ai:hover {
-  background: #0b1220;
-  transform: translateY(-2px);
-}
-
-.tela-cadastro-pergunta__button--submit {
-  background: linear-gradient(90deg, var(--primary), var(--primary-600));
-  color: white;
-}
-.tela-cadastro-pergunta__button--submit:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(37,99,235,0.16);
-}
-
-/* Actions row (right aligned on wide screens) */
 .tela-cadastro-pergunta__actions {
   display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-  margin-top: 8px;
-}
-
-/* Lista de alternativas (visível no formulário) */
-.tela-cadastro-pergunta__alternativas-list {
-  list-style: none;
-  padding: 8px;
-  margin: 6px 0 0 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 8px;
-  width: 100%;
-}
-
-.tela-cadastro-pergunta__alternativas-list li {
-  background: #f8fafc;
-  border: 1px dashed var(--border);
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #0f172a;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-}
-
-/* Modal (centralizado e com animação) */
-.modal {
-  position: fixed;
-  inset: 0; /* top/right/bottom/left = 0 */
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background: linear-gradient(180deg, rgba(2,6,23,0.36), rgba(2,6,23,0.6));
-  z-index: 1200;
-  padding: 24px;
-  animation: fadeIn .12s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.modal__content {
-  width: 100%;
-  max-width: 560px;
-  background: var(--card);
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 18px 50px rgba(2,6,23,0.28);
-  border: 1px solid rgba(11,20,32,0.04);
-}
-
-/* Modal header area */
-.modal__content h2 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-/* Modal input / controls */
-.modal__input-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-.modal__input {
-  flex: 1;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  outline: none;
-}
-.modal__input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 8px 30px rgba(37,99,235,0.08);
-}
-
-.modal__add-button {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: var(--success);
-  color: #fff;
-}
-.modal__add-button:hover { transform: translateY(-2px); }
-
-/* Modal list (alternativas) */
-.modal__list {
-  margin: 8px 0 14px 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 8px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-.modal__list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #fbfdff;
-  border: 1px solid var(--border);
-  padding: 8px 10px;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
-/* Remove button */
-.modal__remove-btn {
-  background: transparent;
-  border: none;
-  color: var(--danger);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-}
-.modal__remove-btn:hover {
-  background: rgba(239,68,68,0.08);
-}
-
-/* Footer of modal */
-.modal__footer {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
-
-/* Small helpers */
-.small-muted {
-  font-size: 12px;
-  color: var(--muted);
-}
-
-/* Responsividade */
-@media (max-width: 760px) {
-  .tela-cadastro-pergunta__form-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .tela-cadastro-pergunta__actions {
-    justify-content: stretch;
-    flex-direction: column-reverse;
-  }
-
-  .tela-cadastro-pergunta__input--pergunta {
-    flex-basis: auto;
-  }
+  padding-left: 30px;
+  padding-right: 30px;
 }
