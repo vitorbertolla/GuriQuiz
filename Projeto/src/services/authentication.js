@@ -1,8 +1,24 @@
-import { auth, googleProvider } from "./firebaseConfig";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut} from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { db } from "./firebaseConfig";
-import { use } from "react";
+import { auth, db } from "./firebaseConfig";
+import { 
+  signInWithPopup, 
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
+import { 
+  doc, 
+  getDoc, 
+  setDoc 
+} from "firebase/firestore";
+
+// Criar provider do Google
+const googleProvider = new GoogleAuthProvider();
+
+// Função para obter a referência do documento do usuário
+export const getUserDocRef = (uid) => {
+  return doc(db, "usuarios", uid);
+};
 
 // Login com Google
 export const loginComGoogle = async () => {
@@ -16,7 +32,7 @@ export const loginComGoogle = async () => {
     const nick = user.displayName;
 
     // Referência ao documento no Firestore
-    const userDocRef = doc(db, "usuarios", uid);
+    const userDocRef = getUserDocRef(uid);
 
     // Verifica se o documento já existe
     const userSnapshot = await getDoc(userDocRef);
@@ -37,6 +53,7 @@ export const loginComGoogle = async () => {
     throw error;
   }
 };
+
 // Cadastro com email/senha
 export async function registrarComEmail(email, senha, nick) {
   try {
@@ -54,13 +71,13 @@ export async function registrarComEmail(email, senha, nick) {
     console.error("Erro ao registrar:", error);
     throw error;
   }
-}
+};
 
 // Login com email/senha
 export const loginComEmail = async (email, senha) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-    return userCredential
+    return userCredential;
   } catch (error) {
     console.error("Erro ao logar:", error);
     throw error;
