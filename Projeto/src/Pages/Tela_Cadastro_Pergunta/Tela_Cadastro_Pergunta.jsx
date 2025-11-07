@@ -178,6 +178,16 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 <IAcria 
                                 setDescricao={setDescricao}
                                 setMostrarIACreate={setMostrarIACreate}
+                                setDificuldade={setDificuldade} 
+                                setMateria={setMateria}  
+                                materia={materia}
+                                dificuldade={dificuldade}
+                                setCorreta={setCorreta}
+                                setAlternativas={setAlternativaA}
+                                setAlternativaA={setAlternativaA}
+                                setAlternativaB={setAlternativaB}
+                                setAlternativaC={setAlternativaC}
+                                setAlternativaD={setAlternativaD}
                                 
                                 />
                             )}

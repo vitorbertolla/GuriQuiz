@@ -2,11 +2,9 @@ import { useState } from "react"
 import './Tela_Cadastro_IA.module.css'
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
-export default function IACria ({ setDescricao, setMostrarIACreate}){
+export default function IACria ({ setDescricao, setMostrarIACreate,setDificuldade, setMateria, materia, dificuldade, setCorreta, setAlternativas, setAlternativaA, setAlternativaB,setAlternativaC, setAlternativaD}){
     const [prompt, setPrompt] = useState("")
     const [resposta, setResposta] = useState("")
-    const [dificuldade, setDificuldade] = useState("")
-    const [materia, setMateria] = useState("")
     const [carregando, setCarregando] = useState(false)
     const apikey = "AIzaSyAmLTtMthswzm5R4ER8ENHjl_93rtMQ_rQ"
 
@@ -19,11 +17,64 @@ export default function IACria ({ setDescricao, setMostrarIACreate}){
         const genAI = new GoogleGenerativeAI(apikey)
         const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
-        const response = await model.generateContent(
-            `Gere uma pergunta com esssa solicitação: ${prompt} com esse nível de dificuldade: ${dificuldade} e dessa máteria: ${materia} (coloque apenas a pergunta)`
-        )
-
-        setResposta(response.response.text())
+        const response = await model.generateContent(`
+            Gere uma questão objetiva com:
+            - Enunciado (pergunta)
+            - 4 alternativas (A, B, C, D)
+            - indique qual é a correta
+            - Baseie-se nesta solicitação: ${prompt}
+            - Dificuldade: ${dificuldade}
+            - Matéria: ${materia}
+            Formate a resposta exatamente assim:
+            Pergunta: <texto>
+            A) <texto>
+            B) <texto>
+            C) <texto>
+            D) <texto>
+            Correta: <letra>
+          `)
+          const texto = response.response.text()
+          setResposta(texto)
+          
+          // Divide as linhas e remove espaços extras
+          const linhas = texto.split('\n').map(l => l.trim()).filter(l => l)
+          
+          // Extrai a pergunta
+          const perguntaMatch = linhas.find(l => l.toLowerCase().startsWith('pergunta:'))
+          if (perguntaMatch) {
+            setDescricao(perguntaMatch.replace(/pergunta:\s*/i, ''))
+          }
+          
+          // Extrai alternativas (A, B, C, D)
+          const alternativas = linhas
+            .filter(l => /^[ABCD]\)/i.test(l))
+            .map(l => {
+              const letra = l[0].toUpperCase()
+              const textoAlt = l.slice(2).trim()
+              return { letra, texto: textoAlt }
+            })
+            if (alternativas.length) {
+                setAlternativas(alternativas)
+              
+                // também preenche os campos individuais
+                const altA = alternativas.find(a => a.letra === 'A')?.texto || ''
+                const altB = alternativas.find(a => a.letra === 'B')?.texto || ''
+                const altC = alternativas.find(a => a.letra === 'C')?.texto || ''
+                const altD = alternativas.find(a => a.letra === 'D')?.texto || ''
+              
+                setAlternativaA(altA)
+                setAlternativaB(altB)
+                setAlternativaC(altC)
+                setAlternativaD(altD)
+              }
+          
+          // Extrai a correta
+          const corretaMatch = linhas.find(l => /^correta:/i.test(l))
+          if (corretaMatch) {
+            const letraCorreta = corretaMatch.replace(/correta:\s*/i, '').trim().toUpperCase()
+            setCorreta(letraCorreta)
+          }
+          
         } catch (error) {
         console.error("Erro ao gerar:", error)
         } finally {
@@ -72,8 +123,7 @@ export default function IACria ({ setDescricao, setMostrarIACreate}){
 
             <button className="ia-concluir"
             onClick={() => {
-                setDescricao(resposta)
-                setMostrarIACreate((prev) => !prev)
+                setMostrarIACreate(false)
             }}
             >
             Concluir
