@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import {registrarComEmail} from "../../services/authentication";
 import { doc, query, setDoc, getDocs, where, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -15,6 +16,7 @@ export default function Tela_Cadastro() {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [usuario, setUsuario] = useState(null);
     const [alertSenhasDiferentes, setAlertSenhasDiferentes] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -50,6 +52,10 @@ const handleSubmit = async (e) => {
         return;
     }
 
+    
+
+    
+
     try {
         const userCredential = await registrarComEmail(email, senha, nick);
 
@@ -61,13 +67,16 @@ const handleSubmit = async (e) => {
             criadoEm: new Date()
         });
 
-        alert(`Bem-vindo, ${nick}!`);
+       
+        navigate("/login")
 
+        
         setNick("");
         setEmail("");
         setSenha("");
         setConfirmarSenha("");
         setAlertSenhasDiferentes(false);
+        
 
     } catch (error) {
         console.error("Erro ao cadastrar:", error);
@@ -76,7 +85,7 @@ const handleSubmit = async (e) => {
 };
 
 const passwordValidation = () => {
-    if(senha.length < 8){
+    if(senha.length < 6){
         alert("A senha deve conter pelo menos 8 dígitos")
         return false
     }
