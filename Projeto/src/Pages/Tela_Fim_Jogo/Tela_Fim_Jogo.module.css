@@ -1,0 +1,55 @@
+.container {
+  background-image: url('/images/backgroundJogo.png');
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tituloFimJogo {
+    height: 60px;
+    margin-bottom: 50px;
+}
+
+.telaFimJogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fimJogoBotoes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fimJogoBtn{
+    background-color: white;
+    border: 5px solid #2a2d74;
+    color: #2a2d74;
+    width: 500px;
+    margin: 5px;
+    text-align: center;
+    padding: 5px;
+    font-size: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.icons {
+    height: 30px;
+    fill: #2a2d74;
+}
+
+.fimJogoBtn:hover{
+    scale: 1.05;
+}

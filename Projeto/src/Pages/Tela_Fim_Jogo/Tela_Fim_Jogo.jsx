@@ -2,21 +2,24 @@ import styles from './Tela_Fim_Jogo.module.css'
 
 export default function Tela_Fim_Jogo() {
     return (
-        <div className="tela-fim-jogo">
-            <header className="tela-fim-jogo__header">
-                <h1 className="tela-fim-jogo__title">Fim de Jogo</h1>
-            </header>
-
-            <main className="tela-fim-jogo__main">
-                <div className="tela-fim-jogo__buttons">
-                    <button className="tela-fim-jogo__button tela-fim-jogo__button--menu">
-                        Menu
-                    </button>
-                    <button className="tela-fim-jogo__button tela-fim-jogo__button--resultados">
-                        Resultados
-                    </button>
-                </div>
-            </main>
+        <div className={styles.container}>
+            <div className={styles.telaFimJogo}>
+                <header className={styles.FimJogoHeader}>
+                    <h1><img className={styles.tituloFimJogo} src="/images/tituloFimJogo.png" alt="" /></h1>
+                </header>
+                <main className={styles.fimJogoMain}>
+                    <div className={styles.fimJogoBotoes}>
+                        <button className={styles.fimJogoBtn}>
+                           <img className={styles.icons} src="/images/iconCasa.png" alt="" /> 
+                           MENU
+                        </button>
+                        <button className={styles.fimJogoBtn}>
+                            <img className={styles.icons}src="/images/iconRanking.png" alt="" />
+                            RESULTADOS
+                        </button>
+                    </div>
+                </main>
+            </div>
         </div>
     )
 }

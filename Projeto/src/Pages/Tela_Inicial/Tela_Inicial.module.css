@@ -27,7 +27,17 @@ button {
 .btnLogin,
 .btnCadastro {
     height: 100px;
+    transition: 0.2s;
 }
+
+.btnCadastro:hover {
+  scale: 1.05;
+}
+
+.btnLogin:hover{
+  scale: 1.05;
+}
+
 
 .botoesContainer {
   display: flex;
