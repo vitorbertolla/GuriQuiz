@@ -14,6 +14,11 @@
 
 .botao{
     height: 70px;
+    transition: 0.2s;
+}
+
+.botao:hover {
+    scale: 1.05;
 }
 
 .actions {

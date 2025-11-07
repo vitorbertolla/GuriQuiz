@@ -15,6 +15,14 @@
     height: 80px;
 }
 
+button {
+    transition: 0.2s;
+}
+
+button:hover {
+    scale: 1.05;
+}
+
 .telaMenuTitle {
     height: 100px;
 }
