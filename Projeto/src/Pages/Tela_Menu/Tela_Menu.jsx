@@ -6,7 +6,7 @@ export default function Tela_Menu() {
     <div className={styles.container}>
       <div className={styles.telaMenuMenu}>
         <header className={styles.telaMenuHeader}>
-          <Link to="/start" className={styles.link}>
+          <Link to="/start" className={`${styles.link} ${styles.linkExit}`}>
             <img
               className={styles.telaMenuBtnExit}
               src="/images/botaoExit.png"
@@ -24,14 +24,14 @@ export default function Tela_Menu() {
         <main className={styles.telaMenuMain}>
           <section className={styles.telaMenuControls}>
             <div className={styles.telaMenuOptions}>
-              <Link to="/cadastropergunta" className={styles.link}>
+              <Link to="/cadastropergunta" className={`${styles.link} ${styles.linkOption}`}>
                 <img
                   className={styles.telaMenuBtnOption}
                   src="/images/botaoCadastroPerguntas.png"
                   alt="Cadastrar Perguntas"
                 />
               </Link>
-              <Link to="/ranking" className={styles.link}>
+              <Link to="/ranking" className={`${styles.link} ${styles.linkOption}`}>
                 <img
                   className={styles.telaMenuBtnOption}
                   src="/images/botaoRanking.png"
@@ -40,7 +40,7 @@ export default function Tela_Menu() {
               </Link>
             </div>
             <div className={styles.telaMenuPlay}>
-              <Link to="/configuraçãoQuiz" className={styles.link}>
+              <Link to="/configuraçãoQuiz" className={`${styles.link} ${styles.linkPlay}`}>
                 <img
                   className={styles.telaMenuBtnPlay}
                   src="/images/botaoJogar.png"
