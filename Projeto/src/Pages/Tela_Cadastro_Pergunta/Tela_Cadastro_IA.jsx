@@ -121,7 +121,7 @@ export default function IACria ({ setDescricao, setMostrarIACreate,setDificuldad
                 <option value="portugues">Português</option>
                 <option value="matematica">Matemática</option>
                 <option value="fisica">fisica</option>
-                <option value="geral">Conhecimentos Gerais</option>
+                <option value="conhecimentosGerais">Conhecimentos Gerais</option>
             </select>
 
             <button
