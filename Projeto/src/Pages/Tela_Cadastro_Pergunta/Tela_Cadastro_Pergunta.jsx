@@ -1,6 +1,7 @@
 import styles from './Tela_Cadastro_Pergunta.module.css'
+import IAcria from './Tela_Cadastro_IA.jsx'
 import { useState } from 'react'
-import {usePerguntas} from '../../services/crudPerguntas'
+import {usePerguntas} from '../../services/crudPerguntas.js'
 
 export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
     // preferir funções passadas pelo pai (quando o componente for usado como modal dentro da lista, para edição, garantindo assim que os componentes pais atualizem a lista)
@@ -18,6 +19,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
     const [alternativaC, setAlternativaC] = useState(perguntaInicial?.alternativas?.[2]?.texto || '')
     const [alternativaD, setAlternativaD] = useState(perguntaInicial?.alternativas?.[3]?.texto || '')
     const [modalAberto, setModalAberto] = useState(false) 
+    const [mostrarIACreate, setMostrarIACreate] = useState(false)
 
     function submit(e) {
         e.preventDefault()
@@ -112,7 +114,9 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             <button
                                 type="button"
                                 className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}
-                                onClick={() => setModalAberto(true) }
+                                onClick={() => {setModalAberto(true)
+                                                setMostrarIACreate(false)
+                                } }
                             >
                                 ALTERNATIVAS
                             </button>
@@ -123,6 +127,9 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 <button
                                     type="button"
                                     className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
+                                    onClick={() => {setMostrarIACreate(prev => !prev)
+                                                    setModalAberto(false)
+                                    }}
                                 >
                                     <img className={styles['tela-cadastro-pergunta__btn-criar-com-ia']} src="/images/botaoCriarComIa.png" alt="" ></img>
                                 </button>
@@ -171,9 +178,26 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                     <button type='button' onClick={confirmarAlternativas}>Confirmar</button>
                                 </div>
                             )}
+                            {mostrarIACreate &&(
+                                <IAcria 
+                                setDescricao={setDescricao}
+                                setMostrarIACreate={setMostrarIACreate}
+                                setDificuldade={setDificuldade} 
+                                setMateria={setMateria}  
+                                materia={materia}
+                                dificuldade={dificuldade}
+                                setCorreta={setCorreta}
+                                setAlternativas={setAlternativas}
+                                setAlternativaA={setAlternativaA}
+                                setAlternativaB={setAlternativaB}
+                                setAlternativaC={setAlternativaC}
+                                setAlternativaD={setAlternativaD}
+                                
+                                />
+                            )}
                     </form>
                 </main>
             </div>
         </div>
-    )
+    )   
 }
