@@ -53,28 +53,37 @@ export default function IACria ({ setDescricao, setMostrarIACreate,setDificuldad
               const textoAlt = l.slice(2).trim()
               return { letra, texto: textoAlt }
             })
+            let altA = '', altB = '', altC = '', altD = ''
             if (alternativas.length) {
-                setAlternativas(alternativas)
-              
-                // também preenche os campos individuais
-                const altA = alternativas.find(a => a.letra === 'A')?.texto || ''
-                const altB = alternativas.find(a => a.letra === 'B')?.texto || ''
-                const altC = alternativas.find(a => a.letra === 'C')?.texto || ''
-                const altD = alternativas.find(a => a.letra === 'D')?.texto || ''
+
+                // preenche os campos individuais
+                altA = alternativas.find(a => a.letra === 'A')?.texto || ''
+                altB = alternativas.find(a => a.letra === 'B')?.texto || ''
+                altC = alternativas.find(a => a.letra === 'C')?.texto || ''
+                altD = alternativas.find(a => a.letra === 'D')?.texto || ''
               
                 setAlternativaA(altA)
                 setAlternativaB(altB)
                 setAlternativaC(altC)
                 setAlternativaD(altD)
               }
-          
+            setAlternativas([
+            { letra: 'A', texto: altA },
+            { letra: 'B', texto: altB },
+            { letra: 'C', texto: altC },
+            { letra: 'D', texto: altD },
+        ])
           // Extrai a correta
           const corretaMatch = linhas.find(l => /^correta:/i.test(l))
           if (corretaMatch) {
             const letraCorreta = corretaMatch.replace(/correta:\s*/i, '').trim().toUpperCase()
             setCorreta(letraCorreta)
           }
-          
+       
+
+        console.log("Alternativas:", altA, altB, altC, altD)
+        console.log("Correta:", letraCorreta)
+
         } catch (error) {
         console.error("Erro ao gerar:", error)
         } finally {
@@ -101,30 +110,40 @@ export default function IACria ({ setDescricao, setMostrarIACreate,setDificuldad
                 <p>solicitação</p>
             </label>
             </div>
-            <select className="ia-select" value={dificuldade} onChange={(e) => setDificuldade(e.target.value)}>
+            <select required className="ia-select" value={dificuldade} onChange={(e) => setDificuldade(e.target.value)}>
+                <option value="">Dificuldade</option>
                 <option value="facil">Fácil</option>
                 <option value="medio">Médio</option>
                 <option value="dificil">Difícil</option>
             </select>
-            <select className="ia-select" value={materia} onChange={(e) => setMateria(e.target.value)}>
+            <select required className="ia-select" value={materia} onChange={(e) => setMateria(e.target.value)}>
+                <option value="">Matéria</option>
                 <option value="portugues">Português</option>
                 <option value="matematica">Matemática</option>
                 <option value="fisica">fisica</option>
-                <option value="conhecimentos gerais">Conhecimentos Gerais</option>
+                <option value="geral">Conhecimentos Gerais</option>
             </select>
 
             <button
-            disabled={!prompt || carregando}
-            onClick={enviarPrompt}
+            disabled={carregando}
+            onClick={() => {
+                if(materia == "" || dificuldade == ""){
+                    alert("Por favor, selecione a matéria e a dificuldade antes de concluir.")
+                    return
+                }
+                if(setDescricao === ""){
+                    alert("Por favor, insira uma solicitação válida.")
+                    return
+                }
+                enviarPrompt()
+            }}
             className="ia-button"
             >
             {carregando ? "Gerando..." : "Gerar"}
             </button>
 
             <button className="ia-concluir"
-            onClick={() => {
-                setMostrarIACreate(false)
-            }}
+            onClick={() => setMostrarIACreate(false)}
             >
             Concluir
             </button>

@@ -114,7 +114,9 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             <button
                                 type="button"
                                 className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}
-                                onClick={() => setModalAberto(true) }
+                                onClick={() => {setModalAberto(true)
+                                                setMostrarIACreate(false)
+                                } }
                             >
                                 ALTERNATIVAS
                             </button>
@@ -125,7 +127,9 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 <button
                                     type="button"
                                     className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
-                                    onClick={() => setMostrarIACreate(prev => !prev)}
+                                    onClick={() => {setMostrarIACreate(prev => !prev)
+                                                    setModalAberto(false)
+                                    }}
                                 >
                                     <img className={styles['tela-cadastro-pergunta__btn-criar-com-ia']} src="/images/botaoCriarComIa.png" alt="" ></img>
                                 </button>
@@ -183,7 +187,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 materia={materia}
                                 dificuldade={dificuldade}
                                 setCorreta={setCorreta}
-                                setAlternativas={setAlternativaA}
+                                setAlternativas={setAlternativas}
                                 setAlternativaA={setAlternativaA}
                                 setAlternativaB={setAlternativaB}
                                 setAlternativaC={setAlternativaC}
@@ -195,5 +199,5 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                 </main>
             </div>
         </div>
-    )
+    )   
 }
