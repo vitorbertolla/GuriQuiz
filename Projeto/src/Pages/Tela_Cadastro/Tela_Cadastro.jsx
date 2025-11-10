@@ -6,6 +6,7 @@ import {registrarComEmail} from "../../services/authentication";
 import { doc, query, setDoc, getDocs, where, collection } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 
 
@@ -67,7 +68,7 @@ const handleSubmit = async (e) => {
             criadoEm: new Date()
         });
 
-       
+       await signOut(auth);
         navigate("/login")
 
         
