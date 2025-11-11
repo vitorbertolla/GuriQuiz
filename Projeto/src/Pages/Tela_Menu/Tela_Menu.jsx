@@ -44,7 +44,16 @@ export default function Tela_Menu() {
                 <img
                   className={styles.telaMenuBtnPlay}
                   src="/images/botaoJogar.png"
-                  alt="Jogar"
+                  alt="Criar quiz"
+                />
+              </Link>
+            </div>
+            <div>
+              <Link to="/configuraçãoQuiz" className={`${styles.link} ${styles.linkPlay}`}>
+                <img
+                  className={styles.telaMenuBtnPlay}
+                  src="/images/botaoJogar.png"
+                  alt="Jogo rápido"
                 />
               </Link>
             </div>
