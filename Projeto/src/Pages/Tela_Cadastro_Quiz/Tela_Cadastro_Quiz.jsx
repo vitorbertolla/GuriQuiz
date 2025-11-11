@@ -1,4 +1,4 @@
-import {styles} from './Tela_CRUD_Quiz.module.css'
+import styles from './Tela_Cadastro_Quiz.module.css'
 import { useState} from 'react'
 import { useQuizzes } from '../../services/crudQuiz';
 import { usePerguntas } from "../../services/crudPerguntas";

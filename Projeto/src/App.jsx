@@ -12,6 +12,7 @@ import Tela_Fim_Jogo from './Pages/Tela_Fim_Jogo/Tela_Fim_Jogo.jsx';
 import Tela_Resultados from './Pages/Tela_Resultados/Tela_Resultados.jsx';
 import Tela_Admin from './Pages/Tela_Admin/Tela_Admin.jsx';
 import Tela_Quiz_Pronto from './Pages/Tela_Quiz_Pronto/Tela_Quiz_Pronto.jsx';
+import Tela_CRUD_Quiz from './Pages/Tela_Cadastro_Quiz/Tela_Cadastro_Quiz.jsx';
 
 function App() {
 

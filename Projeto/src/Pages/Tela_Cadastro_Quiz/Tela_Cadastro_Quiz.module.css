@@ -1,4 +1,4 @@
-.tela-montar-quiz {
+.telaMonarQuiz {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -7,13 +7,13 @@
   font-family: Arial;
 }
 
-.info-quiz input, .info-quiz textarea {
+.infoQuiz input, .infoQuiz textarea {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
 }
 
-.perguntas-disponiveis, .quiz-montado {
+.perguntasDisponiveis, .quizMontado {
   border: 1px solid #ddd;
   padding: 12px;
   border-radius: 8px;
@@ -47,6 +47,7 @@ button {
 button:hover {
   background: #0056b3;
 }
+
 .perguntaItem {
   padding: 10px;
   margin: 6px 0;

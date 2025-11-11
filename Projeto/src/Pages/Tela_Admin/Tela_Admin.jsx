@@ -1,7 +1,7 @@
 import ListaPerguntas from "./Tela_ListaPerguntas";
 import { usePerguntas } from "../../services/crudPerguntas";
 import { useState } from "react";
-import Tela_CRUD_Quiz from "../Tela_Cadastro_Quiz/Tela_CRUD_Quiz";
+import Tela_CRUD_Quiz from "../Tela_Cadastro_Quiz/Tela_Cadastro_Quiz";
 
 export default function Tela_Admin() {
   const { perguntas, removerPergunta, editarPergunta } = usePerguntas();
