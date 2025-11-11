@@ -1,0 +1,34 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-image: url("/images/BackgroundInicio.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.telaMenuBtnPlay {
+    width: 100%; /* Faz a imagem ocupar todo o espaço do link */
+    height: 100%; /* Faz a imagem ocupar todo o espaço do link */
+    display: block; /* Garante que a imagem seja um bloco */
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Remova se não necessário */
+    width: 100px; /* Ajuste conforme necessário */
+    height: 100px; /* Ajuste conforme necessário */
+}
+
+.linkPlay { 
+    width: 150px; /* Ajuste para o tamanho da imagem */
+    height: 120px; /* Ajuste para o tamanho da imagem */
+}
+
