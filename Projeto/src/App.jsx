@@ -25,6 +25,7 @@ function App() {
       <Route path="/menu" element={<Tela_Menu/>} />
       <Route path="/ranking" element={<Tela_Ranking/>} />
       <Route path="/cadastroPergunta" element={<Tela_Cadastro_Pergunta/>} />
+      <Route path="/cadastroQuiz" element={<Tela_CRUD_Quiz/>} />
       <Route path="/configuraçãoQuiz" element={<Tela_Config_Quiz/>} />
       <Route path="/jogo" element={<Tela_Jogo/>} />
       <Route path="/fimJogo" element={<Tela_Fim_Jogo/>} />
