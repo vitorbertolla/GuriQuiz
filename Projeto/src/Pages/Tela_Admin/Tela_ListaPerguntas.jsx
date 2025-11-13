@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import styles from './Tela_Admin.module.css';
+import { useState } from "react";
 import Tela_Cadastro_Pergunta from "../Tela_Cadastro_Pergunta/Tela_Cadastro_Pergunta";
 
 

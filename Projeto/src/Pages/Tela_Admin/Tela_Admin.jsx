@@ -1,10 +1,12 @@
 import ListaPerguntas from "./Tela_ListaPerguntas";
+import ListaQuiz from "./Tela_ListaQuiz";  
 import { usePerguntas } from "../../services/crudPerguntas";
+import { useQuizzes } from "../../services/crudQuiz";
 import { useState } from "react";
-import Tela_CRUD_Quiz from "../Tela_Cadastro_Quiz/Tela_Cadastro_Quiz";
 
 export default function Tela_Admin() {
   const { perguntas, removerPergunta, editarPergunta } = usePerguntas();
+  const { quizzes, removerQuiz } = useQuizzes();
   const [crudPergunta, setCrudPergunta] = useState(false);
   const [crudQuiz, setCrudQuiz] = useState(false);
 
@@ -13,6 +15,7 @@ export default function Tela_Admin() {
       <h1>Tela ADMIN</h1>
       <button onClick={() => setCrudQuiz(prev => !prev)}>Crud Quiz</button>
       <button onClick={() => setCrudPergunta(prev => !prev)}>Crud pergunta</button>
+
       {crudPergunta && (
         <>
           <h1>Perguntas cadastradas</h1>
@@ -26,8 +29,18 @@ export default function Tela_Admin() {
           ))}
         </>
       )}
+
       {crudQuiz && (
-        <Tela_CRUD_Quiz />
+        <>
+          <h1>Quizzes Cadastrados</h1>
+          {quizzes.map((q) => (
+            <ListaQuiz
+              key={q.id}
+              quiz={q}
+              removerQuiz={removerQuiz}
+            />
+          ))}
+        </>
       )}
     </div>
   );
