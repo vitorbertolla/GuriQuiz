@@ -45,33 +45,34 @@ export default function Tela_Jogo() {
 
     const pergunta = perguntasFiltradas[perguntaAtual];
 
-    const handleAlternativaClick = (textoAlternativa) => {
-        setRespostaClicada(textoAlternativa);
+    const handleAlternativaClick = (letraAlternativa) => {
+        setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
-        // Verifica se a resposta está correta (compare com pergunta.correta)
-        if (textoAlternativa === pergunta.correta) {
+        // Verifica se a resposta está correta (compara letra com letra)
+        if (letraAlternativa === pergunta.correta) {
             setPontuacao((p) => p + 100);
         }
     };
 
     const handleProxima = () => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
-            setPerguntaAtual(perguntaAtual + 1);
+            setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
             setMostrarResultado(false);
         } else {
-            navigate(`/resultados?pontuacao=${pontuacao}`);
+            // envia pontuação e total de perguntas
+            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`);
         }
     };
 
     const getDificuldadeValue = (dificuldade) => {
         switch (dificuldade) {
-            case 'Fácil':
+            case 'facil':
                 return 25;
-            case 'Médio':
+            case 'medio':
                 return 75;
-            case 'Difícil':
+            case 'dificil':
                 return 100;
             default:
                 return 0;
@@ -104,11 +105,11 @@ export default function Tela_Jogo() {
                     <button
                         key={index}
                         className={`${styles.alternativaBtn} ${
-                            respostaClicada === alt.texto
-                                ? (alt.texto === pergunta.correta ? styles.correta : styles.incorreta)
+                            mostrarResultado && respostaClicada === alt.letra
+                                ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
                                 : ''
                         }`}
-                        onClick={() => handleAlternativaClick(alt.texto)}
+                        onClick={() => handleAlternativaClick(alt.letra)}
                         disabled={mostrarResultado}
                     >
                         <strong style={{marginRight: 8}}>{alt.letra}</strong>
