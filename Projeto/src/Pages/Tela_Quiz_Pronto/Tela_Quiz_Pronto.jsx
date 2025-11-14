@@ -29,7 +29,7 @@ export default function Tela_Quiz_Pronto() {
             <h1>Selecione um Quiz</h1>
 
             <button onClick={() => setCrudQuiz(prev => !prev)}>
-                Crud Quiz
+                Jogos
             </button>
 
             {crudQuiz && (
@@ -39,6 +39,7 @@ export default function Tela_Quiz_Pronto() {
                         <Tela_ListaQuiz
                             key={q.id}
                             quiz={q}
+                            editar={false}
                             
                         />
                     ))}
