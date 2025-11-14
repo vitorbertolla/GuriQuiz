@@ -5,7 +5,7 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase
 export function useQuizzes() {
   const [quizzes, setQuizzes] = useState([]);
 
-  // 🔄 Carrega todos os quizzes do Firestore
+  // Carrega todos os quizzes do Firestore
   const carregarQuizzes = async () => {
     const querySnapshot = await getDocs(collection(db, "quizzes"));
     const lista = querySnapshot.docs.map((docSnap) => ({
@@ -19,7 +19,7 @@ export function useQuizzes() {
     carregarQuizzes();
   }, []);
 
-  // ➕ Adiciona um novo quiz
+  //  Adiciona um novo quiz
   const adicionarQuiz = async (nome, descricao, dificuldade, materia, perguntasSelecionadas) => {
     await addDoc(collection(db, "quizzes"), {
       nome,
@@ -32,14 +32,14 @@ export function useQuizzes() {
     carregarQuizzes();
   };
 
-  // ✏️ Edita um quiz existente
+  // Edita um quiz existente
   const editarQuiz = async (id, novosDados) => {
     const ref = doc(db, "quizzes", id);
     await updateDoc(ref, novosDados);
     carregarQuizzes();
   };
 
-  // 🗑️ Remove um quiz
+  //  Remove um quiz
   const removerQuiz = async (id) => {
     const ref = doc(db, "quizzes", id);
     await deleteDoc(ref);

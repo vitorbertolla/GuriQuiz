@@ -4,14 +4,16 @@ import { useQuizzes } from '../../services/crudQuiz';
 import { usePerguntas } from "../../services/crudPerguntas";
 
 
-export default function Tela_CRUD_Quiz() {
-    const { perguntas } = usePerguntas();
-    const { adicionarQuiz } = useQuizzes()
-    const [nomeQuiz, setNomeQuiz] = useState("");
-    const [descricaoQuiz, setDescricaoQuiz] = useState("");
-    const [dificuldadeQuiz, setDificuldadeQuiz] = useState("");
-    const [materiaQuiz, setMateriaQuiz] = useState("");
-    const [perguntasSelecionadas, setPerguntasSelecionadas] = useState([]);
+export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClose,adicionarQuiz: adicionarQuizProp,editarQuiz: editarQuizProp})  {
+    const {perguntas}  = usePerguntas();
+    const hooks = useQuizzes()
+    const adicionarQuiz = adicionarQuizProp || hooks.adicionarQuiz;
+    const editarQuiz = editarQuizProp || hooks.editarQuiz;
+    const [nomeQuiz, setNomeQuiz] = useState(quizInicial?.nome || "");
+    const [descricaoQuiz, setDescricaoQuiz] = useState(quizInicial?.descricao || "");
+    const [dificuldadeQuiz, setDificuldadeQuiz] = useState(quizInicial?.dificuldade || "");
+    const [materiaQuiz, setMateriaQuiz] = useState(quizInicial?.materia || "");
+    const [perguntasSelecionadas, setPerguntasSelecionadas] = useState(quizInicial?.perguntas || []);
 
     function alternarPergunta(pergunta) {
         const jaSelecionada = perguntasSelecionadas.some(p => p.id === pergunta.id)
@@ -30,15 +32,22 @@ export default function Tela_CRUD_Quiz() {
         }
 
         const dados = {
-            nomeQuiz,
-            descricaoQuiz,
-            dificuldadeQuiz,
-            materiaQuiz,
-            perguntasSelecionadas
-
+        nome: nomeQuiz,
+        descricao: descricaoQuiz,
+        dificuldade: dificuldadeQuiz,
+        materia: materiaQuiz,
+        perguntas: perguntasSelecionadas
+        };  
+        if(editar && quizInicial){
+            // Lógica para editar o quiz existente
+            editarQuiz(quizInicial.id, dados)
+            console.log("Quiz editado");
+        }else{
+            adicionarQuiz(dados.nome,dados.descricao,dados.dificuldade,dados.materia,dados.perguntas);
+            console.log("Quiz cadastrado:", dados);
         }
-        adicionarQuiz(nomeQuiz, descricaoQuiz, dificuldadeQuiz, materiaQuiz, perguntasSelecionadas)
-        console.log("Quiz cadastrado:", dados);
+       
+        onClose?.()
         // Resetar os campos após o cadastro
         setDescricaoQuiz("");
         setDificuldadeQuiz("");
@@ -53,7 +62,7 @@ export default function Tela_CRUD_Quiz() {
         <div>
             <form onSubmit={submit}>
                 <div className={styles.telaMonarQuiz}>
-                    <h2>Montar Quiz Pronto</h2>
+                    <h2>{editar? "editar quiz" : "cadastro de quiz"}</h2>
 
                     <div className={styles.infoQuiz}>
                         <label>Nome do Quiz:</label>
@@ -104,8 +113,11 @@ export default function Tela_CRUD_Quiz() {
                         ))}
                         </ul>
                     </div>
-
-                    <button type='submit' >Cadastrar Quiz</button>
+                    {editar && (
+                        <button onClick={onClose}>Cancelar edição</button>
+                    )}
+                    <button type='submit' >{editar? "salvar alterações" : "cadastrar quiz"}</button>
+                
                 </div>
             </form>
         </div>
