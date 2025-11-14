@@ -31,6 +31,12 @@ export default function Tela_Menu() {
                   alt="Cadastrar Perguntas"
                 />
               </Link>
+              <Link to="/cadastroQuiz" className={`${styles.link} ${styles.linkOption}`}>
+                <img
+                  className={styles.telaMenuBtnOption}
+                  alt="Cadastrar Quiz"
+                />
+              </Link>
               <Link to="/ranking" className={`${styles.link} ${styles.linkOption}`}>
                 <img
                   className={styles.telaMenuBtnOption}
