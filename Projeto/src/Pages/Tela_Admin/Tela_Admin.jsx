@@ -9,6 +9,7 @@ export default function Tela_Admin() {
   const { quizzes, removerQuiz, editarQuiz } = useQuizzes();
   const [crudPergunta, setCrudPergunta] = useState(false);
   const [crudQuiz, setCrudQuiz] = useState(false);
+  const [adm, setAdm] = useState(false);
 
   return (
     <div>
@@ -43,6 +44,7 @@ export default function Tela_Admin() {
             <ListaQuiz
               key={q.id}
               quiz={q}
+              adm = {true}
               removerQuiz={removerQuiz}
               editarQuiz={editarQuiz}
             />

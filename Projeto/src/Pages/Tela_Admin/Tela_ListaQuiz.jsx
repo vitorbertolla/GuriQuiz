@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Tela_Cadastro_Quiz from "../Tela_Cadastro_Quiz/Tela_Cadastro_Quiz";
+import { Link } from "react-router-dom";
 
-const ListaQuiz = ({ quiz, removerQuiz, editarQuiz}) => {
+
+
+const ListaQuiz = ({ quiz, removerQuiz, editarQuiz, adm}) => {
     const [verPerguntas, setVerPerguntas] = useState(false);
     const [editarQuizAtiva, setEditarQuizAtiva] = useState(false);
+   
   return (
     <div style={{ border: "1px solid #ccc", margin: "10px", padding: "10px" }}>
         <p><strong>Quiz:</strong> {quiz.nome}</p>
@@ -19,8 +23,14 @@ const ListaQuiz = ({ quiz, removerQuiz, editarQuiz}) => {
                         </li>
                     ))}
                 </ul>)}
-        <button onClick={() => removerQuiz(quiz.id)}>🗑️ </button>
-        <button onClick={() => setEditarQuizAtiva(prev => !prev)}>✏️ </button>
+                
+        {adm &&(
+            <div>
+                <button onClick={() => removerQuiz(quiz.id)}>🗑️ </button>
+                <button onClick={() => setEditarQuizAtiva(prev => !prev)}>✏️ </button>
+            </div>
+        )}
+        
         {editarQuizAtiva && (
         <Tela_Cadastro_Quiz
             quizInicial={quiz}
@@ -29,6 +39,12 @@ const ListaQuiz = ({ quiz, removerQuiz, editarQuiz}) => {
             editarQuiz={editarQuiz}
                 
         />)}
+
+        {!adm &&(
+            <div>
+                <Link to= "/jogo"><button>jogar</button></Link>
+            </div>
+        )}
 
 
     </div>
