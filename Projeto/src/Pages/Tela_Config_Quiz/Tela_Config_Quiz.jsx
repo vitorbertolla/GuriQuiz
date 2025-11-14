@@ -2,9 +2,12 @@ import styles from "./Tela_Config_Quiz.module.css";
 import { useEffect, useState } from "react";
 import { usePerguntas } from "../../services/crudPerguntas";
 import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { buildQuizParams, paramsToQueryString } from "../../services/quizConfig";
 
 export default function Tela_Config_Quiz() {
   const { perguntas } = usePerguntas();
+  const navigate = useNavigate();
 
   const [materiaSelecionada, setMateriaSelecionada] = useState([]);
   const [dificuldadeSelecionada, setDificuldadeSelecionada] = useState("");
@@ -12,8 +15,7 @@ export default function Tela_Config_Quiz() {
     useState("");
   const [perguntasDisponiveis, setPerguntasDisponiveis] = useState(0);
 
-  // cria lista de matérias únicas a partir de 'perguntas'
-  const materiasUnicas = Array.from(
+    const materiasUnicas = Array.from(
     new Set((perguntas || []).map((p) => p.materia).filter(Boolean))
   );
 
@@ -41,32 +43,19 @@ export default function Tela_Config_Quiz() {
   };
 
   const handleJogar = () => {
-    const num = parseInt(numeroPerguntasSelecionadas, 10) || 0;
-
-    if (materiaSelecionada.length === 0 || dificuldadeSelecionada.length === 0 || num === 0) {
-      alert("Por favor, selecione todas as opções antes de jogar.");
-      return;
-    }
-
-    if (num > perguntasDisponiveis) {
-      alert(
-        "Número de perguntas selecionadas excede o número disponível para as configurações escolhidas."
+    try {
+      const params = buildQuizParams(
+        materiaSelecionada,
+        dificuldadeSelecionada,
+        numeroPerguntasSelecionadas,
+        perguntasDisponiveis
       );
-      return;
+
+      const queryString = paramsToQueryString(params);
+      navigate(`/jogo?${queryString}`);
+    } catch (err) {
+      alert(err.message);
     }
-
-    console.log({
-      materias: materiaSelecionada,
-      dificuldade: dificuldadeSelecionada,
-      numeroPerguntas: numeroPerguntasSelecionadas,
-    });
-
-    alert(
-      `Quiz configurado com sucesso!\nMatérias: ${materiaSelecionada.join(
-        ", "
-      )}\nDificuldade: ${dificuldadeSelecionada}\nNúmero de Perguntas: ${numeroPerguntasSelecionadas}`
-    );
-
   };
 
   return (
