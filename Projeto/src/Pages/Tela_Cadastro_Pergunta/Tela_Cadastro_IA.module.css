@@ -1,0 +1,115 @@
+/* Fundo escuro */
+.overlayIa {
+  position: fixed;
+  inset: 0; 
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Janela flutuante centralizada */
+.iaContainer {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 90%;
+  height: 80vh;
+  max-width: 40vw;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 7px solid #2a2d74;
+  flex-wrap: wrap;
+}
+
+/* Animação opcional */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.iaSelect{
+    border: 3px solid #2a2d74;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 400px;
+    transition: 0.2s;
+}
+
+.iaSelect:hover {
+    cursor: pointer;
+    scale: 1.01;
+}
+
+.iaTitle {
+    text-align: center;
+    padding-bottom: 100px;
+    font-size: 40px;
+    color: #2a2d74;
+}
+
+.iaInput {
+    border: 3px solid #2a2d74;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    width: 400px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.iaButton, .iaConcluir {
+    background-color: #2c7ef4;
+    color: #2a2d74;
+    border: 3px solid #2a2d74;
+    padding: 10px;
+    border-radius: 15px;
+    transition: 0.2s;
+    width: 80px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.iaButton:hover {
+    background-color: #0056b3;
+    color: white;
+    scale: 1.05;
+}
+
+.iaConcluir:hover {
+    background-color: #0056b3;
+    color: white;
+    scale: 1.05;
+}
+
+.formControl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+
+.iaTextoBotao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.iaBotoes {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}

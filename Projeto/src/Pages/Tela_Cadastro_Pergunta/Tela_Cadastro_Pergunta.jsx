@@ -152,38 +152,39 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </div>
                         )}
                         {modalAberto && (
-                                <div className={styles.alternativas}>
-                                    <h3>Alternativas</h3>
-                                    <div className={styles.alternativa}>
-                                        <input type="text"
-                                        placeholder='Digite a alternativa A'
-                                        value={alternativaA} onChange={(e) =>
-                                        setAlternativaA(e.target.value)} />
-                                        <button type='button' onClick={() =>setCorreta("A")}> <img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /> </button>
-                                    </div >
-            
-                                    <div className={styles.alternativa}>
-                                        <input type="text"
-                                        placeholder='Digite a alternativa B'
-                                        value={alternativaB} onChange={(e) =>
-                                        setAlternativaB(e.target.value)} />
-                                        <button type='button' onClick={() =>setCorreta("B")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
+                                <div className={styles.overlayAlternativas}>
+                                    <div className={styles.alternativas}>
+                                        <h3>Alternativas</h3>
+                                        <div className={styles.alternativa}>
+                                            <input type="text"
+                                            placeholder='Digite a alternativa A'
+                                            value={alternativaA} onChange={(e) =>
+                                            setAlternativaA(e.target.value)} />
+                                            <button type='button' onClick={() =>setCorreta("A")}> <img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /> </button>
+                                        </div >
+                                        <div className={styles.alternativa}>
+                                            <input type="text"
+                                            placeholder='Digite a alternativa B'
+                                            value={alternativaB} onChange={(e) =>
+                                            setAlternativaB(e.target.value)} />
+                                            <button type='button' onClick={() =>setCorreta("B")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
+                                        </div>
+                                        <div className={styles.alternativa}>
+                                            <input type="text"
+                                            placeholder='Digite a alternativa C'
+                                            value={alternativaC} onChange={(e) =>
+                                            setAlternativaC(e.target.value)} />
+                                            <button type='button' onClick={() =>setCorreta("C")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
+                                        </div>
+                                        <div className={styles.alternativa}>
+                                            <input type="text"
+                                            placeholder='Digite a alternativa D'
+                                            value={alternativaD} onChange={(e) =>
+                                            setAlternativaD(e.target.value)} />
+                                            <button type='button' onClick={() =>setCorreta("D")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
+                                        </div>
+                                        <button className={styles.ModalConfirmar} type='button' onClick={confirmarAlternativas}>Confirmar</button>
                                     </div>
-                                    <div className={styles.alternativa}>
-                                        <input type="text"
-                                        placeholder='Digite a alternativa C'
-                                        value={alternativaC} onChange={(e) =>
-                                        setAlternativaC(e.target.value)} />
-                                        <button type='button' onClick={() =>setCorreta("C")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
-                                    </div>
-                                    <div className={styles.alternativa}>
-                                        <input type="text"
-                                        placeholder='Digite a alternativa D'
-                                        value={alternativaD} onChange={(e) =>
-                                        setAlternativaD(e.target.value)} />
-                                        <button type='button' onClick={() =>setCorreta("D")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
-                                    </div>
-                                    <button className={styles.ModalConfirmar} type='button' onClick={confirmarAlternativas}>Confirmar</button>
                                 </div>
                             )}
                             {mostrarIACreate &&(

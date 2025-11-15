@@ -21,6 +21,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 10px;
 }
 
 .tela-cadastro-pergunta__title {
@@ -88,6 +89,27 @@
   padding-top: 20px;
 }
 
+.tela-cadastro-pergunta__select {
+  transition: 0.2s;
+}
+
+.tela-cadastro-pergunta__input {
+  font-family: arial;
+}
+
+.tela-cadastro-pergunta__select:hover{
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.tela-cadastro-pergunta__button {
+  transition: 0.2s;
+}
+
+.tela-cadastro-pergunta__button:hover {
+  scale: 1.05;
+}
+
 .tela-cadastro-pergunta__exit-button {
   height: 70px;
   position: absolute;
@@ -113,6 +135,21 @@
 
 
 /* MODAL ALTERNATIVAS -------------------------------------- */
+.overlayAlternativas{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
 .alternativas {
   position: fixed;
   z-index: 999999;
