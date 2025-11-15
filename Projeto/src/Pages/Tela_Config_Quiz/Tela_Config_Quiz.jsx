@@ -59,61 +59,63 @@ export default function Tela_Config_Quiz() {
   };
 
   return (
-    <div>
-      <div>
-        <Link to="/menu">
-            <button>EXIT</button>
-        </Link>
-      </div>
-      <div>
-        <h1>CONFIGURAÇÃO DO QUIZ</h1>
-      </div>
-      <div>
-        <div>
-          <label>Matérias:</label>
-          <div>
-            {materiasUnicas.map((materia) => (
-              <label key={materia}>
-                <input
-                  type="checkbox"
-                  checked={materiaSelecionada.includes(materia)}
-                  onChange={() => handleMateriaChange(materia)}
-                />
-                {materia}
-              </label>
-            ))}
+    <div className={styles.containerConfig}>
+      <div className={styles.telaConfig}>
+        <div className={styles.divBtnExit}>
+          <Link to="/menu">
+              <button className={styles.btnExit}>EXIT</button>
+          </Link>
+        </div>
+        <div className={styles.containerTitle}>
+          <h1 className={styles.tituloConfig}>CONFIGURAÇÃO DO QUIZ</h1>
+        </div>
+        <div className={styles.opcoes}>
+          <div className={styles.materias}>
+            <label>Matérias:</label>
+            <div className={styles.opcoesMateria}>
+              {materiasUnicas.map((materia) => (
+                <label key={materia}>
+                  <input
+                    type="checkbox"
+                    checked={materiaSelecionada.includes(materia)}
+                    onChange={() => handleMateriaChange(materia)}
+                  />
+                  {materia}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className={styles.dificuldade}>
+            <label htmlFor="Dificuldade">Dificuldade:</label>
+            <select
+              name="Dificuldade"
+              id="Dificuldade"
+              value={dificuldadeSelecionada}
+              onChange={(e) => setDificuldadeSelecionada(e.target.value)}
+            >
+              <option value="">Selecione a dificuldade</option>
+              <option value="facil">Fácil</option>
+              <option value="medio">Médio</option>
+              <option value="dificil">Difícil</option>
+            </select>
+          </div>
+          <div className={styles.numeroPerguntas}>
+            <label htmlFor="NumeroPerguntas">Número de Perguntas:</label>
+            <input
+              type="number"
+              id="NumeroPerguntas"
+              name="NumeroPerguntas"
+              min="1"
+              max={perguntasDisponiveis}
+              value={numeroPerguntasSelecionadas}
+              onChange={(e) => setNumeroPerguntasSelecionadas(e.target.value)}
+              placeholder="Ex: 10"
+            />
+            <small>{perguntasDisponiveis} perguntas disponíveis</small>
           </div>
         </div>
-        <div>
-          <label htmlFor="Dificuldade">Dificuldade:</label>
-          <select
-            name="Dificuldade"
-            id="Dificuldade"
-            value={dificuldadeSelecionada}
-            onChange={(e) => setDificuldadeSelecionada(e.target.value)}
-          >
-            <option value="">Selecione a dificuldade</option>
-            <option value="facil">Fácil</option>
-            <option value="medio">Médio</option>
-            <option value="dificil">Difícil</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="NumeroPerguntas">Número de Perguntas:</label>
-          <input
-            type="number"
-            id="NumeroPerguntas"
-            name="NumeroPerguntas"
-            min="1"
-            max={perguntasDisponiveis}
-            value={numeroPerguntasSelecionadas}
-            onChange={(e) => setNumeroPerguntasSelecionadas(e.target.value)}
-            placeholder="Ex: 10"
-          />
-          <small>{perguntasDisponiveis} perguntas disponíveis</small>
-        </div>
+        <button onClick={handleJogar}><img className={styles.btnJogar} src="/images/botaoJogar.png" alt="" /></button>
       </div>
-      <button onClick={handleJogar}>JOGAR</button>
     </div>
   );
 }

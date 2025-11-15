@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'minecraft';
-    src: url('../Fonts/Minecraft.ttf') format('truetype');
+    font-family: 'retropix';
+    src: url('../Fonts/PressStart2P.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
   
   * {
-    font-family: 'minecraft';
+    font-family: 'retropix';  
   }
