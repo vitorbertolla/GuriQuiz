@@ -1,0 +1,70 @@
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/images/backgroundResultados.png");
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.container * {
+    font-family: 'brick-sans';
+}
+
+.main {
+    display: flex;
+    height: 85vh;
+    width: 85vw;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 110px;
+}
+
+.title {
+    color: white;
+    font-size: 70px;
+    height: 85vh;
+    width: 40vw;
+    align-self: flex-start;
+}
+
+.pontuacao {
+    color: white;
+    font-size: 30px;
+    padding-right: 100px;
+}
+
+.resultado {
+    background-color: #2e1b5b;
+    height: 35vh;
+    width: 20vw;
+    color: white;
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.btnMenu {
+    background-color: white;
+    padding: 10px;
+    width: 16vw;
+    border-radius: 10px;
+    border: 3px solid #2a2d74;
+    text-align: center;
+    color: #2a2d74;
+    transition: 0.2s;
+}
+
+.btnMenu:hover {
+    scale: 1.05;
+}
+
+.btnOverlay {
+    width: 20vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

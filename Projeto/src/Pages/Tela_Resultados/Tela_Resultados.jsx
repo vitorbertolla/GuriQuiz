@@ -11,20 +11,22 @@ export default function Tela_Resultados() {
 
   return (
     <div className={styles.container}>
-      <h1>Resultados</h1>
-      <div>
-        <h3>ACERTOS: {acertos}{ total ? ` / ${total}` : '' }</h3>
-        <h3>SCORE: {pontuacao}</h3>
-
+      <div className={styles.main}>
+        <h1 className={styles.title}>RESULTADOS</h1>
         <div>
-          <p>RESPOSTAS</p>
-          <div>
-            {/* monte a lista de respostas se tiver enviado/armazenado */}
-            <p>item</p>
+          <div className={styles.pontuacao}>
+            <h3>ACERTOS: {acertos}{ total ? ` / ${total}` : '' }</h3>
+            <h3>SCORE: {pontuacao}</h3>
           </div>
+          <div className={styles.resultado}>
+            <p>RESPOSTAS:</p>
+            <div>
+              {/* monte a lista de respostas se tiver enviado/armazenado */}
+              <p>item</p>
+            </div>
+          </div>
+          <div className={styles.btnOverlay}><button onClick={() => navigate('/menu')} className={styles.btnMenu}>MENU</button></div>
         </div>
-
-        <button onClick={() => navigate('/menu')}>MENU</button>
       </div>
     </div>
   )

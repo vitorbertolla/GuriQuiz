@@ -1,10 +1,17 @@
 @font-face {
-    font-family: 'retropix';
+    font-family: 'pressStart';
     src: url('../Fonts/PressStart2P.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
   
-  * {
-    font-family: 'retropix';  
-  }
+* {
+  font-family: 'PressStart';  
+}
+
+@font-face {
+  font-family: 'brick-sans';
+  src: url('../Fonts/NTBrickSans.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
