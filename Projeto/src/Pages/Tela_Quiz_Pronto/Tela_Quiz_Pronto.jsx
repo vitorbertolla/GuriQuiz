@@ -7,7 +7,6 @@ import { db } from "../../services/firebaseConfig.js";
 
 export default function Tela_Quiz_Pronto() {
     const [quizzes, setQuizzes] = useState([]);
-    const [crudQuiz, setCrudQuiz] = useState(false);
 
      useEffect(() => {
         async function carregarQuizzes() {
@@ -26,13 +25,6 @@ export default function Tela_Quiz_Pronto() {
     }, []);
     return (
         <div>
-            <h1>Selecione um Quiz</h1>
-
-            <button onClick={() => setCrudQuiz(prev => !prev)}>
-                Jogos
-            </button>
-
-            {crudQuiz && (
                 <>
                     <h1>Quizzes Cadastrados</h1>
                     {quizzes.map((q) => (
@@ -45,7 +37,6 @@ export default function Tela_Quiz_Pronto() {
                     ))}
                     
                 </>
-            )}
         </div>
     );
 }
