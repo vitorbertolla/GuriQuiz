@@ -1,0 +1,118 @@
+.background {
+    background-image: url('/images/backgroundJogo.png');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    image-rendering: pixelated;
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    height: 90vh;
+    width: 90VH;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 70px;
+}
+
+.dica {
+    background-color: white;
+    padding: 10px;
+    width: 16vw;
+    border-radius: 10px;
+    border: 3px solid #2a2d74;
+    text-align: center;
+    color: #2a2d74;
+    transition: 0.2s;
+}
+
+.dificuldadeContainer label {
+    background-color: white;
+    padding: 10px;
+    width: 16vw;
+    border-radius: 10px;
+    border: 3px solid #2a2d74;
+    text-align: center;
+    color: #2a2d74;
+    transition: 0.2s;
+}
+
+.dificuldadeContainer progress {
+    width: 16vw;
+    height: 30px;
+}
+
+.dificuldadeContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    gap: 30px;
+    width: 70vw;
+}
+
+.info h1 {
+    font-size: 15px;
+    font-family: arial;
+    text-align: center;
+}
+
+.info h2 {
+    font-family: 'brick-sans';
+    text-align: center;
+    font-size: 40px;
+}
+
+.pontuacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alternativas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    gap: 40px;
+    width: 70vw;
+    justify-items: center; /* centraliza cada botão */
+    align-items: center;
+}
+
+
+
+.alternativaLetra {
+    background-color: green;
+    padding: 30px;
+    border-radius: 100px;
+    transition: 0.2s;
+}
+
+.alternativaLetra:hover{
+    scale: 1.05;
+}
+
+.alternativaBtn {
+    width: 28vw;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* letra + texto alinhado */
+    gap: 10px;
+    text-align: left;
+    transition: 0.2s;
+}
+
+
+.alternativaBtn:hover {
+    scale: 1.05;
+}

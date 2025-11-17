@@ -80,53 +80,53 @@ export default function Tela_Jogo() {
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <button className={styles.dica}>DICA</button>
-                <div className={styles.info}>
-                    <h1>{pergunta.descricao}</h1>
-                    <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
-                    <div className={styles.pontuacao}>
-                        <span>Pontuação: {pontuacao}</span>
+        <div className={styles.background}>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <button className={styles.dica}>DICA</button>
+                    <div className={styles.info}>
+                        <h1>{pergunta.descricao}</h1>   
+                        <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
+                        <div className={styles.pontuacao}>
+                            <span>Pontuação: {pontuacao}</span>
+                        </div>
+                    </div>
+                    <div className={styles.dificuldadeContainer}>
+                        <label htmlFor="dificuldade">Dificuldade:</label>
+                        <progress
+                            id='dificuldade'
+                            value={getDificuldadeValue(pergunta.dificuldade)}
+                            max='100'
+                        ></progress>
                     </div>
                 </div>
-                <div className={styles.dificuldadeContainer}>
-                    <label htmlFor="dificuldade">Dificuldade:</label>
-                    <progress 
-                        id='dificuldade' 
-                        value={getDificuldadeValue(pergunta.dificuldade)} 
-                        max='100'
-                    ></progress>
+                <div className={styles.alternativas}>
+                    {pergunta.alternativas?.map((alt, index) => (
+                        <button
+                            key={index}
+                            className={`${styles.alternativaBtn} ${
+                                mostrarResultado && respostaClicada === alt.letra
+                                    ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
+                                    : ''
+                            }`}
+                            onClick={() => handleAlternativaClick(alt.letra)}
+                            disabled={mostrarResultado}
+                        >
+                            <strong className = {styles.alternativaLetra} style={{marginRight: 8}}>{alt.letra}</strong>
+                            {alt.texto}
+                        </button>
+                    ))}
                 </div>
+                {mostrarResultado && (
+                    <div className={styles.resultado}>
+                        <p className={respostaClicada === pergunta.correta ? styles.correto : styles.errado}>
+                            {respostaClicada === pergunta.correta ? '✓ Correto!' : '✗ Incorreto!'}
+                        </p>
+                        <p>Resposta correta: <strong>{pergunta.correta}</strong></p>
+                        <small>Próxima pergunta em 2 segundos...</small>
+                    </div>
+                )}
             </div>
-
-            <div className={styles.alternativas}>
-                {pergunta.alternativas?.map((alt, index) => (
-                    <button
-                        key={index}
-                        className={`${styles.alternativaBtn} ${
-                            mostrarResultado && respostaClicada === alt.letra
-                                ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
-                                : ''
-                        }`}
-                        onClick={() => handleAlternativaClick(alt.letra)}
-                        disabled={mostrarResultado}
-                    >
-                        <strong style={{marginRight: 8}}>{alt.letra}</strong>
-                        {alt.texto}
-                    </button>
-                ))}
-            </div>
-
-            {mostrarResultado && (
-                <div className={styles.resultado}>
-                    <p className={respostaClicada === pergunta.correta ? styles.correto : styles.errado}>
-                        {respostaClicada === pergunta.correta ? '✓ Correto!' : '✗ Incorreto!'}
-                    </p>
-                    <p>Resposta correta: <strong>{pergunta.correta}</strong></p>
-                    <small>Próxima pergunta em 2 segundos...</small>
-                </div>
-            )}
         </div>
     )
 }
