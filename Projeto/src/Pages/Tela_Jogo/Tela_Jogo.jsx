@@ -14,6 +14,7 @@ export default function Tela_Jogo() {
     const [respostaClicada, setRespostaClicada] = useState(null);
     const [mostrarResultado, setMostrarResultado] = useState(false);
 
+    //usar essa como base prapuxar um quiz pronto
     useEffect(() => {
         if (!perguntas || perguntas.length === 0) return;
 
