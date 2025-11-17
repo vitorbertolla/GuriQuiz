@@ -1,3 +1,4 @@
+import { enviarPrompt } from './Dica.jsx'
 import styles from './Tela_Jogo.module.css'
 import { usePerguntas } from '../../services/crudPerguntas'
 import { useSearchParams, useNavigate } from 'react-router-dom'
@@ -13,6 +14,8 @@ export default function Tela_Jogo() {
     const [pontuacao, setPontuacao] = useState(0);
     const [respostaClicada, setRespostaClicada] = useState(null);
     const [mostrarResultado, setMostrarResultado] = useState(false);
+    const [carregando, setCarregando] = useState(false)
+    const [dica, setDica] = useState("")
 
     //usar essa como base prapuxar um quiz pronto
     useEffect(() => {
@@ -61,6 +64,7 @@ export default function Tela_Jogo() {
             setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
             setMostrarResultado(false);
+            setDica("")
         } else {
             // envia pontuação e total de perguntas
             navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`);
@@ -84,7 +88,20 @@ export default function Tela_Jogo() {
         <div className={styles.background}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <button className={styles.dica}>DICA</button>
+                    <button className={styles.dica}
+                    onClick={() => {
+                        enviarPrompt(pergunta.descricao, setDica, setCarregando)
+                        setCarregando(true)    
+                    }
+                    }
+                    >DICA</button>
+                    {carregando && (<p>Carregando dica...</p>)}
+                    {dica !== "" && (
+                        <div>
+                            <button onClick={() => setDica("")}>X</button>
+                            <p>Dica: {dica}</p>
+                        </div>
+                        )}
                     <div className={styles.info}>
                         <h1>{pergunta.descricao}</h1>   
                         <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
