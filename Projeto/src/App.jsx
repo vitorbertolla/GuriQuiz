@@ -13,6 +13,7 @@ import Tela_Resultados from './Pages/Tela_Resultados/Tela_Resultados.jsx';
 import Tela_Admin from './Pages/Tela_Admin/Tela_Admin.jsx';
 import Tela_Quiz_Pronto from './Pages/Tela_Quiz_Pronto/Tela_Quiz_Pronto.jsx';
 import Tela_CRUD_Quiz from './Pages/Tela_Cadastro_Quiz/Tela_Cadastro_Quiz.jsx';
+import Teste from './Pages/Componentes/Teste.jsx';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
       <Route path="/resultados" element={<Tela_Resultados/>} />
       <Route path="/admin" element={<Tela_Admin/>} />
       <Route path="/quizPronto" element={<Tela_Quiz_Pronto/>} />
+      <Route path="/teste" element={<Teste/>} />
 
     </Routes>
     </>
