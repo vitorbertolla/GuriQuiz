@@ -9,6 +9,12 @@ export default function Timer({ duracao, onTempoEsgotado }) {
         }, 1000)
     },[tempoRestante]);
 
+    useEffect(() => {
+        if (tempoRestante === 0) {
+            onTempoEsgotado();
+        }
+    }, [tempoRestante, onTempoEsgotado]);
+
     const FormatarTempo = (ms) => {
         let segundos = Math.floor((tempoRestante / 1000));
         return `${segundos}`

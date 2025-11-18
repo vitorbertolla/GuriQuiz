@@ -1,5 +1,6 @@
 import { enviarPrompt } from './Dica.jsx'
 import styles from './Tela_Jogo.module.css'
+import Timer from './Timer.jsx'
 
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
@@ -20,6 +21,7 @@ export default function Tela_Jogo() {
     const [dica, setDica] = useState("")
     const [resultados, setResultados] = useState([]);
     const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
+    const [timeON, setTimeON] = useState(true);
 
     // Obter o ID do quiz a partir dos parâmetros de busca
     const quizId = searchParams.get('id');
@@ -54,15 +56,6 @@ export default function Tela_Jogo() {
     }, [quizzes, quizId]);
 
     // Auto-avanço após mostrar resultado
-    useEffect(() => {
-        if (mostrarResultado) {
-            const timer = setTimeout(() => {
-                handleProxima();
-            }, 2000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [mostrarResultado]);
 
     if (carregandoPerguntas) {
         return (
@@ -109,7 +102,12 @@ export default function Tela_Jogo() {
                 acertou
             }
         ]);
+            // AVANÇA DEPOIS DE 2s
+        setTimeout(() => {
+            handleProxima();
+        }, 2000);
     };
+
 
     const handleProxima = () => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
@@ -123,6 +121,27 @@ export default function Tela_Jogo() {
             });
         }
     };
+    const handleTempoEsgotado = () => {
+        if (mostrarResultado) return;
+
+        setRespostaClicada(null);        
+        setMostrarResultado(true);
+
+        setResultados(prev => [
+            ...prev,
+            {
+                descricao: pergunta.descricao,
+                correta: pergunta.correta,
+                escolhida: null,
+                acertou: false
+            }
+        ]);
+
+        setTimeout(() => {
+            handleProxima();
+        }, 2000);
+    };
+
 
     const getDificuldadeValue = (dificuldade) => {
         switch (dificuldade) {
@@ -141,6 +160,11 @@ export default function Tela_Jogo() {
         <div className={styles.background}>
             <div className={styles.container}>
                 <div className={styles.header}>
+                        <Timer 
+                            key={perguntaAtual} 
+                            duracao={10 * 1000} 
+                            onTempoEsgotado={handleTempoEsgotado} 
+                        />
                     <button 
                         className={styles.dica}
                         onClick={() => {
