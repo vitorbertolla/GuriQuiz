@@ -25,12 +25,13 @@
 .dica {
     background-color: white;
     padding: 10px;
-    width: 16vw;
+    min-width: 16vw;
     border-radius: 10px;
     border: 3px solid #2a2d74;
     text-align: center;
     color: #2a2d74;
     transition: 0.2s;
+    max-height: 60px;
 }
 
 .dificuldadeContainer label {
@@ -58,12 +59,17 @@
     display: flex;
     gap: 30px;
     width: 70vw;
+    justify-content: center;
+    align-items: center;
 }
 
 .info h1 {
     font-size: 15px;
     font-family: arial;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.452);
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .info h2 {
@@ -81,19 +87,21 @@
 .alternativas {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 colunas */
-    gap: 40px;
-    width: 70vw;
-    justify-items: center; /* centraliza cada botão */
+    gap: 20px;
+    width: 60vw;
     align-items: center;
 }
 
 
 
 .alternativaLetra {
-    background-color: green;
+    background-color: rgb(29, 70, 216);
     padding: 30px;
     border-radius: 100px;
     transition: 0.2s;
+    font-size: 25px;
+    text-align: center;
+    border: 5px solid white;
 }
 
 .alternativaLetra:hover{

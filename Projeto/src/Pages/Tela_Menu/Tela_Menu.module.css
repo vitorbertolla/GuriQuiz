@@ -13,6 +13,9 @@
 
 .telaMenuBtnExit {
     height: 80px; /* Ajuste se necessário */
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 
 img {
@@ -27,37 +30,6 @@ img:hover {
     height: 100px;
 }
 
-.link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Remova se não necessário */
-    width: 100px; /* Ajuste conforme necessário */
-    height: 100px; /* Ajuste conforme necessário */
-}
-
-.linkExit { 
-    width: 80px; /* Ajuste para o tamanho da imagem */
-    height: 80px; /* Ajuste para o tamanho da imagem */
-}
-
-.linkOption { 
-    width: 130px; /* Ajuste para o tamanho da imagem */
-    height: 90px; /* Ajuste para o tamanho da imagem */
-}
-
-.linkPlay { 
-    width: 150px; /* Ajuste para o tamanho da imagem */
-    height: 120px; /* Ajuste para o tamanho da imagem */
-}
-
-.telaMenuBtnExit,
-.telaMenuBtnOption,
-.telaMenuBtnPlay {
-    width: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    height: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    display: block; /* Garante que a imagem seja um bloco */
-}
 
 .telaMenuMenu {
     background-color: #bfebf4;
@@ -77,6 +49,7 @@ img:hover {
     justify-content: center;
     align-items: center;
     padding: 30px;
+    width: 77vw;
 }
 
 .telaMenuControls button {
@@ -90,13 +63,7 @@ img:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 300px;
-}
-
-.telaMenuPlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+    gap: 40px;
 }
 
 .telaMenuHeader {
@@ -121,4 +88,20 @@ img:hover {
 }
 
 
+.telaMenuBtnOption {
+    height: 100px;
+}
 
+.telaMenuBtnPlay {
+    height: 100px;
+}
+
+
+.botoesJogar{
+    width: 77vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+}
