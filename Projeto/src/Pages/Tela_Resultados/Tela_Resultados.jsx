@@ -27,8 +27,8 @@ export default function Tela_Resultados() {
               {resultados.length === 0 && <p>Nenhum detalhe de respostas disponível.</p>}
               {resultados.map((r, i) => (
                 <div key={i} className={styles.resultItem}>
-                  <p><strong>{i + 1}.</strong> {r.descricao}</p>
-                  <p>{r.acertou ? '✓ Acertou' : '✗ Errou'} (resposta: {r.escolhida} / correta: {r.correta})</p>
+                  <p><strong>{i + 1}.</strong></p>
+                  <p>{r.acertou ? '✓' : '✗'}</p>
                 </div>
               ))}
             </div>

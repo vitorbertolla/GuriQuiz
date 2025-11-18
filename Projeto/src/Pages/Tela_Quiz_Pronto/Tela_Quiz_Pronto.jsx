@@ -4,11 +4,13 @@ import Tela_ListaQuiz from '../Tela_Admin/Tela_ListaQuiz.jsx';
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Tela_Quiz_Pronto() {
     const [quizzes, setQuizzes] = useState([]);
+    const navigate = useNavigate();
 
-     useEffect(() => {
+    useEffect(() => {
         async function carregarQuizzes() {
             const ref = collection(db, "quizzes"); 
             const snapshot = await getDocs(ref);
@@ -23,20 +25,19 @@ export default function Tela_Quiz_Pronto() {
 
         carregarQuizzes();
     }, []);
+
     return (
         <div>
-                <>
-                    <h1>Quizzes Cadastrados</h1>
-                    {quizzes.map((q) => (
-                        <Tela_ListaQuiz
-                            key={q.id}
-                            quiz={q}
-                            editar={false}
-                            
-                        />
-                    ))}
-                    
-                </>
+            <h1>Quizzes Cadastrados</h1>
+            {quizzes.map((q) => (
+                <div
+                    key={q.id}
+                    onClick={() => navigate(`/jogo?id=${q.id}`)}
+                    style={{ cursor: "pointer" }}
+                >
+                    <Tela_ListaQuiz quiz={q} editar={false} />
+                </div>
+            ))}
         </div>
     );
 }

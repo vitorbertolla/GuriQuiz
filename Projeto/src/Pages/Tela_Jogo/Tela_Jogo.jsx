@@ -1,11 +1,13 @@
 import { enviarPrompt } from './Dica.jsx'
 import styles from './Tela_Jogo.module.css'
-import { usePerguntas } from '../../services/crudPerguntas'
+
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { useQuizzes } from '../../services/crudQuiz'
+
 
 export default function Tela_Jogo() {
-    const { perguntas } = usePerguntas();
+    const { quizzes } = useQuizzes();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -16,66 +18,87 @@ export default function Tela_Jogo() {
     const [mostrarResultado, setMostrarResultado] = useState(false);
     const [carregando, setCarregando] = useState(false)
     const [dica, setDica] = useState("")
-    const [quizzes, setQuizzes] = useState([]);
-    const [resultados, setResultados] = useState([]); // <-- armazena resultado de cada questão
+    const [resultados, setResultados] = useState([]);
+    const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
 
-    //jogar a partir do jogar quiz
+    // Obter o ID do quiz a partir dos parâmetros de busca
+    const quizId = searchParams.get('id');
+
     useEffect(() => {
-        if (!quizzes || quizzes.length === 0) return;
+        if (!quizzes) return;
+        setCarregandoPerguntas(true);
 
-        const materias = searchParams.get('materias')?.split(',') || [];
-        const dificuldade = searchParams.get('dificuldade') || '';
-        const numeroPerguntas = parseInt(searchParams.get('numeroPerguntas')) || 0;
-
-        let filtradas = quizzes.filter((q) => materias.includes(q.materia) && q.dificuldade === dificuldade);
-
-        filtradas = filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas);
-
-        setPerguntasFiltradas(filtradas);
-    }, [quizzes, searchParams]);
-
-    //jogar a partir da config. quiz
-    useEffect(() => {
-        if (!perguntas || perguntas.length === 0) return;
-
-        const materias = searchParams.get('materias')?.split(',') || [];
-        const dificuldade = searchParams.get('dificuldade') || '';
-        const numeroPerguntas = parseInt(searchParams.get('numeroPerguntas')) || 0;
-
-        let filtradas = perguntas.filter((p) => materias.includes(p.materia) && p.dificuldade === dificuldade);
-
-        filtradas = filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas);
-
-        setPerguntasFiltradas(filtradas);
-    }, [perguntas, searchParams]);
+        if (quizId) {
+            // Buscar quiz pelo id
+            const quizEncontrado = quizzes.find(q => q.id === quizId);
+            if (!quizEncontrado) {
+                setPerguntasFiltradas([]);
+                setCarregandoPerguntas(false);
+                return;
+            }
+            // Se as perguntas já estão completas dentro do quiz (como no Firestore)
+            let perguntasDoQuiz = quizEncontrado.perguntas || [];
+            // Se for objeto, transforma em array
+            if (!Array.isArray(perguntasDoQuiz)) {
+                perguntasDoQuiz = Object.values(perguntasDoQuiz);
+            }
+            // Embaralha perguntas
+            perguntasDoQuiz = [...perguntasDoQuiz].sort(() => Math.random() - 0.5);
+            setPerguntasFiltradas(perguntasDoQuiz);
+            setCarregandoPerguntas(false);
+        } else {
+            // fallback: não tem id, não mostra nada
+            setPerguntasFiltradas([]);
+            setCarregandoPerguntas(false);
+        }
+    }, [quizzes, quizId]);
 
     // Auto-avanço após mostrar resultado
     useEffect(() => {
         if (mostrarResultado) {
             const timer = setTimeout(() => {
                 handleProxima();
-            }, 2000); // 2 segundos para ver o resultado
+            }, 2000);
 
             return () => clearTimeout(timer);
         }
     }, [mostrarResultado]);
 
+    if (carregandoPerguntas) {
+        return (
+            <div className={styles.background}>
+                <div className={styles.container}>
+                    <div>Carregando perguntas...</div>
+                </div>
+            </div>
+        );
+    }
+
     if (perguntasFiltradas.length === 0) {
-        return <div>Carregando perguntas...</div>;
+        return (
+            <div className={styles.background}>
+                <div className={styles.container}>
+                    <div>
+                        <h2>Nenhuma pergunta encontrada</h2>
+                        <button onClick={() => navigate('/')}>Voltar ao início</button>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     const pergunta = perguntasFiltradas[perguntaAtual];
 
     const handleAlternativaClick = (letraAlternativa) => {
+        if (mostrarResultado) return;
+        
         setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
-        // Verifica se a resposta está correta (compara letra com letra)
         if (letraAlternativa === pergunta.correta) {
             setPontuacao((p) => p + 100);
         }
 
-        // registra resultado da questão
         const acertou = letraAlternativa === pergunta.correta;
         setResultados(prev => [
             ...prev,
@@ -95,8 +118,9 @@ export default function Tela_Jogo() {
             setMostrarResultado(false);
             setDica("")
         } else {
-            // envia pontuação, total de perguntas e lista de resultados via state
-            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`, { state: { resultados } });
+            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`, { 
+                state: { resultados } 
+            });
         }
     };
 
@@ -117,20 +141,23 @@ export default function Tela_Jogo() {
         <div className={styles.background}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                    <button className={styles.dica}
-                    onClick={() => {
-                        enviarPrompt(pergunta.descricao, setDica, setCarregando)
-                        setCarregando(true)    
-                    }
-                    }
-                    >DICA</button>
+                    <button 
+                        className={styles.dica}
+                        onClick={() => {
+                            enviarPrompt(pergunta.descricao, setDica, setCarregando)
+                            setCarregando(true)    
+                        }}
+                        disabled={carregando}
+                    >
+                        DICA
+                    </button>
                     {carregando && (<p>Carregando dica...</p>)}
                     {dica !== "" && (
-                        <div>
+                        <div className={styles.dicaContainer}>
                             <button onClick={() => setDica("")}>X</button>
                             <p>Dica: {dica}</p>
                         </div>
-                        )}
+                    )}
                     <div className={styles.info}>
                         <h1>{pergunta.descricao}</h1>   
                         <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
@@ -159,7 +186,9 @@ export default function Tela_Jogo() {
                             onClick={() => handleAlternativaClick(alt.letra)}
                             disabled={mostrarResultado}
                         >
-                            <strong className = {styles.alternativaLetra} style={{marginRight: 8}}>{alt.letra}</strong>
+                            <strong className={styles.alternativaLetra} style={{marginRight: 8}}>
+                                {alt.letra}
+                            </strong>
                             {alt.texto}
                         </button>
                     ))}

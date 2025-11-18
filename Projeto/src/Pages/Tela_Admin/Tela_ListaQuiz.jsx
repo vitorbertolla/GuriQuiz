@@ -42,7 +42,7 @@ const ListaQuiz = ({ quiz, removerQuiz, editarQuiz, adm}) => {
 
         {!adm &&(
             <div>
-                <Link to= "/jogo"><button>jogar</button></Link>
+                    <Link to= "/jogo"><button>jogar</button></Link>
             </div>
         )}
 
