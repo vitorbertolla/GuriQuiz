@@ -16,8 +16,25 @@ export default function Tela_Jogo() {
     const [mostrarResultado, setMostrarResultado] = useState(false);
     const [carregando, setCarregando] = useState(false)
     const [dica, setDica] = useState("")
+    const [quizzes, setQuizzes] = useState([]);
+    const [resultados, setResultados] = useState([]); // <-- armazena resultado de cada questão
 
-    //usar essa como base prapuxar um quiz pronto
+    //jogar a partir do jogar quiz
+    useEffect(() => {
+        if (!quizzes || quizzes.length === 0) return;
+
+        const materias = searchParams.get('materias')?.split(',') || [];
+        const dificuldade = searchParams.get('dificuldade') || '';
+        const numeroPerguntas = parseInt(searchParams.get('numeroPerguntas')) || 0;
+
+        let filtradas = quizzes.filter((q) => materias.includes(q.materia) && q.dificuldade === dificuldade);
+
+        filtradas = filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas);
+
+        setPerguntasFiltradas(filtradas);
+    }, [quizzes, searchParams]);
+
+    //jogar a partir da config. quiz
     useEffect(() => {
         if (!perguntas || perguntas.length === 0) return;
 
@@ -57,6 +74,18 @@ export default function Tela_Jogo() {
         if (letraAlternativa === pergunta.correta) {
             setPontuacao((p) => p + 100);
         }
+
+        // registra resultado da questão
+        const acertou = letraAlternativa === pergunta.correta;
+        setResultados(prev => [
+            ...prev,
+            {
+                descricao: pergunta.descricao,
+                correta: pergunta.correta,
+                escolhida: letraAlternativa,
+                acertou
+            }
+        ]);
     };
 
     const handleProxima = () => {
@@ -66,8 +95,8 @@ export default function Tela_Jogo() {
             setMostrarResultado(false);
             setDica("")
         } else {
-            // envia pontuação e total de perguntas
-            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`);
+            // envia pontuação, total de perguntas e lista de resultados via state
+            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`, { state: { resultados } });
         }
     };
 
