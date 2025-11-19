@@ -1,0 +1,41 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.titulo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.botoesTopo {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.btnToggle {
+  padding: 10px 18px;
+  border: none;
+  background: #4a90e2;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+.btnToggle:hover {
+  background: #357ac8;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}

@@ -77,7 +77,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
             <div className={styles['tela-cadastro-pergunta']}>
                 <header className={styles['tela-cadastro-pergunta__header']}>
                     {!editar && (<button><img className={styles['tela-cadastro-pergunta__exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
-                    <h1 className={styles['tela-cadastro-pergunta__title']}>{editar?"Edição de Perguntas" : "CADASTRO DE PERGUNTAS"}</h1>
+                    {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Edição de Perguntas</h1>)}
                 </header>
                 <main className={styles['tela-cadastro-pergunta__main']}>
                     <form
@@ -133,12 +133,20 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </div>
                         )}
                         {editar && (
-                            <div>
-                                <button type="submit" className={styles['tela-cadastro-pergunta__button']}>
+                            <div className={styles["tela-cadastro-pergunta__buttons"]}>
+                                <button 
+                                    type="submit" 
+                                    className={styles["tela-cadastro-pergunta__button"]}
+                                >
                                     Salvar Alterações
                                 </button>
-                                <button type="button" onClick={onClose} className={styles['tela-cadastro-pergunta__button--cancel']}>
-                                Cancelar
+
+                                <button 
+                                    type="button" 
+                                    onClick={onClose} 
+                                    className={styles["tela-cadastro-pergunta__button--cancel"]}
+                                >
+                                    Cancelar
                                 </button>
                             </div>
                         )}

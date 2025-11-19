@@ -1,3 +1,4 @@
+import styles from "./Tela_Admin.module.css";
 import ListaPerguntas from "./Tela_ListaPerguntas";
 import ListaQuiz from "./Tela_ListaQuiz";  
 import { usePerguntas } from "../../services/crudPerguntas";
@@ -9,46 +10,57 @@ export default function Tela_Admin() {
   const { quizzes, removerQuiz, editarQuiz } = useQuizzes();
   const [crudPergunta, setCrudPergunta] = useState(false);
   const [crudQuiz, setCrudQuiz] = useState(false);
-  const [adm, setAdm] = useState(false);
 
   return (
-    <div>
-      <h1>Tela ADMIN</h1>
-      <button onClick={() => {
-        setCrudQuiz(prev => !prev)
-        setCrudPergunta(false)
-      } }>Crud Quiz</button>
-      <button onClick={() =>{
-        setCrudQuiz(false)
-        setCrudPergunta(prev => !prev)
-      }}>Crud pergunta</button>
+    <div className={styles.container}>
+      <h1 className={styles.titulo}>Painel Administrativo</h1>
+
+      <div className={styles.botoesTopo}>
+        <button className={styles.btnToggle} onClick={() => {
+          setCrudQuiz(prev => !prev)
+          setCrudPergunta(false)
+        }}>
+          CRUD Quiz
+        </button>
+
+        <button className={styles.btnToggle} onClick={() =>{
+          setCrudQuiz(false)
+          setCrudPergunta(prev => !prev)
+        }}>
+          CRUD Perguntas
+        </button>
+      </div>
 
       {crudPergunta && (
         <>
-          <h1>Perguntas cadastradas</h1>
-          {perguntas.map((p) => (
-            <ListaPerguntas
-              key={p.id}
-              pergunta={p}
-              removerPergunta={removerPergunta}
-              editarPergunta={editarPergunta}
-            />
-          ))}
+          <h2>Perguntas Cadastradas</h2>
+          <div className={styles.cardContainer}>
+            {perguntas.map((p) => (
+              <ListaPerguntas
+                key={p.id}
+                pergunta={p}
+                removerPergunta={removerPergunta}
+                editarPergunta={editarPergunta}
+              />
+            ))}
+          </div>
         </>
       )}
 
       {crudQuiz && (
         <>
-          <h1>Quizzes Cadastrados</h1>
-          {quizzes.map((q) => (
-            <ListaQuiz
-              key={q.id}
-              quiz={q}
-              adm = {true}
-              removerQuiz={removerQuiz}
-              editarQuiz={editarQuiz}
-            />
-          ))}
+          <h2>Quizzes Cadastrados</h2>
+          <div className={styles.cardContainer}>
+            {quizzes.map((q) => (
+              <ListaQuiz
+                key={q.id}
+                quiz={q}
+                adm={true}
+                removerQuiz={removerQuiz}
+                editarQuiz={editarQuiz}
+              />
+            ))}
+          </div>
         </>
       )}
     </div>
