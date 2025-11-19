@@ -4,6 +4,7 @@ import { usePerguntas } from "../../services/crudPerguntas";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { buildQuizParams, paramsToQueryString } from "../../services/quizConfig";
+import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 
 export default function Tela_Config_Quiz() {
   const { perguntas } = usePerguntas();
@@ -87,17 +88,11 @@ export default function Tela_Config_Quiz() {
           </div>
           <div className={styles.dificuldade}>
             <label htmlFor="Dificuldade">Dificuldade:</label>
-            <select
-              name="Dificuldade"
-              id="Dificuldade"
-              value={dificuldadeSelecionada}
-              onChange={(e) => setDificuldadeSelecionada(e.target.value)}
-            >
-              <option value="">Selecione a dificuldade</option>
-              <option value="facil">Fácil</option>
-              <option value="medio">Médio</option>
-              <option value="dificil">Difícil</option>
-            </select>
+            <SelectDificuldade
+                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
+                dificuldade={dificuldadeSelecionada}
+                setDificuldade={setDificuldadeSelecionada}
+            />
           </div>
           <div className={styles.numeroPerguntas}>
             <label htmlFor="NumeroPerguntas">Número de Perguntas:</label>

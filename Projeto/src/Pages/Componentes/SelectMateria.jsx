@@ -1,14 +1,16 @@
-export default function SelectMateria({ Materia, setMateria }) {
+export default function SelectMateria({ materia, setMateria, className }) {
     const OPCOES_MATERIA = [
         { value: "matematica", label: "Matemática" },
         { value: "portugues", label: "Português" },
         { value: "fisica", label: "Física" },
-        { value: "conhecimentosGerais", label: "Conhecimentos Gerais" },
+        { value: "conhecimentos Gerais", label: "Conhecimentos Gerais" },
+        { value: "biologia", label: "biologia" },
     ];
 
   return (
     <select
-      value={Materia}
+      className={className}
+      value={materia}
       onChange={(e) => setMateria(e.target.value)}
     >
       <option value="">MATERIA</option>

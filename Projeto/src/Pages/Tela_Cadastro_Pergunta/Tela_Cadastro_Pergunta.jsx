@@ -2,6 +2,8 @@ import styles from './Tela_Cadastro_Pergunta.module.css'
 import IAcria from './Tela_Cadastro_IA.jsx'
 import { useState } from 'react'
 import {usePerguntas} from '../../services/crudPerguntas.js'
+import SelectMateria from '../Componentes/SelectMateria.jsx'
+import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 
 export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
     // preferir funções passadas pelo pai (quando o componente for usado como modal dentro da lista, para edição, garantindo assim que os componentes pais atualizem a lista)
@@ -90,27 +92,16 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 value={descricao}
                                 onChange={(e) => setDescricao(e.target.value)}
                             />
-                            <select
+                            <SelectDificuldade
                                 className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
-                                value={dificuldade}
-                                onChange={(e) => setDificuldade(e.target.value)}
-                            >
-                                <option value="">DIFICULDADE</option>
-                                <option value="facil">Fácil</option>
-                                <option value="medio">Médio</option>
-                                <option value="dificil">Difícil</option>
-                            </select>
-                            <select
+                                dificuldade={dificuldade}
+                                setDificuldade={setDificuldade}
+                            />
+                            <SelectMateria
                                 className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--materia']}`}
-                                value={materia}
-                                onChange={(e) => setMateria(e.target.value)}
-                            >
-                                <option value="">MATERIA</option>
-                                <option value="matematica">Matemática</option>
-                                <option value="portugues">Português</option>
-                                <option value="fisica">Física</option>
-                                <option value="conhecimentosGerais">Conhecimentos Gerais</option>
-                            </select>
+                                materia={materia}
+                                setMateria={setMateria}
+                            />
                             <button
                                 type="button"
                                 className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}

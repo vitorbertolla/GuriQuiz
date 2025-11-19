@@ -2,6 +2,8 @@ import styles from './Tela_Cadastro_Quiz.module.css'
 import { useState} from 'react'
 import { useQuizzes } from '../../services/crudQuiz';
 import { usePerguntas } from "../../services/crudPerguntas";
+import SelectMateria from '../Componentes/SelectMateria.jsx'
+import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 
 
 export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClose,adicionarQuiz: adicionarQuizProp,editarQuiz: editarQuizProp})  {
@@ -71,20 +73,16 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
                         <label>Descrição:</label>
                         <input value={descricaoQuiz} onChange={(e) => setDescricaoQuiz(e.target.value)} placeholder="Descrição curta do quiz..."></input>
                         
-                        <select value={dificuldadeQuiz} onChange={(e) => setDificuldadeQuiz(e.target.value)} name="" id="">
-                            <option value="">Selecione a dificuldade</option>
-                            <option value="facil">Fácil</option>
-                            <option value="medio">Médio</option>
-                            <option value="dificil">Difícil</option>
-                        </select>
-
-                        <select name="" value={materiaQuiz} onChange={(e) => setMateriaQuiz(e.target.value)} id="">
-                            <option value="">Selecione a Matéria</option>
-                            <option value="portugues">Português</option>
-                            <option value="matematica">Matemática</option>
-                            <option value="fisica">Física</option>
-                            <option value="conhecimentosGerais">Conhecimentos Gerais</option>
-                        </select>
+                            <SelectDificuldade
+                                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
+                                dificuldade={dificuldadeQuiz}
+                                setDificuldade={setDificuldadeQuiz}
+                            />
+                            <SelectMateria
+                                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--materia']}`}
+                                materia={materiaQuiz}
+                                setMateria={setMateriaQuiz}
+                            />
                     </div>
 
                     <div className={styles.perguntasDisponiveis}>
