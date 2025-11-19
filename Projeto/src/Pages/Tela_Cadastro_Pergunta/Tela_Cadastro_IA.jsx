@@ -2,6 +2,8 @@ import { useState } from "react"
 import './Tela_Cadastro_IA.module.css'
 import { GoogleGenerativeAI } from "@google/generative-ai"
 import styles from './Tela_Cadastro_IA.module.css'
+import SelectMateria from '../Componentes/SelectMateria.jsx'
+import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 
 export default function IACria({ setDescricao, setMostrarIACreate, setDificuldade, setMateria, materia, dificuldade, setCorreta, setAlternativas, setAlternativaA, setAlternativaB, setAlternativaC, setAlternativaD }) {
     const [prompt, setPrompt] = useState("")
@@ -116,30 +118,18 @@ export default function IACria({ setDescricao, setMostrarIACreate, setDificuldad
                         </label>
                     </div>
 
-                    <select
-                        required
-                        className={styles.iaSelect}
-                        value={dificuldade}
-                        onChange={(e) => setDificuldade(e.target.value)}
-                    >
-                        <option value="">Dificuldade</option>
-                        <option value="facil">Fácil</option>
-                        <option value="medio">Médio</option>
-                        <option value="dificil">Difícil</option>
-                    </select>
-
-                    <select
-                        required
-                        className={styles.iaSelect}
-                        value={materia}
-                        onChange={(e) => setMateria(e.target.value)}
-                    >
-                        <option value="">Matéria</option>
-                        <option value="portugues">Português</option>
-                        <option value="matematica">Matemática</option>
-                        <option value="fisica">Física</option>
-                        <option value="conhecimentosGerais">Conhecimentos Gerais</option>
-                    </select>
+                        <SelectDificuldade
+                            required
+                            className={styles.iaSelect}
+                            dificuldade={dificuldade}
+                            setDificuldade={setDificuldade}
+                            />
+                        <SelectMateria
+                            required
+                            className={styles.iaSelect}
+                            materia={materia}
+                            setMateria={setMateria}
+                        />
 
                     <div className={styles.iaBotoes}>
                         <button

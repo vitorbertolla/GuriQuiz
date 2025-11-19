@@ -1,4 +1,4 @@
-export default function SelectDificuldade({ Dificuldade, setDificuldade}) {
+export default function SelectDificuldade({ dificuldade, setDificuldade, className}) {
     const OPCOES_DIFICULDADE = [
         { value: "facil", label: "Fácil" },
         { value: "medio", label: "Médio" },
@@ -7,7 +7,8 @@ export default function SelectDificuldade({ Dificuldade, setDificuldade}) {
 
   return (
     <select
-      value={Dificuldade}
+    className={className}
+      value={dificuldade}
       onChange={(e) => setDificuldade(e.target.value)}
     >
       <option value="">Dificuldade</option>
