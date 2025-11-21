@@ -4,6 +4,7 @@ export default function Timer({ duracao, onTempoEsgotado }) {
     const [tempoRestante, setTempoRestante] = useState(duracao);
 
     useEffect(() => {
+        if (tempoRestante <= 0) return;
         setTimeout(() => {
             setTempoRestante(tempoRestante - 1000);
         }, 1000)

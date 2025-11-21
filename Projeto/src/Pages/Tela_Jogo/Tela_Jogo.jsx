@@ -21,8 +21,7 @@ export default function Tela_Jogo() {
     const [dica, setDica] = useState("")
     const [resultados, setResultados] = useState([]);
     const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
-    const [timeON, setTimeON] = useState(true);
-
+    
     // Obter o ID do quiz a partir dos parâmetros de busca
     const quizId = searchParams.get('id');
 
@@ -92,24 +91,24 @@ export default function Tela_Jogo() {
             setPontuacao((p) => p + 100);
         }
 
-        const acertou = letraAlternativa === pergunta.correta;
-        setResultados(prev => [
-            ...prev,
-            {
+        const acertou = letraAlternativa === pergunta.correta   ;
+
+            const novoResultado = {
                 descricao: pergunta.descricao,
                 correta: pergunta.correta,
                 escolhida: letraAlternativa,
                 acertou
             }
-        ]);
+        const todosResultados = [...resultados, novoResultado];
+        setResultados(todosResultados);
             // AVANÇA DEPOIS DE 2s
         setTimeout(() => {
-            handleProxima();
+            handleProxima(todosResultados);
         }, 2000);
     };
 
 
-    const handleProxima = () => {
+    const handleProxima = (resultadosAtualizados = resultados) => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
             setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
@@ -117,7 +116,7 @@ export default function Tela_Jogo() {
             setDica("")
         } else {
             navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`, { 
-                state: { resultados } 
+                state: { resultados: resultadosAtualizados } 
             });
         }
     };
@@ -127,18 +126,17 @@ export default function Tela_Jogo() {
         setRespostaClicada(null);        
         setMostrarResultado(true);
 
-        setResultados(prev => [
-            ...prev,
-            {
+        const novoResultado = {
                 descricao: pergunta.descricao,
                 correta: pergunta.correta,
                 escolhida: null,
                 acertou: false
             }
-        ]);
+        const todosResultados = [...resultados, novoResultado];
+        setResultados(todosResultados);
 
         setTimeout(() => {
-            handleProxima();
+            handleProxima(todosResultados);
         }, 2000);
     };
 

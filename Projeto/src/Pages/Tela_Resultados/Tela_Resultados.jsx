@@ -7,10 +7,10 @@ export default function Tela_Resultados() {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const pontuacao = parseInt(searchParams.get('pontuacao')) || 0
   const total = parseInt(searchParams.get('total')) || 0
-  const acertos = Math.floor(pontuacao / 100)
   const resultados = location.state?.resultados || []
+  const acertos = resultados.filter(r => r.acertou).length 
+  const pontuacao = (acertos * 100)
 
   return (
     <div className={styles.container}>
