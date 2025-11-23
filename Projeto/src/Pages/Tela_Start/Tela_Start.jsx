@@ -1,12 +1,21 @@
 import styles from "./Tela_Start.module.css";
 import { useEffect, useState } from "react";
 import { getDoc } from "firebase/firestore";
-import { getUserDocRef } from "../../services/authentication.js";
+import { getUserDocRef, logout } from "../../services/authentication.js";
 import { auth } from "../../services/firebaseConfig"; 
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Tela_Start() {
+  const navigate = useNavigate();
   const [nick, setNick] = useState("");
+  const [modal, setModal] = useState(false);
+  
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");   
+  };
 
   useEffect(() => {
     const fetchUserNick = async () => {
@@ -24,15 +33,39 @@ export default function Tela_Start() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.telaStartHeader}>
-        <div className={styles.jogador}>
-          <img className={styles.iconeJogador} src="/images/iconeJogador.png" alt="Imagem jogador" />
-          <h3 className={styles.nomeJogador}>
-            {nick || "Jogador"}
-          </h3>
-        </div>
-      </header>
+      <button onClick={() => setModal(true)}>
+          <header className={styles.telaStartHeader}>
+          <div className={styles.jogador}>
+            <img className={styles.iconeJogador} src="/images/iconeJogador.png" alt="Imagem jogador" />
+            <h3 className={styles.nomeJogador}>
+              {nick || "Jogador"}
+            </h3>
+          </div>
+        </header>
+      </button>
+        {modal && (
+          <div className={styles.modalLogout}>
+            <div className={styles.modalBox}>
 
+              <h3 className={styles.modalNick}>
+                {nick || "Jogador"}
+              </h3>
+
+              <div className={styles.modalButtons}>
+                <button className={styles.btnSair} onClick={handleLogout}>
+                  Logout  
+                </button>
+
+                <button className={styles.btnCancelar} onClick={() => setModal(false)}>
+                  Cancelar
+                </button>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+    
       <main className={styles.containerPrincipal}>
         <section className={styles.telaStartSection}>
           <h3>

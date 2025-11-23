@@ -1,4 +1,5 @@
 import { auth, db } from "./firebaseConfig";
+import { Link } from "react-router-dom";
 import { 
   signInWithPopup, 
   GoogleAuthProvider,
@@ -88,6 +89,7 @@ export const loginComEmail = async (email, senha) => {
 export const logout = async () => {
   try {
     await signOut(auth);
+    console.log("Usuário deslogado com sucesso.");
   } catch (error) {
     console.error("Erro ao sair:", error);
   }
