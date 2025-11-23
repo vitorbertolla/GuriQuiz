@@ -6,11 +6,12 @@ export default function Tela_Resultados() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const location = useLocation()
+  
 
   const total = parseInt(searchParams.get('total')) || 0
   const resultados = location.state?.resultados || []
   const acertos = resultados.filter(r => r.acertou).length 
-  const pontuacao = (acertos * 100)
+  const pontuacao = parseInt(searchParams.get('pontuacao')) || 0
 
   return (
     <div className={styles.container}>

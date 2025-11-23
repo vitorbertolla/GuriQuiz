@@ -21,6 +21,7 @@ export default function Tela_Jogo() {
     const [dica, setDica] = useState("")
     const [resultados, setResultados] = useState([]);
     const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
+    const [tempoRestante, setTempoRestante] = useState(10*1000) 
     
     // Obter o ID do quiz a partir dos parâmetros de busca
     const quizId = searchParams.get('id');
@@ -87,12 +88,12 @@ export default function Tela_Jogo() {
         setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
-        if (letraAlternativa === pergunta.correta) {
-            setPontuacao((p) => p + 100);
-        }
+        const acertou = letraAlternativa === pergunta.correta;
+        const novaPontuacao = acertou 
+            ? pontuacao + (tempoRestante * 10 / 1000 * (getDificuldadeValue(pergunta.dificuldade)/10))
+            : pontuacao;
 
-        const acertou = letraAlternativa === pergunta.correta   ;
-
+        setPontuacao(novaPontuacao);
             const novoResultado = {
                 descricao: pergunta.descricao,
                 correta: pergunta.correta,
@@ -103,19 +104,20 @@ export default function Tela_Jogo() {
         setResultados(todosResultados);
             // AVANÇA DEPOIS DE 2s
         setTimeout(() => {
-            handleProxima(todosResultados);
+            handleProxima(todosResultados, novaPontuacao);
         }, 2000);
     };
 
 
-    const handleProxima = (resultadosAtualizados = resultados) => {
+    const handleProxima = (resultadosAtualizados = resultados, pontuacaoAtualizada = pontuacao ) => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
             setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
             setMostrarResultado(false);
             setDica("")
+            setTempoRestante(10 * 1000);
         } else {
-            navigate(`/resultados?pontuacao=${pontuacao}&total=${perguntasFiltradas.length}`, { 
+              navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, { 
                 state: { resultados: resultadosAtualizados } 
             });
         }
@@ -136,7 +138,7 @@ export default function Tela_Jogo() {
         setResultados(todosResultados);
 
         setTimeout(() => {
-            handleProxima(todosResultados);
+            handleProxima(todosResultados, pontuacao);
         }, 2000);
     };
 
@@ -144,9 +146,9 @@ export default function Tela_Jogo() {
     const getDificuldadeValue = (dificuldade) => {
         switch (dificuldade) {
             case 'facil':
-                return 25;
+                return 33;
             case 'medio':
-                return 75;
+                return 66;
             case 'dificil':
                 return 100;
             default:
@@ -159,8 +161,10 @@ export default function Tela_Jogo() {
             <div className={styles.container}>
                 <div className={styles.header}>
                         <Timer 
-                            key={perguntaAtual} 
-                            duracao={10 * 1000} 
+                            key={perguntaAtual}  
+                            tempoRestante={tempoRestante}
+                            duracao={10*1000}
+                            setTempoRestante={setTempoRestante}
                             onTempoEsgotado={handleTempoEsgotado} 
                         />
                     <button 

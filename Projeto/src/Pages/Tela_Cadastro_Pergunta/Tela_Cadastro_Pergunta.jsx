@@ -73,11 +73,11 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
     }
 
     return (
-        <div className={styles.container}>
+        <div className={editar? styles.containerEdit : styles.container}>
             <div className={styles['tela-cadastro-pergunta']}>
                 <header className={styles['tela-cadastro-pergunta__header']}>
                     {!editar && (<button><img className={styles['tela-cadastro-pergunta__exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
-                    {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Edição de Perguntas</h1>)}
+                    {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>)}
                 </header>
                 <main className={styles['tela-cadastro-pergunta__main']}>
                     <form
