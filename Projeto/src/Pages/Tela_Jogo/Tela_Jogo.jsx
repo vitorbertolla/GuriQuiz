@@ -1,16 +1,19 @@
 import { enviarPrompt } from './Dica.jsx'
 import styles from './Tela_Jogo.module.css'
 import Timer from './Timer.jsx'
-
+import { usePerguntas } from '../../services/crudPerguntas'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useQuizzes } from '../../services/crudQuiz'
 
 
 export default function Tela_Jogo() {
+    const { perguntas } = usePerguntas();
     const { quizzes } = useQuizzes();
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+
+    const quizId = searchParams.get('id'); // declare early
 
     const [perguntasFiltradas, setPerguntasFiltradas] = useState([]);
     const [perguntaAtual, setPerguntaAtual] = useState(0);
@@ -23,40 +26,64 @@ export default function Tela_Jogo() {
     const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
     const [tempoRestante, setTempoRestante] = useState(10*1000) 
     
-    // Obter o ID do quiz a partir dos parâmetros de busca
-    const quizId = searchParams.get('id');
-
     useEffect(() => {
-        if (!quizzes) return;
+        // começa carregando
         setCarregandoPerguntas(true);
 
+        // se não houver perguntas ainda, aguarda
+        if (!perguntas || perguntas.length === 0) {
+            setPerguntasFiltradas([]);
+            setCarregandoPerguntas(false);
+            return;
+        }
+
         if (quizId) {
-            // Buscar quiz pelo id
-            const quizEncontrado = quizzes.find(q => q.id === quizId);
+            // --- branch: carregar quiz por id ---
+            const quizEncontrado = (quizzes || []).find(q => String(q.id) === String(quizId));
             if (!quizEncontrado) {
                 setPerguntasFiltradas([]);
                 setCarregandoPerguntas(false);
                 return;
             }
-            // Se as perguntas já estão completas dentro do quiz (como no Firestore)
+
             let perguntasDoQuiz = quizEncontrado.perguntas || [];
-            // Se for objeto, transforma em array
             if (!Array.isArray(perguntasDoQuiz)) {
                 perguntasDoQuiz = Object.values(perguntasDoQuiz);
             }
-            // Embaralha perguntas
             perguntasDoQuiz = [...perguntasDoQuiz].sort(() => Math.random() - 0.5);
             setPerguntasFiltradas(perguntasDoQuiz);
             setCarregandoPerguntas(false);
-        } else {
-            // fallback: não tem id, não mostra nada
-            setPerguntasFiltradas([]);
-            setCarregandoPerguntas(false);
+            return;
         }
-    }, [quizzes, quizId]);
 
-    // Auto-avanço após mostrar resultado
+        // --- branch: carregar por filtros via query params ---
+        const materiasParam = searchParams.get('materias');
+        const dificuldadesParam = searchParams.get('dificuldade');
+        const numeroPerguntasParam = parseInt(searchParams.get('numeroPerguntas'), 10);
 
+        const materias = materiasParam ? materiasParam.split(',').map(s => s.trim()).filter(Boolean) : null; // null = aceita todas
+        const dificuldades = dificuldadesParam ? dificuldadesParam.split(',').map(s => s.trim()).filter(Boolean) : null; // null = aceita todas
+        const numeroPerguntas = !isNaN(numeroPerguntasParam) && numeroPerguntasParam > 0 ? numeroPerguntasParam : perguntas.length;
+
+        let filtradas = perguntas.filter((p) => {
+            const okMateria = !materias || materias.length === 0 ? true : materias.includes(p.materia);
+            const okDificuldade = !dificuldades || dificuldades.length === 0 ? true : dificuldades.includes(p.dificuldade);
+            return okMateria && okDificuldade;
+        });
+
+        if (!filtradas || filtradas.length === 0) {
+            // fallback: usa todas se nenhum filtro encontrar resultado
+            filtradas = [...perguntas];
+        }
+
+        filtradas = filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas);
+        setPerguntasFiltradas(filtradas);
+        setCarregandoPerguntas(false);
+
+    }, [perguntas, quizzes, searchParams, quizId]);
+
+
+    // Auto-avanço e lógica do jogo (mantidas, sem mudanças funcionais)
     if (carregandoPerguntas) {
         return (
             <div className={styles.background}>
@@ -94,15 +121,14 @@ export default function Tela_Jogo() {
             : pontuacao;
 
         setPontuacao(novaPontuacao);
-            const novoResultado = {
-                descricao: pergunta.descricao,
-                correta: pergunta.correta,
-                escolhida: letraAlternativa,
-                acertou
-            }
+        const novoResultado = {
+            descricao: pergunta.descricao,
+            correta: pergunta.correta,
+            escolhida: letraAlternativa,
+            acertou
+        }
         const todosResultados = [...resultados, novoResultado];
         setResultados(todosResultados);
-            // AVANÇA DEPOIS DE 2s
         setTimeout(() => {
             handleProxima(todosResultados, novaPontuacao);
         }, 2000);
@@ -135,6 +161,7 @@ export default function Tela_Jogo() {
                 acertou: false
             }
         const todosResultados = [...resultados, novoResultado];
+        // garantir que resultados já inclui o último antes de avançar/navegar
         setResultados(todosResultados);
 
         setTimeout(() => {
@@ -163,7 +190,7 @@ export default function Tela_Jogo() {
                         <Timer 
                             key={perguntaAtual}  
                             tempoRestante={tempoRestante}
-                            duracao={10*1000}
+                            duracao={30     *1000}
                             setTempoRestante={setTempoRestante}
                             onTempoEsgotado={handleTempoEsgotado} 
                         />

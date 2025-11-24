@@ -50,7 +50,9 @@ const ListaQuiz = ({ quiz, removerQuiz, editarQuiz, adm}) => {
 
       {!adm && (
         <Link to="/jogo">
-          <button className={styles.btn}>Jogar</button>
+          <button className={styles.btn}>
+            Jogar
+          </button>
         </Link>
       )}
     </div>

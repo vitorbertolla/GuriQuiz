@@ -1,7 +1,7 @@
 /**
  * Valida e constrói os parâmetros do quiz
  * @param {string[]} materias - Array de matérias selecionadas
- * @param {string} dificuldade - Dificuldade selecionada (Fácil, Médio, Difícil)
+ * @param {string[]} dificuldade - Dificuldade selecionada (Fácil, Médio, Difícil)
  * @param {number} numeroPerguntas - Número de perguntas desejadas
  * @param {number} disponiveis - Número de perguntas disponíveis (padrão: Infinity)
  * @returns {object} Objeto com os parâmetros validados do quiz
@@ -17,7 +17,7 @@ export function buildQuizParams(materias, dificuldade, numeroPerguntas, disponiv
     throw new Error("Selecione ao menos uma matéria.");
   }
 
-  if (!dificuldade || dificuldade.trim() === "") {
+  if (!dificuldade) {
     throw new Error("Selecione a dificuldade.");
   }
 

@@ -47,7 +47,7 @@ export default function Tela_Menu() {
             </div>
             <div className={styles.botoesJogar}>
               <div className={styles.telaMenuPlay}>
-                <Link to="/configuraçãoQuiz" className={`${styles.link} ${styles.linkPlay}`}>
+                <Link to="/quizPronto" className={`${styles.link} ${styles.linkPlay}`}>
                   <img
                     className={styles.telaMenuBtnPlay}
                     src="/images/botaoJogoRapido.png"
@@ -56,7 +56,7 @@ export default function Tela_Menu() {
                 </Link>
               </div>
               <div>
-                <Link to="/quizPronto" className={`${styles.link} ${styles.linkPlay}`}>
+                <Link to="/configuraçãoQuiz" className={`${styles.link} ${styles.linkPlay}`}>
                   <img
                     className={styles.telaMenuBtnPlay}
                     src="/images/botaoCriarQuiz.png"
