@@ -4,20 +4,22 @@ import { usePerguntas } from "../../services/crudPerguntas";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { buildQuizParams, paramsToQueryString } from "../../services/quizConfig";
-import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 
 export default function Tela_Config_Quiz() {
   const { perguntas } = usePerguntas();
   const navigate = useNavigate();
 
   const [materiaSelecionada, setMateriaSelecionada] = useState([]);
-  const [dificuldadeSelecionada, setDificuldadeSelecionada] = useState("");
+  const [dificuldadeSelecionada, setDificuldadeSelecionada] = useState([]);
   const [numeroPerguntasSelecionadas, setNumeroPerguntasSelecionadas] =
     useState("");
   const [perguntasDisponiveis, setPerguntasDisponiveis] = useState(0);
 
     const materiasUnicas = Array.from(
     new Set((perguntas || []).map((p) => p.materia).filter(Boolean))
+  );
+    const dificuldadesUnicas = Array.from(
+    new Set((perguntas || []).map((p) => p.dificuldade).filter(Boolean))
   );
 
   useEffect(() => {
@@ -27,9 +29,11 @@ export default function Tela_Config_Quiz() {
       filtradas = filtradas.filter((p) => materiaSelecionada.includes(p.materia));
     }
 
-    if (dificuldadeSelecionada) {
-      filtradas = filtradas.filter((p) => p.dificuldade === dificuldadeSelecionada);
-    }
+    if (dificuldadeSelecionada.length > 0) {
+      filtradas = filtradas.filter((p) =>
+      dificuldadeSelecionada.includes(p.dificuldade)
+    );
+  }
 
     setPerguntasDisponiveis(filtradas.length);
   }, [materiaSelecionada, dificuldadeSelecionada, perguntas]);
@@ -40,6 +44,14 @@ export default function Tela_Config_Quiz() {
         return prev.filter((m) => m !== materia);
       }
       return [...prev, materia];
+    });
+  };
+  const handleDificuldadeChange = (dificuldade) => {
+    setDificuldadeSelecionada((prev) => {
+      if (prev.includes(dificuldade)) {
+        return prev.filter((m) => m !== dificuldade);
+      }
+      return [...prev, dificuldade];
     });
   };
 
@@ -78,6 +90,7 @@ export default function Tela_Config_Quiz() {
                 <label key={materia}>
                   <input
                     type="checkbox"
+                    name="dificuldade"
                     checked={materiaSelecionada.includes(materia)}
                     onChange={() => handleMateriaChange(materia)}
                   />
@@ -86,13 +99,23 @@ export default function Tela_Config_Quiz() {
               ))}
             </div>
           </div>
+                          
+
           <div className={styles.dificuldade}>
-            <label htmlFor="Dificuldade">Dificuldade:</label>
-            <SelectDificuldade
-                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
-                dificuldade={dificuldadeSelecionada}
-                setDificuldade={setDificuldadeSelecionada}
-            />
+            <label>Dificuldade:</label>
+            <div className={styles.opcoesMateria}>
+              {dificuldadesUnicas.map((dificuldade) => (
+                <label key={dificuldade}>
+                  <input
+                    type="checkbox"
+                    name="dificuldade"
+                    checked={dificuldadeSelecionada.includes(dificuldade)}
+                    onChange={() => handleDificuldadeChange(dificuldade)}
+                  />
+                  {dificuldade}
+                </label>
+              ))}
+            </div>
           </div>
           <div className={styles.numeroPerguntas}>
             <label htmlFor="NumeroPerguntas">Número de Perguntas:</label>
