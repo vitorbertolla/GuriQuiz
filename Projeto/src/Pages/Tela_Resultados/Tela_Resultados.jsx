@@ -1,17 +1,43 @@
 import styles from './Tela_Resultados.module.css'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { db } from "../../services/firebaseConfig";
+import { auth } from "../../services/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+
+
+
 
 export default function Tela_Resultados() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const location = useLocation()
   
-
+  const quizId = location.state?.quizId;
+  console.log("quizId:", quizId);
   const total = parseInt(searchParams.get('total')) || 0
   const resultados = location.state?.resultados || []
   const acertos = resultados.filter(r => r.acertou).length 
   const pontuacao = parseInt(searchParams.get('pontuacao')) || 0
+
+  async function score() {
+    if (!quizId) {
+      alert("para salvar o resultado é necessário jogar um quiz pronto!");
+      return;
+    }
+    const user = auth.currentUser;
+    if (!user) {
+    alert("Você precisa estar logado para salvar o resultado!");
+    return;
+  }
+   const ref = await addDoc(collection(db, "ranking"), {
+  score: pontuacao,
+  userId: user.uid,
+  quizId: quizId
+});
+alert("Resultado salvo com sucesso!");
+  }
+  
 
   return (
     <div className={styles.container}>
@@ -34,7 +60,8 @@ export default function Tela_Resultados() {
               ))}
             </div>
           </div>
-          <div className={styles.btnOverlay}><button onClick={() => navigate('/menu')} className={styles.btnMenu}>MENU</button></div>
+          <div className={styles.btnOverlay}><button onClick={() => navigate('/menu')} className={styles.btnMenu}>MENU</button>
+          <button onClick={score} className={styles.btnMenu}>Salvar Resultados</button></div>
         </div>
       </div>
     </div>

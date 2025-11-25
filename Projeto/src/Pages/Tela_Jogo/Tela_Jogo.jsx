@@ -140,11 +140,11 @@ export default function Tela_Jogo() {
             setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
             setMostrarResultado(false);
-            setDica("")
+            setDica("");
             setTempoRestante(10 * 1000);
         } else {
               navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, { 
-                state: { resultados: resultadosAtualizados } 
+                state: { resultados: resultadosAtualizados, quizId: quizId } 
             });
         }
     };
