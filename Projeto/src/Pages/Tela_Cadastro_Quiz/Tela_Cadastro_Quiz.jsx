@@ -61,28 +61,39 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
     }
 
     return (
-        <div>
+        <div className={styles.container}>
             <form onSubmit={submit}>
                 <div className={styles.telaMonarQuiz}>
                     <h2>{editar? "editar quiz" : "cadastro de quiz"}</h2>
 
                     <div className={styles.infoQuiz}>
-                        <label>Nome do Quiz:</label>
-                        <input value={nomeQuiz} onChange={(e) => setNomeQuiz(e.target.value)} type="text"  placeholder="Ex: Quiz de Programação"/>
+                        <div>
+                            <label>Nome do Quiz:</label>
+                            <input value={nomeQuiz} onChange={(e) => setNomeQuiz(e.target.value)} type="text"  placeholder="Ex: Quiz de Prog"/>
+                        </div>
 
-                        <label>Descrição:</label>
-                        <input value={descricaoQuiz} onChange={(e) => setDescricaoQuiz(e.target.value)} placeholder="Descrição curta do quiz..."></input>
-                        
+                        <div>
+                            <label>Descrição:</label>
+                            <input value={descricaoQuiz} onChange={(e) => setDescricaoQuiz(e.target.value)} placeholder="Descrição curta"/>
+                        </div>
+
+                        <div>
+                            <label>Dificuldade:</label>
                             <SelectDificuldade
                                 className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
                                 dificuldade={dificuldadeQuiz}
                                 setDificuldade={setDificuldadeQuiz}
                             />
+                        </div>
+
+                        <div>
+                            <label>Matéria:</label>
                             <SelectMateria
                                 className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--materia']}`}
                                 materia={materiaQuiz}
                                 setMateria={setMateriaQuiz}
                             />
+                        </div>
                     </div>
 
                     <div className={styles.perguntasDisponiveis}>
@@ -103,14 +114,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
                         ))}
                     </div>
 
-                    <div className={styles.quizMontado}>
-                        <h3>Perguntas Selecionadas</h3>
-                        <ul>
-                        {perguntasSelecionadas.map(p => (
-                            <li key={p.id}>{p.descricao}</li>
-                        ))}
-                        </ul>
-                    </div>
+
                     {editar && (
                         <button onClick={onClose}>Cancelar edição</button>
                     )}

@@ -1,0 +1,511 @@
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* CONTAINER PRINCIPAL */
+.container {
+  background-image: url("/images/backgroundAnoitecer.png");
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  image-rendering: pixelated;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* TELA PRINCIPAL DO QUIZ */
+.telaMonarQuiz {
+  background: linear-gradient(135deg, #9cdbff 0%, #b8e6ff 100%);
+  border: 7px solid #2a2d74;
+  border-radius: 30px;
+  box-shadow: 0 15px 40px rgba(42, 45, 116, 0.3),
+              0 0 0 2px #7cb8e8 inset;
+
+  width: 95%;
+  max-width: 1400px;
+  max-height: 90vh;
+  padding: clamp(15px, 2vw, 25px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+  position: relative;
+}
+
+.telaMonarQuiz::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent
+  );
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* TÍTULO */
+.telaMonarQuiz h2 {
+  color: #2a2d74;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+  border: 7px solid #2a2d74;
+  border-radius: 30px;
+  font-weight: 600;
+  padding: clamp(8px, 1.5vw, 12px) clamp(15px, 3vw, 30px);
+  font-size: clamp(22px, 3.5vw, 38px);
+  margin: 0;
+  text-transform: capitalize;
+  box-shadow: 0 8px 20px rgba(42, 45, 116, 0.2);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.6s ease-out 0.2s both;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.telaMonarQuiz h2:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(42, 45, 116, 0.25);
+}
+
+/* INFORMAÇÕES DO QUIZ */
+.infoQuiz {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  width: 100%;
+  padding: 0 20px;
+  animation: fadeIn 0.7s ease-out 0.3s both;
+  align-items: start;
+}
+
+.infoQuiz > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoQuiz label {
+  color: #2a2d74;
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.infoQuiz input {
+  background-color: white;
+  color: #2a2d74;
+  border: 5px solid #2a2d74;
+  border-radius: 12px;
+  padding: 10px 12px;
+
+  width: 100%;
+  min-height: 45px;
+  font-size: clamp(13px, 1.5vw, 15px);
+  text-align: center;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(42, 45, 116, 0.1);
+}
+
+.infoQuiz input:focus {
+  outline: none;
+  border-color: #2b6bff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(43, 107, 255, 0.3);
+}
+
+.infoQuiz input:hover {
+  border-color: #3d4eb8;
+}
+
+/* SELECT */
+.tela-cadastro-pergunta__select {
+  background-color: white;
+  color: #2a2d74;
+  border: 5px solid #2a2d74;
+  border-radius: 12px;
+
+  width: 100%;
+  min-height: 45px;
+  padding: 10px 12px;
+  font-size: clamp(13px, 1.5vw, 15px);
+  text-align: center;
+
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 20 20'%3E%3Cpath fill='%232a2d74' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 35px;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(42, 45, 116, 0.1);
+}
+
+.tela-cadastro-pergunta__select:hover {
+  transform: translateY(-2px);
+  border-color: #3d4eb8;
+  box-shadow: 0 6px 15px rgba(42, 45, 116, 0.2);
+}
+
+.tela-cadastro-pergunta__select:focus {
+  outline: none;
+  border-color: #2b6bff;
+  box-shadow: 0 6px 15px rgba(43, 107, 255, 0.3);
+}
+
+/* PERGUNTAS DISPONÍVEIS */
+.perguntasDisponiveis {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+  border: 7px solid #2a2d74;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(42, 45, 116, 0.15);
+
+  padding: 15px;
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  min-height: 200px;
+  overflow-y: auto;
+
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.perguntasDisponiveis::-webkit-scrollbar {
+  width: 10px;
+}
+
+.perguntasDisponiveis::-webkit-scrollbar-track {
+  background: #d8f1ff;
+  border-radius: 10px;
+}
+
+.perguntasDisponiveis::-webkit-scrollbar-thumb {
+  background: #2a2d74;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.perguntasDisponiveis::-webkit-scrollbar-thumb:hover {
+  background: #2b6bff;
+}
+
+.perguntasDisponiveis h3 {
+  text-align: center;
+  color: #2a2d74;
+  font-size: clamp(20px, 3vw, 28px);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+/* ITEM DE PERGUNTA */
+.perguntaItem {
+  background: linear-gradient(135deg, #d8f1ff 0%, #e8f7ff 100%);
+  border: 5px solid #2a2d74;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.4s ease-out backwards;
+}
+
+.perguntaItem:nth-child(even) {
+  animation-delay: 0.05s;
+}
+
+.perguntaItem:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.perguntaItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.perguntaItem:hover::before {
+  left: 100%;
+}
+
+.perguntaItem:hover {
+  transform: translateX(5px) scale(1.02);
+  background: linear-gradient(135deg, #c8eaff 0%, #d8f5ff 100%);
+  box-shadow: 0 8px 20px rgba(42, 45, 116, 0.2);
+}
+
+.perguntaItem:active {
+  transform: scale(0.98);
+}
+
+.selecionada {
+  background: linear-gradient(135deg, #7cc9ff 0%, #9dd9ff 100%) !important;
+  border-color: #1b1f66 !important;
+  box-shadow: 0 8px 20px rgba(27, 31, 102, 0.3) !important;
+  animation: pulse 0.5s ease;
+}
+
+/* QUIZ MONTADO */
+.quizMontado {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+  border: 7px solid #2a2d74;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(42, 45, 116, 0.15);
+
+  width: 100%;
+  max-width: 900px;
+
+  animation: fadeIn 0.9s ease-out 0.5s both;
+}
+
+.quizMontado h3 {
+  text-align: center;
+  color: #2a2d74;
+  font-size: clamp(20px, 3vw, 28px);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.quizMontado ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quizMontado li {
+  background: linear-gradient(135deg, #d8f1ff 0%, #e8f7ff 100%);
+  border: 5px solid #2a2d74;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: clamp(14px, 2vw, 18px);
+  text-align: center;
+  transition: all 0.3s ease;
+  animation: slideIn 0.4s ease-out backwards;
+}
+
+.quizMontado li:nth-child(n) {
+  animation-delay: calc(0.05s * var(--item-index, 1));
+}
+
+.quizMontado li:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(42, 45, 116, 0.15);
+}
+
+/* BOTÕES */
+button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 20px;
+
+  background: linear-gradient(135deg, #2b6bff 0%, #4080ff 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+
+  padding: 14px 40px;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: bold;
+
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(43, 107, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+button:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(135deg, #1f53cc 0%, #2b6bff 100%);
+  box-shadow: 0 10px 25px rgba(43, 107, 255, 0.4);
+}
+
+button:active {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 10px rgba(43, 107, 255, 0.3);
+}
+
+/* BOTÃO DE CANCELAR */
+button:nth-of-type(1) {
+  background: linear-gradient(135deg, #e74c3c 0%, #ec6355 100%);
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
+}
+
+button:nth-of-type(1):hover {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+  box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .infoQuiz {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .telaMonarQuiz {
+    width: 95%;
+    max-height: 95vh;
+    padding: 15px;
+    border-width: 5px;
+  }
+
+  .telaMonarQuiz h2 {
+    border-width: 5px;
+    margin-bottom: 15px;
+  }
+
+  .infoQuiz {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .perguntasDisponiveis,
+  .quizMontado {
+    border-width: 5px;
+    padding: 15px;
+  }
+
+  .perguntaItem,
+  .quizMontado li {
+    border-width: 3px;
+    padding: 12px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .telaMonarQuiz {
+    border-radius: 20px;
+  }
+
+  .telaMonarQuiz h2 {
+    border-radius: 20px;
+  }
+
+  .perguntasDisponiveis,
+  .quizMontado {
+    border-radius: 15px;
+  }
+
+  .infoQuiz {
+    gap: 12px;
+  }
+
+  button {
+    font-size: 16px;
+  }
+}
+
+/* ACESSIBILIDADE */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* MODO ESCURO (opcional) */
+@media (prefers-color-scheme: dark) {
+  .telaMonarQuiz {
+    background: linear-gradient(135deg, #7cb8e8 0%, #9cdbff 100%);
+  }
+}
