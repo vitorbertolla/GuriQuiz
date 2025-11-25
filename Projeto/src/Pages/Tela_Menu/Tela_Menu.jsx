@@ -25,24 +25,13 @@ export default function Tela_Menu() {
           <section className={styles.telaMenuControls}>
             <div className={styles.telaMenuOptions}>
               <Link to="/cadastropergunta" className={`${styles.link} ${styles.linkOption}`}>
-                <img
-                  className={styles.telaMenuBtnOption}
-                  src="/images/botaoCadastroPerguntas.png"
-                  alt="Cadastrar Perguntas"
-                />
+                  <button className={styles.pixelButton}>CADASTRO PERGUNTA</button>
               </Link>
-              <Link to="/cadastroQuiz" className={`${styles.link} ${styles.linkOption}`}>
-                <img
-                  className={styles.telaMenuBtnOption}
-                  alt="Cadastrar Quiz"
-                />
+              <Link to="/cadastroQuiz"  className={`${styles.link} ${styles.linkOption}`} >
+                  <button className={styles.pixelButton}>CADASTRO QUIZ</button>
               </Link>
               <Link to="/ranking" className={`${styles.link} ${styles.linkOption}`}>
-                <img
-                  className={styles.telaMenuBtnOption}
-                  src="/images/botaoRanking.png"
-                  alt="Ranking"
-                />
+                  <button className={styles.pixelButton}>RAKING GERAL</button>
               </Link>
             </div>
             <div className={styles.botoesJogar}>
