@@ -112,6 +112,7 @@ export default function Tela_Jogo() {
     const handleAlternativaClick = (letraAlternativa) => {
         if (mostrarResultado) return;
         
+        
         setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
@@ -234,6 +235,8 @@ export default function Tela_Jogo() {
                             className={`${styles.alternativaBtn} ${
                                 mostrarResultado && respostaClicada === alt.letra
                                     ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
+                                    : mostrarResultado && alt.letra === pergunta.correta
+                                    ? styles.correta
                                     : ''
                             }`}
                             onClick={() => handleAlternativaClick(alt.letra)}
@@ -246,15 +249,6 @@ export default function Tela_Jogo() {
                         </button>
                     ))}
                 </div>
-                {mostrarResultado && (
-                    <div className={styles.resultado}>
-                        <p className={respostaClicada === pergunta.correta ? styles.correto : styles.errado}>
-                            {respostaClicada === pergunta.correta ? '✓ Correto!' : '✗ Incorreto!'}
-                        </p>
-                        <p>Resposta correta: <strong>{pergunta.correta}</strong></p>
-                        <small>Próxima pergunta em 2 segundos...</small>
-                    </div>
-                )}
             </div>
         </div>
     )

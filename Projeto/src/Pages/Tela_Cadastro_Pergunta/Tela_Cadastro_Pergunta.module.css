@@ -139,152 +139,122 @@
 }
 
 
-/* MODAL ALTERNATIVAS -------------------------------------- */
-.overlayAlternativas{
+/* Fundo escurecido da área */
+.overlayAlternativas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
-
+  background: rgba(0, 0, 0, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
-
-  z-index: 9999;
+  z-index: 999;
 }
 
+/* Container principal */
 .alternativas {
-  position: fixed;
-  z-index: 999999;
-  background-color: white;
-  border: 7px solid #2a2d74;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 40vh;
-  min-width: 40%;
-  border-radius: 20px;
-  padding: 10px;
-
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background: #ffffff;
+  width: 420px;
+  padding: 26px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  animation: fadeInAlternativas 0.3s ease;
 }
 
-.ModalConfirmar {
-  background-color: #2c7ef4;
-  color: #2a2d74;
-  border: 2px solid #2a2d74;
-  border-radius: 30px;
-  height: 30px;
-  width: 200px;
+@keyframes fadeInAlternativas {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Título */
+.alternativas h3 {
   text-align: center;
-  margin: 10px;
-  transition: 0.2s;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+/* Cada alternativa */
+.alternativas {
+  background: #ffffff;
+  width: 420px;
+  padding: 26px;
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  animation: fadeInAlternativas 0.3s ease;
+}
+
+@keyframes fadeInAlternativas {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Título */
+.alternativas h3 {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+/* Cada alternativa */
+.alternativa {
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Input de texto das alternativas */
+.alternativa input[type="text"] {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border 0.2s ease;
+}
+
+.alternativa input[type="text"]:focus {
+  border-color: #6a5acd;
+  outline: none;
+}
+
+/* Radio estilizado */
+.alternativa input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #6a5acd;
+  cursor: pointer;
+}
+
+/* Botão de confirmar */
+.ModalConfirmar {
+  display: block;
+  width: 45%;
+  background: #6a5acd;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  margin: 10px auto 0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .ModalConfirmar:hover {
-  scale: 1.05;
-  color: white;
-}
-
-.alternativas h3 {
-  color: #2a2d74;
-  font-size: 40px;
-}
-
-.tipoAlternativa {
-  height: 50px;
-}
-
-.alternativas button {
-  padding: 0;
-}
-
-.alternativas input {
-  padding: 15px;
-  width: 30vw;
-  font-family: Arial;
-  border-radius: 10px;
-}
-
-.alternativa {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-/* --------------------------------------------------------- */
-.tela-cadastro-pergunta__buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-  justify-content: center;
-}
-
-/* Botão padrão (Salvar) */
-.tela-cadastro-pergunta__button {
-  background: #2b6bff;
-  color: #fff;
-  font-weight: bold;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: all 0.2s ease;
-}
-
-.tela-cadastro-pergunta__button:hover {
-  background: #1f53cc;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-}
-
-.tela-cadastro-pergunta_Low{
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: all 0.2s ease;
-}
-.tela-cadastro-pergunta_Low:hover {
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: all 0.2s ease;
-
-}
-/* Botão cancelar */
-.tela-cadastro-pergunta__button--cancel {
-  background: #e74c3c;
-  color: white;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  transition: all 0.2s ease;
-}
-
-.tela-cadastro-pergunta__button--cancel:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  background: #5847c2;
+  transform: scale(1.02);
 }

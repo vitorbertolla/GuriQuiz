@@ -155,39 +155,84 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                         )}
                         {modalAberto && (
                                 <div className={styles.overlayAlternativas}>
-                                    <div className={styles.alternativas}>
-                                        <h3>Alternativas</h3>
-                                        <div className={styles.alternativa}>
-                                            <input type="text"
-                                            placeholder='Digite a alternativa A'
-                                            value={alternativaA} onChange={(e) =>
-                                            setAlternativaA(e.target.value)} />
-                                            <button type='button' onClick={() =>setCorreta("A")}> <img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /> </button>
-                                        </div >
-                                        <div className={styles.alternativa}>
-                                            <input type="text"
-                                            placeholder='Digite a alternativa B'
-                                            value={alternativaB} onChange={(e) =>
-                                            setAlternativaB(e.target.value)} />
-                                            <button type='button' onClick={() =>setCorreta("B")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
-                                        </div>
-                                        <div className={styles.alternativa}>
-                                            <input type="text"
-                                            placeholder='Digite a alternativa C'
-                                            value={alternativaC} onChange={(e) =>
-                                            setAlternativaC(e.target.value)} />
-                                            <button type='button' onClick={() =>setCorreta("C")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
-                                        </div>
-                                        <div className={styles.alternativa}>
-                                            <input type="text"
-                                            placeholder='Digite a alternativa D'
-                                            value={alternativaD} onChange={(e) =>
-                                            setAlternativaD(e.target.value)} />
-                                            <button type='button' onClick={() =>setCorreta("D")}><img className={styles.tipoAlternativa} src="/images/certo.png" alt="" srcset="" /></button>
-                                        </div>
-                                        <button className={styles.ModalConfirmar} type='button' onClick={confirmarAlternativas}>Confirmar</button>
-                                    </div>
+                                <div className={styles.alternativas}>
+                                    <h3>Alternativas</h3>
+
+                                    {/* Alternativa A */}
+                                    <label className={styles.alternativa}>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite a alternativa A"
+                                            value={alternativaA}
+                                            onChange={(e) => setAlternativaA(e.target.value)}
+                                        />
+                                    <input
+                                        type="radio"
+                                        name="correta"
+                                        value="A"
+                                        checked={correta === "A"}
+                                        onChange={() => setCorreta("A")}
+                                    />
+                                    </label>
+
+                                    {/* Alternativa B */}
+                                    <label className={styles.alternativa}>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite a alternativa B"
+                                            value={alternativaB}
+                                            onChange={(e) => setAlternativaB(e.target.value)}
+                                        />
+                                    <input
+                                        type="radio"
+                                        name="correta"
+                                        value="B"
+                                        checked={correta === "B"}
+                                        onChange={() => setCorreta("B")}
+                                    />
+                                    </label>
+
+                                    {/* Alternativa C */}
+                                    <label className={styles.alternativa}>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite a alternativa C"
+                                            value={alternativaC}
+                                            onChange={(e) => setAlternativaC(e.target.value)}
+                                        />
+                                    <input
+                                        type="radio"
+                                        name="correta"
+                                        value="C"
+                                        checked={correta === "C"}
+                                        onChange={() => setCorreta("C")}
+                                    />
+                                    </label>
+
+                                    {/* Alternativa D */}
+                                    <label className={styles.alternativa}>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite a alternativa D"
+                                            value={alternativaD}
+                                            onChange={(e) => setAlternativaD(e.target.value)}
+                                        />
+                                    <input
+                                        type="radio"
+                                        name="correta"
+                                        value="D"
+                                        checked={correta === "D"}
+                                        onChange={() => setCorreta("D")}
+                                    />
+                                    </label>
+
+                                    <button className={styles.ModalConfirmar} type="button" onClick={confirmarAlternativas}>
+                                    Confirmar
+                                    </button>
                                 </div>
+                                </div>
+
+
                             )}
                             {mostrarIACreate &&(
                                 <IAcria 

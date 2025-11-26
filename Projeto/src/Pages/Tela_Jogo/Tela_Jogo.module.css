@@ -124,3 +124,33 @@
 .alternativaBtn:hover {
     scale: 1.05;
 }
+
+.correta {
+  background-color: #28d83a !important;
+  color: #000000;
+  border: 2px solid #1f9d2b;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.correta:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(40, 216, 58, 0.55);
+}
+
+.incorreta {
+  background-color: #ff4b4b !important;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(255, 75, 75, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.incorreta:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(255, 75, 75, 0.5);
+}
