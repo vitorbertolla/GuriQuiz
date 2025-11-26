@@ -4,6 +4,7 @@ import { useState } from 'react'
 import {usePerguntas} from '../../services/crudPerguntas.js'
 import SelectMateria from '../Componentes/SelectMateria.jsx'
 import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
+import { Link } from "react-router-dom";
 
 export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
     // preferir funções passadas pelo pai (quando o componente for usado como modal dentro da lista, para edição, garantindo assim que os componentes pais atualizem a lista)
@@ -76,7 +77,9 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
         <div className={editar? styles.containerEdit : styles.container}>
             <div className={styles['tela-cadastro-pergunta']}>
                 <header className={styles['tela-cadastro-pergunta__header']}>
-                    {!editar && (<button><img className={styles['tela-cadastro-pergunta__exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
+                    <Link to="/menu">
+                        {!editar && (<button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
+                    </Link>
                     {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>)}
                 </header>
                 <main className={styles['tela-cadastro-pergunta__main']}>
@@ -117,7 +120,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             <div className={styles['tela-cadastro-pergunta__actions']}>
                                 <button
                                     type="button"
-                                    className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--ai']}`}
+                                    className={`${styles['.tela-cadastro-pergunta_Low']} ${styles['tela-cadastro-pergunta__button--ai']}`}
                                     onClick={() => {setMostrarIACreate(prev => !prev)
                                                     setModalAberto(false)
                                     }}
@@ -126,7 +129,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 </button>
                                 <button
                                     type="submit"
-                                    className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--submit']}`}
+                                    className={`${styles['.tela-cadastro-pergunta_Low']} ${styles['tela-cadastro-pergunta__button--submit']}`}
                                 >
                                     <img className={styles['tela-cadastro-pergunta__btn-cadastrar-pergunta']} src="/images/botaoConfirmar.png" alt="" ></img>
                                 </button>

@@ -115,11 +115,11 @@
   scale: 1.05;
 }
 
-.tela-cadastro-pergunta__exit-button {
+.exit-button {
   height: 70px;
   position: absolute;
-  top: 85px;
-  left: 170px;
+  top: 100px;
+  left: 190px;
 }
 
 .tela-cadastro-pergunta__btn-cadastrar-pergunta{
@@ -246,6 +246,29 @@
   box-shadow: 0 6px 14px rgba(0,0,0,0.18);
 }
 
+.tela-cadastro-pergunta_Low{
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+}
+.tela-cadastro-pergunta_Low:hover {
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: all 0.2s ease;
+
+}
 /* Botão cancelar */
 .tela-cadastro-pergunta__button--cancel {
   background: #e74c3c;

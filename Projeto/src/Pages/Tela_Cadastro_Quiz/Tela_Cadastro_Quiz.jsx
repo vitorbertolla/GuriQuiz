@@ -4,6 +4,7 @@ import { useQuizzes } from '../../services/crudQuiz';
 import { usePerguntas } from "../../services/crudPerguntas";
 import SelectMateria from '../Componentes/SelectMateria.jsx'
 import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
+import { Link } from 'react-router-dom';
 
 
 export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClose,adicionarQuiz: adicionarQuizProp,editarQuiz: editarQuizProp})  {
@@ -64,6 +65,9 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
         <div className={styles.container}>
             <form onSubmit={submit}>
                 <div className={styles.telaMonarQuiz}>
+                    <Link to="/menu">
+                        {!editar && (<button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
+                    </Link>
                     <h2>{editar? "editar quiz" : "cadastro de quiz"}</h2>
 
                     <div className={styles.infoQuiz}>
@@ -118,7 +122,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
                     {editar && (
                         <button onClick={onClose}>Cancelar edição</button>
                     )}
-                    <button type='submit' >{editar? "salvar alterações" : "cadastrar quiz"}</button>
+                    <button  className={styles.btnQuiz} type='submit' >{editar? "salvar alterações" : "cadastrar quiz"}</button>
                 
                 </div>
             </form>

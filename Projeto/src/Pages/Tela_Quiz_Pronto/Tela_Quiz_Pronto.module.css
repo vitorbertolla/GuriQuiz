@@ -11,6 +11,12 @@
     background-position: center;
     image-rendering: pixelated;
 }
+.exit-button {
+  height: 70px;
+  position: absolute;
+  top: 100px;
+  left: 190px;
+}
 
 .telaMenuBtnPlay {
     width: 100%; /* Faz a imagem ocupar todo o espaço do link */

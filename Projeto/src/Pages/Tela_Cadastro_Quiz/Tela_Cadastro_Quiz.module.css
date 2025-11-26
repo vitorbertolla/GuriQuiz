@@ -81,6 +81,14 @@
   position: relative;
 }
 
+.exit-button {
+  height: 70px;
+  position: absolute;
+  top: 30px;
+  left: 40px;
+}
+
+
 .telaMonarQuiz::before {
   content: '';
   position: absolute;
@@ -361,11 +369,16 @@
 }
 
 /* BOTÕES */
-button {
+/* BOTÕES */
+.btnQuiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 20px;
+  margin: 20px;
+  padding: 20px;
 
-  background: linear-gradient(135deg, #2b6bff 0%, #4080ff 100%);
+  background: linear-gradient(135deg, #ff552b 0%, #ff5340 100%);
   color: white;
   border: none;
   border-radius: 15px;
@@ -375,12 +388,12 @@ button {
   font-weight: bold;
 
   cursor: pointer;
-  box-shadow: 0 6px 15px rgba(43, 107, 255, 0.3);
+  box-shadow: 0 6px 15px rgba(255, 68, 43, 0.3);
   position: relative;
   overflow: hidden;
 }
 
-button::before {
+.btnQuiz::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -393,32 +406,33 @@ button::before {
   transition: width 0.6s, height 0.6s;
 }
 
-button:hover::before {
+.btnQuiz:hover::before {
   width: 300px;
   height: 300px;
 }
 
-button:hover {
+.btnQuiz:hover {
   transform: translateY(-4px) scale(1.05);
-  background: linear-gradient(135deg, #1f53cc 0%, #2b6bff 100%);
-  box-shadow: 0 10px 25px rgba(43, 107, 255, 0.4);
+  background: linear-gradient(135deg, #cc611f 0%, #ff752b 100%);
+  box-shadow: 0 10px 25px rgba(255, 135, 43, 0.4);
 }
 
-button:active {
+.btnQuiz:active {
   transform: translateY(-1px) scale(1.02);
   box-shadow: 0 4px 10px rgba(43, 107, 255, 0.3);
 }
 
-/* BOTÃO DE CANCELAR */
-button:nth-of-type(1) {
+/* BOTÃO DE CANCELAR (primeiro botão) */
+.btnQuiz.cancelar {
   background: linear-gradient(135deg, #e74c3c 0%, #ec6355 100%);
   box-shadow: 0 6px 15px rgba(231, 76, 60, 0.3);
 }
 
-button:nth-of-type(1):hover {
+.btnQuiz.cancelar:hover {
   background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
   box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
 }
+
 
 /* RESPONSIVIDADE */
 @media (max-width: 1024px) {

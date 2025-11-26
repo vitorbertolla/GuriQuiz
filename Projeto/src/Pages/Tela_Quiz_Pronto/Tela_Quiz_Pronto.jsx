@@ -28,6 +28,9 @@ export default function Tela_Quiz_Pronto() {
 
     return (
         <div>
+            <Link to="/menu">
+                <button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>
+            </Link>
             <h1>Quizzes Cadastrados</h1>
             {quizzes.map((q) => (
                 <div
