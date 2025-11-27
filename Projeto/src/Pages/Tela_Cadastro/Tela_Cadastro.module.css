@@ -13,8 +13,10 @@
 }
 
 .botao{
-    height: 70px;
-    transition: 0.2s;
+    width: 12vw;
+    min-height: 55px;
+    max-height: 70px;
+    max-width: 180px;
 }
 
 .botao:hover {
@@ -31,24 +33,27 @@
 .bloco {
     background-color: #ff9545;
     border: 8px solid #932600;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    min-width: 700px;
-    min-height: 535px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35vw;
+    height: 50vh;
+    min-width: 600px;
+    min-height: 470px;
 }
 
 .title {
     color: white;
     text-align: center;
-    font-size: 60px;
+    font-size: 45px;
+    padding-top: 2rem;
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 5px;
 }
 
 .field label {
@@ -67,4 +72,75 @@
 
 .field input::placeholder {
     color: #932600;
+}
+@media (max-width: 768px) {
+
+  .bloco {
+    min-width: 80%;
+    min-height: 60%;
+  }
+
+  .title {
+    font-size: 35px;
+  }
+
+  .field input {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .botao {
+    width: 25vw;      /* largura proporcional e menor */
+    max-width: 110px; /* impede de ficar muito grande */
+    height: 45px;
+    padding: 0;
+  }
+
+
+  .actions{
+    padding: 0;
+    gap: 5px;
+  }
+    .field label {
+    font-size: 22px;
+  }
+
+  .field input {
+    padding: 9px;
+    font-size: 18px;
+  }
+
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+
+  .bloco {
+    min-width: 90%;
+    padding: 20px 20px;
+    border-width: 6px;
+  }
+
+  .title {
+    font-size: 35px;
+  }
+
+  .field label {
+    font-size: 20px;
+  }
+
+  .field input {
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .actions {
+    margin-top: 40px;
+  }
+
+  .botao {
+    height: 55px;
+    padding: 0;
+    margin: 0;
+  }
 }

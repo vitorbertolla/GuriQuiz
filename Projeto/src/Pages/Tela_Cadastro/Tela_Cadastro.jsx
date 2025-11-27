@@ -133,7 +133,7 @@ const emailValidation = async (email) => {
                         {alertSenhasDiferentes && <span className={styles.alert}>As senhas não coincidem!</span>}
                     </div>
                     <div className={styles.actions}>
-                        <button
+                        <button className={styles.botao}
                         type="submit">
                             <img className={styles.botao} 
                             src="/images/botaoCadastrar.png" 

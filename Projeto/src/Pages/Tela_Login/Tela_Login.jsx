@@ -68,10 +68,10 @@ export default function Tela_Login (){
                             <input className={styles.input} type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required placeholder='SUA SENHA' />
                         </div>
                     <div className={styles.actions}>
-                        <button type="submit">
+                        <button className={styles.botao} type="submit">
                             <img className={styles.botao} src="/images/botaoEntrar.png" alt="" />
                         </button>
-                        <button onClick={handleLoginGoogle} type="button">
+                        <button className={styles.botao} onClick={handleLoginGoogle} type="button">
                             <img className={styles.botao} src="/images/googleAcessar.png" alt="" />
                         </button>
                     </div>
