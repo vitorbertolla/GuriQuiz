@@ -79,7 +79,7 @@ export default function Tela_Start() {
         <section className={styles.botoesContainer}>
           <Link to="/menu">
           <button>
-            <img className={styles.btnStart} src="/images/botaoStart.png" alt="" />
+            <img  className={styles.btnStart} src="/images/botaoStart.png" alt="" />
           </button>
           </Link>
         </section>

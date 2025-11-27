@@ -13,7 +13,11 @@
 }
 
 .botao{
-    height: 70px;
+    width: 12vw;
+    min-height: 55px;
+    max-height: 70px;
+    max-width: 180px;
+
     transition: 0.2s;
 }
 
@@ -22,7 +26,7 @@
 }
 
 .actions {
-    margin-top: 70px;
+    margin-top: 1vh;
     display: flex;
     gap: 10px;
     justify-content: center;
@@ -30,20 +34,23 @@
 }
 
 .bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: #ff9545;
     border: 8px solid #932600;
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    min-width: 700px;
-    min-height: 535px;
+    width: 35vw;
+    height: 45vh;
+    min-width: 600px;
+    min-height: 450px;
 }
 
 .title {
+    padding-top: 2rem;
     color: white;
     text-align: center;
-    font-size: 60px;
+    font-size: 45px;
 }
 
 .field {
@@ -72,4 +79,63 @@
 
 .form {
     margin-top: 50px;
+}
+@media (max-width: 768px) {
+
+  .bloco {
+    min-width: 80%;
+    min-height: 60%;
+  }
+
+  .title {
+    font-size: 45px;
+  }
+
+  .field input {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .botao {
+    height: 60px;
+    padding:0%;
+  }
+  .actions{
+    padding: 0;
+    gap: 5px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+
+  .bloco {
+    min-width: 90%;
+    padding: 20px 20px;
+    border-width: 6px;
+  }
+
+  .title {
+    font-size: 35px;
+  }
+
+  .field label {
+    font-size: 20px;
+  }
+
+  .field input {
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .actions {
+    margin-top: 40px;
+    flex-direction: column;
+  }
+
+  .botao {
+    height: 55px;
+    padding: 0;
+    margin: 0;
+  }
 }

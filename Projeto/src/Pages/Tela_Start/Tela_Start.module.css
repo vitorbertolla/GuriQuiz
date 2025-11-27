@@ -9,31 +9,34 @@
   image-rendering: pixelated;
 
   display: flex;
-  align-items: start;
+  align-items:  center;
   justify-content: center;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
 }
 
 .tituloGuri {
   display: block;
   margin: 0 auto;     
-  padding-bottom: 30px;
+  padding-bottom: 1.875rem;
   border: 0;
-  max-width: 60%;      
-  height: auto;       
+  max-width: 65%;      
+  height:18vh;
+  padding-bottom: 1.8rem;
 }
 
 .tituloPequeno{
   display: block;
   margin: 0 auto;     
-  padding-bottom: 50px;
+  padding-bottom: 3.125rem;
   border: 0;
-  max-width: 30%;      
-  height: auto;     
+  max-width: 40%;      
+  padding-bottom: 1.8rem;   
 }
 
 .btnStart {
-    height: 100px;
+    height:12vh;
     transition: 0.2s;
 }
 
@@ -96,9 +99,8 @@
   background: #fff;
   padding: 30px;
   border-radius: 16px;
-  width: 90%;
-  max-width: 350px;
-
+  width: 30%;
+  min-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -163,3 +165,87 @@
     opacity: 1;
   }
 }
+
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 60px;
+  }
+
+
+  .telaStartHeader {
+    padding: 10px 15px;
+  }
+
+  .containerPrincipal {
+    gap: 1.5rem;
+  }
+
+  .modalBox {
+    max-width: 90%;
+  }
+
+  .modalButtons button {
+    min-width: 80px;
+  }
+  .tituloGuri {
+  max-width: 80%;      
+  padding-bottom: 1rem;    
+}
+
+.tituloPequeno{
+  max-width: 60%;      
+  padding-bottom: 1rem;  
+}
+
+.btnStart {
+    height:70px;
+}
+.modalBox{
+  width:60%;
+}
+}
+
+
+/* Celulares pequenos (480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-top: 50px;
+  }
+
+  .telaStartHeader {
+    padding: 8px 12px;
+  }
+
+
+  .containerPrincipal {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .tituloGuri {
+    max-width: 85vw;
+    padding-bottom: 1rem;
+  }
+
+  .tituloPequeno {
+    max-width: 65vw;
+    padding-bottom: 1rem;
+  }
+
+  .modalBox {
+    width: 90%;
+    max-width: 420px;
+    
+  }
+
+  .modalButtons {
+    gap: 10px;
+  }
+
+  .modalButtons button {
+    min-width: 70px;
+    padding: 8px 12px;
+  }
+}
+

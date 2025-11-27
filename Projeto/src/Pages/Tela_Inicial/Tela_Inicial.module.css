@@ -26,7 +26,7 @@ button {
 
 .btnLogin,
 .btnCadastro {
-    height: 100px;
+    height: 10vh;
     transition: 0.2s;
 }
 
@@ -47,17 +47,73 @@ button {
 .tituloGuri {
   display: block;
   margin: 0 auto;     
-  padding-bottom: 30px;
+  padding-bottom: 1.875rem;
   border: 0;
-  max-width: 60%;      
-  height: auto;       
+  max-width: 65%;      
+  height:18vh;
+  padding-bottom: 1.8rem;
 }
 
 .tituloPequeno{
   display: block;
   margin: 0 auto;     
-  padding-bottom: 50px;
+  padding-bottom: 3.125rem;
   border: 0;
-  max-width: 30%;      
-  height: auto;     
+  max-width: 40%;      
+  padding-bottom: 1.8rem;   
+}
+@media (max-width: 768px) {
+
+  .containerPrincipal {
+    gap: 0.5rem;
+  }
+
+  .tituloGuri {
+    max-width: 80%;
+    padding-bottom: 1rem;
+  }
+
+  .tituloPequeno {
+    max-width: 55%;
+    padding-bottom: 1rem;
+  }
+
+  .btnLogin,
+  .btnCadastro {
+    height: 70px;
+  }
+  .botoesContainer {
+  gap: 5px;
+}
+.botao{
+  padding: 5px;
+}
+}
+
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+
+  .containerPrincipal {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .tituloGuri {
+    max-width: 85vw;
+    padding-bottom: 0.8rem;
+  }
+
+  .tituloPequeno {
+    max-width: 65vw;
+    padding-bottom: 0.8rem;
+  }
+
+  .btnLogin,
+  .btnCadastro {
+    height: 60px;
+  }
+  .botao{
+    padding: 3px;
+  }
 }
