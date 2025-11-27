@@ -60,8 +60,8 @@ alert("Resultado salvo com sucesso!");
               ))}
             </div>
           </div>
-          <div className={styles.btnOverlay}><button onClick={() => navigate('/menu')} className={styles.btnMenu}>MENU</button>
-          <button onClick={score} className={styles.btnMenu}>Salvar Resultados</button></div>
+            <div className={styles.btnOverlay}><button onClick={() => navigate('/menu')} className={styles.btnMenu}>MENU</button>
+            <button onClick={score} className={styles.btnMenu}>Salvar Resultados</button></div>
         </div>
       </div>
     </div>

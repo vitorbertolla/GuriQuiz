@@ -24,8 +24,8 @@ export default function Tela_Jogo() {
     const [dica, setDica] = useState("")
     const [resultados, setResultados] = useState([]);
     const [carregandoPerguntas, setCarregandoPerguntas] = useState(true);
-    const [tempoRestante, setTempoRestante] = useState(10*1000) 
-    
+    const [tempoRestante, setTempoRestante] = useState(10 * 1000)
+
     useEffect(() => {
         // começa carregando
         setCarregandoPerguntas(true);
@@ -111,14 +111,14 @@ export default function Tela_Jogo() {
 
     const handleAlternativaClick = (letraAlternativa) => {
         if (mostrarResultado) return;
-        
-        
+
+
         setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
         const acertou = letraAlternativa === pergunta.correta;
-        const novaPontuacao = acertou 
-            ? pontuacao + (tempoRestante * 10 / 1000 * (getDificuldadeValue(pergunta.dificuldade)/10))
+        const novaPontuacao = acertou
+            ? pontuacao + (tempoRestante * 10 / 1000 * (getDificuldadeValue(pergunta.dificuldade) / 10))
             : pontuacao;
 
         setPontuacao(novaPontuacao);
@@ -136,7 +136,7 @@ export default function Tela_Jogo() {
     };
 
 
-    const handleProxima = (resultadosAtualizados = resultados, pontuacaoAtualizada = pontuacao ) => {
+    const handleProxima = (resultadosAtualizados = resultados, pontuacaoAtualizada = pontuacao) => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
             setPerguntaAtual((prev) => prev + 1);
             setRespostaClicada(null);
@@ -144,23 +144,23 @@ export default function Tela_Jogo() {
             setDica("");
             setTempoRestante(10 * 1000);
         } else {
-              navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, { 
-                state: { resultados: resultadosAtualizados, quizId: quizId } 
+            navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, {
+                state: { resultados: resultadosAtualizados, quizId: quizId }
             });
         }
     };
     const handleTempoEsgotado = () => {
         if (mostrarResultado) return;
 
-        setRespostaClicada(null);        
+        setRespostaClicada(null);
         setMostrarResultado(true);
 
         const novoResultado = {
-                descricao: pergunta.descricao,
-                correta: pergunta.correta,
-                escolhida: null,
-                acertou: false
-            }
+            descricao: pergunta.descricao,
+            correta: pergunta.correta,
+            escolhida: null,
+            acertou: false
+        }
         const todosResultados = [...resultados, novoResultado];
         // garantir que resultados já inclui o último antes de avançar/navegar
         setResultados(todosResultados);
@@ -188,32 +188,44 @@ export default function Tela_Jogo() {
         <div className={styles.background}>
             <div className={styles.container}>
                 <div className={styles.header}>
-                        <Timer 
-                            key={perguntaAtual}  
-                            tempoRestante={tempoRestante}
-                            duracao={30     *1000}
-                            setTempoRestante={setTempoRestante}
-                            onTempoEsgotado={handleTempoEsgotado} 
-                        />
-                    <button 
-                        className={styles.dica}
-                        onClick={() => {
-                            enviarPrompt(pergunta.descricao, setDica, setCarregando)
-                            setCarregando(true)    
-                        }}
-                        disabled={carregando}
-                    >
-                        DICA
-                    </button>
-                    {carregando && (<p>Carregando dica...</p>)}
+                    <Timer
+                        key={perguntaAtual}
+                        tempoRestante={tempoRestante}
+                        duracao={30 * 1000}
+                        setTempoRestante={setTempoRestante}
+                        onTempoEsgotado={handleTempoEsgotado}
+                    />
+                    <div>
+                        <button
+                            className={styles.dica}
+                            onClick={() => {
+                                enviarPrompt(pergunta.descricao, setDica, setCarregando)
+                                setCarregando(true)
+                            }}
+                            disabled={carregando}
+                        >
+                            DICA
+                        </button>
+                        {carregando && (<p className={styles.carregandodica}>Carregando dica...</p>)}
+                    </div>
                     {dica !== "" && (
-                        <div className={styles.dicaContainer}>
-                            <button onClick={() => setDica("")}>X</button>
-                            <p>Dica: {dica}</p>
+                        <div className={styles.modalOverlay}>
+                            <div className={styles.modalContent}>
+                                <button
+                                    className={styles.modalClose}
+                                    onClick={() => setDica("")}
+                                >
+                                    X
+                                </button>
+
+                                <h2>Dica</h2>
+                                <p>{dica}</p>
+                            </div>
                         </div>
                     )}
+
                     <div className={styles.info}>
-                        <h1>{pergunta.descricao}</h1>   
+                        <h1>{pergunta.descricao}</h1>
                         <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
                         <div className={styles.pontuacao}>
                             <span>Pontuação: {pontuacao}</span>
@@ -232,17 +244,16 @@ export default function Tela_Jogo() {
                     {pergunta.alternativas?.map((alt, index) => (
                         <button
                             key={index}
-                            className={`${styles.alternativaBtn} ${
-                                mostrarResultado && respostaClicada === alt.letra
+                            className={`${styles.alternativaBtn} ${mostrarResultado && respostaClicada === alt.letra
                                     ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
                                     : mostrarResultado && alt.letra === pergunta.correta
-                                    ? styles.correta
-                                    : ''
-                            }`}
+                                        ? styles.correta
+                                        : ''
+                                }`}
                             onClick={() => handleAlternativaClick(alt.letra)}
                             disabled={mostrarResultado}
                         >
-                            <strong className={styles.alternativaLetra} style={{marginRight: 8}}>
+                            <strong className={styles.alternativaLetra} style={{ marginRight: 8 }}>
                                 {alt.letra}
                             </strong>
                             {alt.texto}

@@ -115,3 +115,18 @@
     display: flex;
     gap: 10px;
 }
+
+.iaResposta {
+  width: 30vw;
+  height: 30vh;
+  position: fixed;
+  background-color: white;
+  border: 3px solid #2a2d74;
+  border-radius: 10px;
+}
+
+.iaResposta p {
+   font-family: arial;
+   padding: 20px;
+   font-weight: bold;
+}

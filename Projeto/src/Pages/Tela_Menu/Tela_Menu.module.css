@@ -112,10 +112,9 @@ img:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-     background: #3d3c80 !important; 
+     background: #6664c6 !important; 
 
   color: rgb(255, 255, 255);
-  font-family: "Press Start 2P", monospace;
   font-size: 34px;
 
   border: none;
@@ -131,7 +130,10 @@ img:hover {
     -4px 0px 0px #000;
 
   border-radius: 8px;
-  transition: 0.1s;
+  transition: 0.2s;
+  padding: 10px;
+
+  font-size: 25px;
 }
 
 /* efeito ao clicar */
@@ -150,4 +152,8 @@ img:hover {
 .link:active,
 .link:focus {
     text-decoration: none !important;
+}
+
+.pixelButton:hover {
+    scale: 1.05;
 }

@@ -157,11 +157,11 @@ export default function IACria({ setDescricao, setMostrarIACreate, setDificuldad
                         </button>
                     </div>
                 </div>
-                {resposta && (
-                    <div className={styles.iaResposta}>
-                        <p>{resposta}</p>
-                    </div>
-                )}
+                    {resposta && (
+                        <div className={styles.iaResposta}>
+                            <p>{resposta}</p>
+                        </div>
+                    )}
             </div>
         </div>
 
