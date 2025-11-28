@@ -11,7 +11,7 @@ export default function Tela_Resultados() {
   const location = useLocation()
   
   const quizId = location.state?.quizId;
-  const nomeQuiz = location.state?.nomeQuiz; // ← MUDOU: era quiznome, agora nomeQuiz
+  const nomeQuiz = searchParams.get('nome');  
   
   console.log("quizId:", quizId);
   console.log("nomeQuiz:", nomeQuiz); // ← ADICIONADO: log para debug

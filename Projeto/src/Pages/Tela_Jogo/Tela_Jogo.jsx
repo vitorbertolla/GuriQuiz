@@ -141,7 +141,7 @@ export default function Tela_Jogo() {
             setDica("");
             setTempoRestante(10 * 1000);
         } else {
-            navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, {
+            navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}&nome=${quizNome}`, {
                 state: { resultados: resultadosAtualizados, quizId: quizId, nomequiz: quizNome }
             });
         }
