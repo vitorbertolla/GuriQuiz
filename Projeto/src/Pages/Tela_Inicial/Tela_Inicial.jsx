@@ -20,6 +20,8 @@ export default function Tela_Inicial (){
                         </Link>
                     </button>
                 </div>
+                <img className = {styles.guri}src="/images/guriGif.gif" alt="" />
+
             </div>
         )
 }
