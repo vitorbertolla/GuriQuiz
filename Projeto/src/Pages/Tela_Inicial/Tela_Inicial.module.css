@@ -117,3 +117,9 @@ button {
     padding: 3px;
   }
 }
+
+.guri {
+  position: absolute;
+  top: 34.5vh;
+  left: 10vw;
+}
