@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Tela_Quiz_Pronto.module.css";
-import Tela_ListaQuiz from '../Tela_Admin/Tela_ListaQuiz.jsx';
+import Tela_ListaQuiz from "../Tela_Admin/Tela_ListaQuiz.jsx";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js";
-import { useNavigate } from "react-router-dom";
 
 export default function Tela_Quiz_Pronto() {
     const [quizzes, setQuizzes] = useState([]);
@@ -12,7 +11,7 @@ export default function Tela_Quiz_Pronto() {
 
     useEffect(() => {
         async function carregarQuizzes() {
-            const ref = collection(db, "quizzes"); 
+            const ref = collection(db, "quizzes");
             const snapshot = await getDocs(ref);
 
             const lista = snapshot.docs.map(doc => ({
@@ -27,20 +26,32 @@ export default function Tela_Quiz_Pronto() {
     }, []);
 
     return (
-        <div>
-            <Link to="/menu">
-                <button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>
+        <div className={styles.container}>
+            
+            {/* BOTÃO EXIT */}
+            <Link to="/menu" className={styles.exitContainer}>
+                <img
+                    className={styles.exitButton}
+                    src="/images/botaoExit.png"
+                    alt="Sair"
+                />
             </Link>
-            <h1>Quizzes Cadastrados</h1>
-            {quizzes.map((q) => (
-                <div
-                    key={q.id}
-                    onClick={() => navigate(`/jogo?id=${q.id}`)}
-                    style={{ cursor: "pointer" }}
-                >
-                    <Tela_ListaQuiz quiz={q} editar={false} />
+
+            {/* CARD AZUL */}
+            <div className={styles.card}>
+                <h1 className={styles.titulo}>QUIZ PRONTO</h1>
+
+                <div className={styles.listaContainer}>
+                    {quizzes.map((q) => (
+                        <div key={q.id} className={styles.quizItem}>
+                            
+                            <div className={styles.quizInfo} onClick={() => navigate(`/jogo?id=${q.id}`)}>
+                                <Tela_ListaQuiz quiz={q} editar={false} />
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
+            </div>
         </div>
     );
 }

@@ -1,71 +1,105 @@
+/* CONTAINER PRINCIPAL */
 .container {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-image: url("/images/BackgroundInicio.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat; 
-    background-position: center;
-    image-rendering: pixelated;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  background-image: url("/images/BackgroundInicio.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+
+  position: relative;
 }
-.exit-button {
-  height: 70px;
+
+/* BOTÃO EXIT NO TOPO ESQUERDO */
+.exitContainer {
   position: absolute;
-  top: 100px;
-  left: 190px;
+  top: 40px;
+  left: 40px;
 }
 
-.telaMenuBtnPlay {
-    width: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    height: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    display: block; /* Garante que a imagem seja um bloco */
+.exitButton {
+  width: 90px;
+  height: auto;
+  image-rendering: pixelated;
+  cursor: pointer;
 }
 
-.link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Remova se não necessário */
-    width: 100px; /* Ajuste conforme necessário */
-    height: 100px; /* Ajuste conforme necessário */
+/* CARD AZUL CENTRAL */
+.card {
+  width: 80%;
+  max-width: 900px;
+  background: #9dd7ff;
+  padding: 40px;
+  border-radius: 20px;
+  border: 6px solid #2b4c7e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 15px #0005;
 }
 
-.linkPlay { 
-    width: 150px; /* Ajuste para o tamanho da imagem */
-    height: 120px; /* Ajuste para o tamanho da imagem */
+/* TÍTULO DO CARD */
+.titulo {
+  font-family: 'Press Start 2P', sans-serif;
+  color: #1a1a1a;
+  font-size: 32px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden; /* Remova se não necessário */
-    width: 100px; /* Ajuste conforme necessário */
-    height: 100px; /* Ajuste conforme necessário */
+/* LISTA DE QUIZZES */
+.listaContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
-.linkExit { 
-    width: 80px; /* Ajuste para o tamanho da imagem */
-    height: 80px; /* Ajuste para o tamanho da imagem */
+/* ITEM INDIVIDUAL DO QUIZ */
+.quizItem {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 4px solid #3a3a3a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.linkOption { 
-    width: 130px; /* Ajuste para o tamanho da imagem */
-    height: 90px; /* Ajuste para o tamanho da imagem */
+/* INFORMAÇÕES DO QUIZ */
+.quizInfo {
+  flex: 1;
+  cursor: pointer;
 }
 
-.linkPlay { 
-    width: 150px; /* Ajuste para o tamanho da imagem */
-    height: 120px; /* Ajuste para o tamanho da imagem */
+/* ÍCONE DE STATUS (CHECK/UNCHECK) */
+.statusIcon img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+  margin-right: 15px;
 }
 
-.telaMenuBtnExit,
-.telaMenuBtnOption,
-.telaMenuBtnPlay {
-    width: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    height: 100%; /* Faz a imagem ocupar todo o espaço do link */
-    display: block; /* Garante que a imagem seja um bloco */
+/* BOTÃO JOGAR */
+.btnJogar {
+  background: #ff5c33;
+  border: 4px solid #2b2b2b;
+  border-radius: 10px;
+  padding: 15px 25px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Press Start 2P', sans-serif;
+  image-rendering: pixelated;
+  transition: transform 0.2s ease;
+}
+
+.btnJogar:hover {
+  transform: scale(1.08);
 }
