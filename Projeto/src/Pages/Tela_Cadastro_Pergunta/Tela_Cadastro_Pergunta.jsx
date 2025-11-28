@@ -7,8 +7,7 @@ import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 import { Link } from "react-router-dom";
 
 export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
-    // preferir funções passadas pelo pai (quando o componente for usado como modal dentro da lista, para edição, garantindo assim que os componentes pais atualizem a lista)
-    // caso contrário, usar o hook de perguntas (quando o componente for usado como página independente para cadastro)
+    // ... (Hooks e estados permanecem os mesmos)
     const hooks = usePerguntas()
     const adicionarPergunta = adicionarPerguntaProp || hooks.adicionarPergunta
     const editarPergunta = editarPerguntaProp || hooks.editarPergunta
@@ -30,22 +29,29 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
-
+        
+        // Garante que as alternativas estejam atualizadas antes de enviar
+        const alternativasAtualizadas = [
+            { letra: 'A', texto: alternativaA },
+            { letra: 'B', texto: alternativaB },
+            { letra: 'C', texto: alternativaC },
+            { letra: 'D', texto: alternativaD },
+        ]
 
         const dados = {
             descricao,
             dificuldade,
             materia,
-            alternativas,
+            alternativas: alternativasAtualizadas,
             correta
-            }
+        }
         if (editar && perguntaInicial) {
             editarPergunta(perguntaInicial.id, dados);
             alert('Pergunta editada com sucesso!');
-          } else {
-            adicionarPergunta(descricao, dificuldade, materia, alternativas, correta);
+        } else {
+            adicionarPergunta(descricao, dificuldade, materia, alternativasAtualizadas, correta);
             alert('Pergunta cadastrada com sucesso!');
-          }
+        }
       
           onClose?.();
         // Resetar os campos após o cadastro
@@ -60,6 +66,13 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
         setCorreta('')
     }
     function confirmarAlternativas() {
+        if (!alternativaA || !alternativaB || !alternativaC || !alternativaD) {
+            alert('Por favor, preencha todas as alternativas antes de confirmar.');
+            return;
+        }else if (!correta) {
+            alert('Por favor, selecione a alternativa correta antes de confirmar.');
+            return;
+        }
         setAlternativas([
             { letra: 'A', texto: alternativaA },
             { letra: 'B', texto: alternativaB },
@@ -70,195 +83,151 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
     }
 
     return (
-        <div className={editar? styles.containerEdit : styles.container}>
+        <div className={editar ? styles.containerEdit : styles.container}>
             <div className={styles['tela-cadastro-pergunta']}>
                 <header className={styles['tela-cadastro-pergunta__header']}>
-                    <Link to="/menu">
-                        {!editar && (<button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
-                    </Link>
+                    {!editar && (
+                        <Link to="/menu" className={styles['tela-cadastro-pergunta__exit-link']}>
+                            <button className={styles['tela-cadastro-pergunta__exit-button']}>
+                                <img src="/images/botaoExit.png" alt="Sair" className={styles['exit-icon']} />
+                            </button>
+                        </Link>
+                    )}
                     {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>)}
+                    {editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Editar Pergunta</h1>)}
                 </header>
+                
                 <main className={styles['tela-cadastro-pergunta__main']}>
                     <form
                         className={styles['tela-cadastro-pergunta__form']}
                         onSubmit={submit}
                     >
+                        {/* LINHA PRINCIPAL - Pergunta e Seletores */}
                         <div className={styles['tela-cadastro-pergunta__form-row']}>
                             <input
-                                className={`${styles['tela-cadastro-pergunta__input']} ${styles['tela-cadastro-pergunta__input--pergunta']}`}
+                                className={styles['input-pergunta']}
                                 type="text"
                                 placeholder="PERGUNTA"
                                 value={descricao}
                                 onChange={(e) => setDescricao(e.target.value)}
                             />
-                            <SelectDificuldade
-                                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--dificuldade']}`}
-                                dificuldade={dificuldade}
-                                setDificuldade={setDificuldade}
-                            />
-                            <SelectMateria
-                                className={`${styles['tela-cadastro-pergunta__select']} ${styles['tela-cadastro-pergunta__select--materia']}`}
-                                materia={materia}
-                                setMateria={setMateria}
-                            />
+                            {/* Os componentes SelectMateria/Dificuldade devem aceitar uma prop 'className' e aplicá-la ao seu elemento raiz */}
+                            <div className={styles['selects-wrapper']}>
+                                <SelectDificuldade
+                                    className={styles['form-select']}
+                                    dificuldade={dificuldade}
+                                    setDificuldade={setDificuldade}
+                                />
+                                <SelectMateria
+                                    className={styles['form-select']}
+                                    materia={materia}
+                                    setMateria={setMateria}
+                                />
+                            </div>
+                        </div>
+
+                        {/* BOTÃO ALTERNATIVAS */}
+                        <div className={styles['alternativas-btn-wrapper']}>
                             <button
                                 type="button"
-                                className={`${styles['tela-cadastro-pergunta__button']} ${styles['tela-cadastro-pergunta__button--alternativas']}`}
-                                onClick={() => {setModalAberto(true)
-                                                setMostrarIACreate(false)
-                                } }
+                                className={styles['btn-alternativas']}
+                                onClick={() => {setModalAberto(true); setMostrarIACreate(false);}}
                             >
                                 ALTERNATIVAS
                             </button>
-            
                         </div>
-                        {!editar &&(
-                            <div className={styles['tela-cadastro-pergunta__actions']}>
+            
+                        {/* BOTÕES DE AÇÃO (Cadastro/Edição) */}
+                        {!editar ? (
+                            <div className={styles['buttons-low']}>
                                 <button
                                     type="button"
-                                    className={`${styles['.tela-cadastro-pergunta_Low']} ${styles['tela-cadastro-pergunta__button--ai']}`}
-                                    onClick={() => {setMostrarIACreate(prev => !prev)
-                                                    setModalAberto(false)
-                                    }}
+                                    className={styles['btn-acao']}
+                                    onClick={() => {setMostrarIACreate(prev => !prev); setModalAberto(false);}}
                                 >
-                                    <img className={styles['tela-cadastro-pergunta__btn-criar-com-ia']} src="/images/botaoCriarComIa.png" alt="" ></img>
+                                    Criar com IA
                                 </button>
                                 <button
                                     type="submit"
-                                    className={`${styles['.tela-cadastro-pergunta_Low']} ${styles['tela-cadastro-pergunta__button--submit']}`}
+                                    className={styles['btn-acao']}
                                 >
-                                    <img className={styles['tela-cadastro-pergunta__btn-cadastrar-pergunta']} src="/images/botaoConfirmar.png" alt="" ></img>
+                                    CONFIRMAR
                                 </button>
                             </div>
-                        )}
-                        {editar && (
-                            <div className={styles["tela-cadastro-pergunta__buttons"]}>
+                        ) : (
+                            <div className={styles['buttons-edit']}>
                                 <button 
                                     type="submit" 
-                                    className={styles["tela-cadastro-pergunta__button"]}
+                                    className={styles['btn-acao']}
                                 >
                                     Salvar Alterações
                                 </button>
-
                                 <button 
                                     type="button" 
                                     onClick={onClose} 
-                                    className={styles["tela-cadastro-pergunta__button--cancel"]}
+                                    className={styles['btn-cancelar']}
                                 >
                                     Cancelar
                                 </button>
                             </div>
                         )}
+
+                        {/* MODAL ALTERNATIVAS */}
                         {modalAberto && (
-                                <div className={styles.overlayAlternativas}>
+                            <div className={styles.overlayAlternativas}>
                                 <div className={styles.alternativas}>
-                                    <h3>Alternativas</h3>
-
-                                    {/* Alternativa A */}
-                                    <label className={styles.alternativa}>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite a alternativa A"
-                                            value={alternativaA}
-                                            onChange={(e) => setAlternativaA(e.target.value)}
-                                        />
-                                    <input
-                                        type="radio"
-                                        name="correta"
-                                        value="A"
-                                        checked={correta === "A"}
-                                        onChange={() => setCorreta("A")}
-                                    />
-                                    </label>
-
-                                    {/* Alternativa B */}
-                                    <label className={styles.alternativa}>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite a alternativa B"
-                                            value={alternativaB}
-                                            onChange={(e) => setAlternativaB(e.target.value)}
-                                        />
-                                    <input
-                                        type="radio"
-                                        name="correta"
-                                        value="B"
-                                        checked={correta === "B"}
-                                        onChange={() => setCorreta("B")}
-                                    />
-                                    </label>
-
-                                    {/* Alternativa C */}
-                                    <label className={styles.alternativa}>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite a alternativa C"
-                                            value={alternativaC}
-                                            onChange={(e) => setAlternativaC(e.target.value)}
-                                        />
-                                    <input
-                                        type="radio"
-                                        name="correta"
-                                        value="C"
-                                        checked={correta === "C"}
-                                        onChange={() => setCorreta("C")}
-                                    />
-                                    </label>
-
-                                    {/* Alternativa D */}
-                                    <label className={styles.alternativa}>
-                                        <input
-                                            type="text"
-                                            placeholder="Digite a alternativa D"
-                                            value={alternativaD}
-                                            onChange={(e) => setAlternativaD(e.target.value)}
-                                        />
-                                    <input
-                                        type="radio"
-                                        name="correta"
-                                        value="D"
-                                        checked={correta === "D"}
-                                        onChange={() => setCorreta("D")}
-                                    />
-                                    </label>
-
-                                    <button className={styles.ModalConfirmar} type="button" onClick={ ()=> {
+                                    <h3>Configurar Alternativas</h3>
+                                    {['A', 'B', 'C', 'D'].map((letra, index) => {
+                                        const setAlternativa = [setAlternativaA, setAlternativaB, setAlternativaC, setAlternativaD][index];
+                                        const alternativaValue = [alternativaA, alternativaB, alternativaC, alternativaD][index];
+                                        const placeholder = `Digite a alternativa ${letra}`;
                                         
-                                        if (!alternativaA || !alternativaB || !alternativaC || !alternativaD) {
-                                            alert('Por favor, preencha todas as alternativas antes de confirmar.');
-                                            return;
-                                        }else if (!correta) {
-                                            alert('Por favor, selecione a alternativa correta antes de confirmar.');
-                                            return;
-                                        }else{
-                                            confirmarAlternativas()}}}>
-                                    Confirmar
+                                        return (
+                                            <label key={letra} className={styles.alternativaItem}>
+                                                <input
+                                                    type="text"
+                                                    placeholder={placeholder}
+                                                    value={alternativaValue}
+                                                    onChange={(e) => setAlternativa(e.target.value)}
+                                                />
+                                                <input
+                                                    type="radio"
+                                                    name="correta"
+                                                    value={letra}
+                                                    checked={correta === letra}
+                                                    onChange={() => setCorreta(letra)}
+                                                />
+                                            </label>
+                                        );
+                                    })}
+                                    <button className={styles.ModalConfirmar} type="button" onClick={confirmarAlternativas}>
+                                        Confirmar
                                     </button>
                                 </div>
-                                </div>
+                            </div>
+                        )}
 
-
-                            )}
-                            {mostrarIACreate &&(
-                                <IAcria 
-                                setDescricao={setDescricao}
-                                setMostrarIACreate={setMostrarIACreate}
-                                setDificuldade={setDificuldade} 
-                                setMateria={setMateria}  
-                                materia={materia}
-                                dificuldade={dificuldade}
-                                setCorreta={setCorreta}
-                                setAlternativas={setAlternativas}
-                                setAlternativaA={setAlternativaA}
-                                setAlternativaB={setAlternativaB}
-                                setAlternativaC={setAlternativaC}
-                                setAlternativaD={setAlternativaD}
-                                
-                                />
-                            )}
+                        {/* COMPONENTE IA */}
+                        {mostrarIACreate &&(
+                            <IAcria 
+                            // ... (Props do IAcria permanecem as mesmas)
+                            setDescricao={setDescricao}
+                            setMostrarIACreate={setMostrarIACreate}
+                            setDificuldade={setDificuldade} 
+                            setMateria={setMateria}  
+                            materia={materia}
+                            dificuldade={dificuldade}
+                            setCorreta={setCorreta}
+                            setAlternativas={setAlternativas}
+                            setAlternativaA={setAlternativaA}
+                            setAlternativaB={setAlternativaB}
+                            setAlternativaC={setAlternativaC}
+                            setAlternativaD={setAlternativaD}
+                            />
+                        )}
                     </form>
                 </main>
             </div>
         </div>
-    )   
+    )  
 }
