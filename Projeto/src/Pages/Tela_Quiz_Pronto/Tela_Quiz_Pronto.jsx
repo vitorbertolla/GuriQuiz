@@ -36,22 +36,16 @@ export default function Tela_Quiz_Pronto() {
                     alt="Sair"
                 />
             </Link>
-
-            {/* CARD AZUL */}
-            <div className={styles.card}>
-                <h1 className={styles.titulo}>QUIZ PRONTO</h1>
-
-                <div className={styles.listaContainer}>
-                    {quizzes.map((q) => (
-                        <div key={q.id} className={styles.quizItem}>
-                            
-                            <div className={styles.quizInfo} onClick={() => navigate(`/jogo?id=${q.id}`)}>
-                                <Tela_ListaQuiz quiz={q} editar={false} />
-                            </div>
-                        </div>
-                    ))}
+            <h1>Quizzes Cadastrados</h1>
+            {quizzes.map((q) => (
+                <div
+                    key={q.id}
+                    onClick={() => navigate(`/jogo?id=${q.id}`)}
+                    style={{ cursor: "pointer" }}
+                >
+                    <Tela_ListaQuiz quiz={q} editar={false} />
                 </div>
+      ))}
             </div>
-        </div>
     );
 }
