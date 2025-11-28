@@ -18,11 +18,15 @@ button {
   background-repeat: no-repeat; 
   background-position: center;
   image-rendering: pixelated;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  position: relative; /* ADICIONE ISSO */
 }
+
 
 .btnLogin,
 .btnCadastro {
@@ -120,6 +124,25 @@ button {
 
 .guri {
   position: absolute;
-  top: 34.5vh;
   left: 10vw;
+  bottom: calc(0px + 25vh); /* Ajuste fino */
+  height: 45vh; /* Mantém escala consistente */
+  image-rendering: pixelated;
 }
+
+.grama {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  image-rendering: pixelated;
+  height: 27vh;
+}
+
+/* Some o personagem em telas pequenas */
+@media (max-width: 1100px) {
+  .guri {
+    height: 20vh;
+  }
+}
+
