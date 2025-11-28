@@ -26,18 +26,12 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
 
     function submit(e) {
         e.preventDefault()
-        if (!descricao || !dificuldade || !materia || !alternativas ) {
+        if (!descricao || !dificuldade || !materia) {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
-        if (alternativas.some(a => !a.texto || a.texto.trim() === '')) {
-            alert('Adicione todas as alternativas antes de cadastrar a pergunta.')
-            return
-        }
-        if (!correta) {
-            alert('Selecione a alternativa correta.')
-            return
-        }
+
+
         const dados = {
             descricao,
             dificuldade,
@@ -47,8 +41,10 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
             }
         if (editar && perguntaInicial) {
             editarPergunta(perguntaInicial.id, dados);
+            alert('Pergunta editada com sucesso!');
           } else {
             adicionarPergunta(descricao, dificuldade, materia, alternativas, correta);
+            alert('Pergunta cadastrada com sucesso!');
           }
       
           onClose?.();
@@ -226,7 +222,16 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                     />
                                     </label>
 
-                                    <button className={styles.ModalConfirmar} type="button" onClick={confirmarAlternativas}>
+                                    <button className={styles.ModalConfirmar} type="button" onClick={ ()=> {
+                                        
+                                        if (!alternativaA || !alternativaB || !alternativaC || !alternativaD) {
+                                            alert('Por favor, preencha todas as alternativas antes de confirmar.');
+                                            return;
+                                        }else if (!correta) {
+                                            alert('Por favor, selecione a alternativa correta antes de confirmar.');
+                                            return;
+                                        }else{
+                                            confirmarAlternativas()}}}>
                                     Confirmar
                                     </button>
                                 </div>
