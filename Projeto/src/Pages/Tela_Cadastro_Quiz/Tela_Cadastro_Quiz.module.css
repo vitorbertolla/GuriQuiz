@@ -440,23 +440,29 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
+
+  .exit-button {
+    height: 60px;
+    top: 10px;
+    left: 15px;
+  }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 10px;
+    padding: 5px;
   }
 
   .telaMonarQuiz {
     width: 95%;
     max-height: 95vh;
-    padding: 15px;
+    padding: 5px;
     border-width: 5px;
   }
 
   .telaMonarQuiz h2 {
     border-width: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
   }
 
   .infoQuiz {
@@ -481,6 +487,12 @@
     max-width: 300px;
     padding: 12px 30px;
   }
+
+  .exit-button {
+    height: 50px;
+    top: 5px;
+    left: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -503,6 +515,12 @@
 
   button {
     font-size: 16px;
+  }
+
+  .exit-button {
+    height: 40px;
+    top: 5px;
+    left: 15px;
   }
 }
 

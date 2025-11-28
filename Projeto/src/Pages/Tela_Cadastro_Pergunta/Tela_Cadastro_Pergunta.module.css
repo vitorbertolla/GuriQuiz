@@ -1,3 +1,5 @@
+/* ===== CONFIGURAÇÃO GERAL ===== */
+
 .container {
   background-image: url("/images/backgroundAnoitecer.png");
   height: 100vh;
@@ -10,6 +12,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .containerEdit {
   display: flex;
   justify-content: center;
@@ -37,9 +40,11 @@
   font-weight: 100;
   padding: 20px;
   font-size: 50px;
+  text-align: center;
 }
 
-.tela-cadastro-pergunta__select {
+.tela-cadastro-pergunta__select, 
+.tela-cadastro-pergunta__input {
   background-color: white;
   color: #2a2d74;
   border: 5px solid #2a2d74;
@@ -53,23 +58,6 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-}
-
-.tela-cadastro-pergunta__input { 
-  background-color: white;
-  color: #2a2d74;
-  border: 5px solid #2a2d74;
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 20px;
-  width: 300px;
-  height: 70px;
-  text-align: center;
-}
-
-.tela-cadastro-pergunta__input input::placeholder {
-  color: #2a2d74;
-  opacity: 1;
 }
 
 .tela-cadastro-pergunta__button--alternativas {
@@ -94,15 +82,7 @@
   padding-top: 20px;
 }
 
-.tela-cadastro-pergunta__select {
-  transition: 0.2s;
-}
-
-.tela-cadastro-pergunta__input {
-  font-family: arial;
-}
-
-.tela-cadastro-pergunta__select:hover{
+.tela-cadastro-pergunta__select:hover {
   scale: 1.05;
   cursor: pointer;
 }
@@ -122,10 +102,7 @@
   left: 190px;
 }
 
-.tela-cadastro-pergunta__btn-cadastrar-pergunta{
-  height: 100px;
-}
-
+.tela-cadastro-pergunta__btn-cadastrar-pergunta,
 .tela-cadastro-pergunta__btn-criar-com-ia {
   height: 100px;
 }
@@ -138,8 +115,8 @@
   padding-right: 30px;
 }
 
+/* ===== MODAL ===== */
 
-/* Fundo escurecido da área */
 .overlayAlternativas {
   position: fixed;
   top: 0;
@@ -153,85 +130,36 @@
   z-index: 999;
 }
 
-/* Container principal */
 .alternativas {
   background: #ffffff;
   width: 420px;
+  max-width: 90%;
   padding: 26px;
   border-radius: 18px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   animation: fadeInAlternativas 0.3s ease;
 }
 
-@keyframes fadeInAlternativas {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Título */
 .alternativas h3 {
   text-align: center;
   font-size: 1.4rem;
   margin-bottom: 20px;
 }
 
-/* Cada alternativa */
-.alternativas {
-  background: #ffffff;
-  width: 420px;
-  padding: 26px;
-  border-radius: 18px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  animation: fadeInAlternativas 0.3s ease;
-}
-
-@keyframes fadeInAlternativas {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Título */
-.alternativas h3 {
-  text-align: center;
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-}
-
-/* Cada alternativa */
 .alternativa {
   text-align: center;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-/* Input de texto das alternativas */
 .alternativa input[type="text"] {
   flex: 1;
   padding: 8px 12px;
   border: 2px solid #ccc;
   border-radius: 10px;
   font-size: 1rem;
-  transition: border 0.2s ease;
 }
 
-.alternativa input[type="text"]:focus {
-  border-color: #6a5acd;
-  outline: none;
-}
-
-/* Radio estilizado */
 .alternativa input[type="radio"] {
   width: 20px;
   height: 20px;
@@ -239,7 +167,6 @@
   cursor: pointer;
 }
 
-/* Botão de confirmar */
 .ModalConfirmar {
   display: block;
   width: 45%;
@@ -251,10 +178,107 @@
   border-radius: 12px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.ModalConfirmar:hover {
-  background: #5847c2;
-  transform: scale(1.02);
+/* ======== RESPONSIVIDADE ======== */
+
+/* Telas médias (tablets) */
+@media (max-width: 992px) {
+  .tela-cadastro-pergunta {
+    height: auto;
+    width: 90%;
+    padding: 20px;
+  }
+
+  .tela-cadastro-pergunta__title {
+    font-size: 38px;
+    padding: 15px;
+  }
+
+  .tela-cadastro-pergunta__select,
+  .tela-cadastro-pergunta__input {
+    width: 260px;
+    height: 60px;
+    font-size: 18px;
+  }
+}
+
+/* Celulares grandes */
+@media (max-width: 768px) {
+  .tela-cadastro-pergunta {
+    width: 95%;
+  }
+
+  .tela-cadastro-pergunta__title {
+    font-size: 32px;
+  }
+
+  .exit-button {
+    top: 50px;
+    left: 40px;
+    height: 55px;
+  }
+
+  .tela-cadastro-pergunta__actions {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .tela-cadastro-pergunta__select,
+  .tela-cadastro-pergunta__input {
+    width: 220px;
+    height: 55px;
+    font-size: 16px;
+  }
+
+  .tela-cadastro-pergunta__button--alternativas {
+    width: 230px;
+    height: 45px;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+
+  .container {
+    background-size: cover;
+  }
+
+  .tela-cadastro-pergunta {
+    width: 100%;
+    border-width: 5px;
+    padding: 15px;
+  }
+
+  .tela-cadastro-pergunta__title {
+    font-size: 26px;
+    padding: 12px;
+    border-width: 5px;
+  }
+
+  .tela-cadastro-pergunta__select,
+  .tela-cadastro-pergunta__input {
+    width: 180px;
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .exit-button {
+    top: 30px;
+    left: 20px;
+    height: 45px;
+  }
+
+  .alternativas {
+    width: 95%;
+    padding: 18px;
+  }
+
+  .alternativas h3 {
+    font-size: 1.1rem;
+  }
+
+  .ModalConfirmar {
+    width: 70%;
+  }
 }
