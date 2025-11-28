@@ -11,151 +11,179 @@
     image-rendering: pixelated;
 }
 
-.telaMenuBtnExit {
-    height: 80px; /* Ajuste se necessário */
+.telaMenuMenu {
+    background: linear-gradient(135deg, #bfebf4 0%, #a8e0ed 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 7px solid #2a2d74;
+    border-radius: 30px;
+    height: 90vh;
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(42, 45, 116, 0.3);
+    position: relative;
+}
+
+.telaMenuHeader {
+    display: flex;
+    width: 100%;
+    height: 25vh;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.telaMenuHeader h1 {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.telaMenuHeader .linkExit {
     position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-img {
-    transition: 0.2s;
-}
-
-img:hover {
-    scale: 1.05;
+    left: 20px;
+    top: 20px;
 }
 
 .telaMenuTitle {
-    height: 100px;
-}
-
-
-.telaMenuMenu {
-    background-color: #bfebf4;
-    border: 7px solid #2a2d74;
-    border-radius: 30px;
-    height: 89vh;
-    width: 80%;
-    padding: 15px;
+    height: clamp(60px, 8vw, 90px);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
 
 .telaMenuMain {
-    background-color: #ffff;
+    background-color: #ffffff;
     border: 7px solid #2a2d74;
     border-radius: 30px;
-    height: 50vh;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 30px;
-    max-width: 77vw;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.telaMenuControls button {
+.telaMenuControls {
     display: flex;
-    justify-content: flex-end ;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    gap: 30px;
 }
 
 .telaMenuOptions {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 25px;
+    flex-wrap: wrap;
 }
 
-.telaMenuHeader {
-    position: relative;
-    display: flex;
-    height: 30vh;
-    align-items: center;
-}
-
-.telaMenuHeader h1 {
-    margin: 0 auto;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-
-.telaMenuHeader button {
-    position: absolute;
-    left: 0; 
-    top: 20%;
-    transform: translateY(-50%);
-}
-
-
-.telaMenuBtnOption {
-    height: 100px;
-}
-
-.telaMenuBtnPlay {
-    height: 100px;
-}
-
-
-.botoesJogar{
-    width: 77vw;
+.botoesJogar {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    margin-top: 40px;
+    gap: 30px;
 }
 
-.pixelButton {
-  width: 224px;        /* ajuste até ficar perfeito com os da imagem */
-  height: 72px;        /* altura igual para todos */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-     background: #6664c6 !important; 
-
-  color: rgb(255, 255, 255);
-     background: #3d3c80 !important; 
-
-  color: rgb(255, 255, 255);
-  font-size: 28px;
-
-  border: none;
-  cursor: pointer;
-  text-align: center;
-
-  image-rendering: pixelated;
-  border: 4px solid black;
-  box-shadow:
-    0px 4px 0px #000,
-    0px -4px 0px #000,
-    4px 0px 0px #000,
-    -4px 0px 0px #000;
-
-  border-radius: 8px;
-  transition: 0.2s;
-  padding: 10px;
-}
-
-/* efeito ao clicar */
-.pixelButton:active {
-  transform: translateY(3px);
-  box-shadow:
-    0px 2px 0px #000,
-    0px -2px 0px #000,
-    2px 0px 0px #000,
-    -2px 0px 0px #000;
-}
 .link {
     text-decoration: none !important;
 }
+
 .link:visited,
 .link:active,
 .link:focus {
     text-decoration: none !important;
 }
+
+.linkExit {
+    width: clamp(45px, 6vw, 65px);
+    height: clamp(45px, 6vw, 65px);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.linkOption {
+    display: inline-block;
+}
+
+.linkPlay {
+    display: inline-block;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+}
+
+.telaMenuBtnPlay {
+    height: clamp(70px, 10vw, 100px);
+    transition: .3s ease;
+}
+
+.telaMenuBtnExit {
+    height: 70px;
+    display: block;
+    transition: .3s ease;
+}
+
+.telaMenuBtnPlay:hover,
+.telaMenuBtnExit:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+
+.pixelButton {
+    width: clamp(140px, 18vw, 200px);
+    height: clamp(50px, 7vw, 70px);
+    font-size: clamp(13px, 1.8vw, 18px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(8px, 1.5vw, 12px);
+
+    background: linear-gradient(180deg, #7a78d8 0%, #5856b0 100%);
+    color: white;
+    font-weight: bold;
+    border: 4px solid #000;
+
+    cursor: pointer;
+    text-align: center;
+    image-rendering: pixelated;
+
+    box-shadow:
+        0px 4px 0px #000,
+        0px -4px 0px #000,
+        4px 0px 0px #000,
+        -4px 0px 0px #000,
+        0 6px 20px rgba(0, 0, 0, 0.3);
+
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
 .pixelButton:hover {
-    scale: 1.05;}
+    transform: translateY(-3px);
+    background: linear-gradient(180deg, #8886e0 0%, #6664c6 100%);
+    box-shadow:
+        0px 4px 0px #000,
+        0px -4px 0px #000,
+        4px 0px 0px #000,
+        -4px 0px 0px #000,
+        0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.pixelButton:active {
+    transform: translateY(2px);
+    box-shadow:
+        0px 2px 0px #000,
+        0px -2px 0px #000,
+        2px 0px 0px #000,
+        -2px 0px 0px #000,
+        0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
 /* MEDIA QUERIES PARA RESPONSIVIDADE */
 
 /* Desktop grande */
@@ -165,10 +193,14 @@ img:hover {
     }
 }
 
-/* Tablets e telas médias (landscape) */
+/* Tablets e telas médias */
 @media (max-width: 1200px) {
     .telaMenuMenu {
         width: 85%;
+    }
+    
+    .telaMenuMain {
+        width: 92%;
     }
 }
 
@@ -178,17 +210,32 @@ img:hover {
         width: 90%;
         border-width: 6px;
     }
-    
+    .telaMenuBtnExit {
+    height: 60px;
+
+    }
     .telaMenuMain {
         border-width: 6px;
+        padding: 25px;
+        width: 94%;
     }
     
     .telaMenuOptions {
-        grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr));
+        gap: 20px;
+    }
+    
+    .botoesJogar {
+        gap: 25px;
+    }
+    
+    .pixelButton {
+        width: clamp(130px, 16vw, 180px);
+        height: clamp(48px, 6.5vw, 65px);
+        font-size: clamp(12px, 1.6vw, 16px);
     }
 }
 
-/* Smartphones (landscape) */
+/* Smartphones */
 @media (max-width: 768px) {
     .container {
         padding: 5px;
@@ -198,11 +245,29 @@ img:hover {
         width: 95%;
         border-width: 5px;
         border-radius: 20px;
+        padding: 15px;
     }
     
     .telaMenuMain {
         border-width: 5px;
         border-radius: 20px;
+        height: 65vh;
+        padding: 20px;
+        width: 96%;
+    }
+    
+    .telaMenuHeader {
+        height: 20vh;
+        margin-bottom: 15px;
+    }
+    
+    .telaMenuHeader .linkExit {
+        left: 15px;
+        top: 15px;
+    }
+    
+    .telaMenuControls {
+        gap: 20px;
     }
     
     .telaMenuOptions {
@@ -213,21 +278,25 @@ img:hover {
     .botoesJogar {
         flex-direction: column;
         gap: 15px;
+        width: 100%;
     }
     
     .pixelButton {
-        max-width: 100%;
+        width: 150px;
+        height: 52px;
         font-size: 14px;
-        height: 55px;
     }
     
     .telaMenuBtnPlay {
-        height: 70px;
-        max-width: 200px;
+        height: 80px;
+    }
+    .telaMenuBtnExit {
+        height: 50px;
+
     }
 }
 
-/* Smartphones (portrait) */
+/* Smartphones pequenos */
 @media (max-width: 576px) {
     .container {
         padding: 0;
@@ -237,26 +306,56 @@ img:hover {
         width: 100%;
         border-radius: 0;
         border-width: 4px;
-        max-height: 100vh;
+        height: 100vh;
+        padding: 12px;
     }
     
     .telaMenuMain {
         border-width: 4px;
         border-radius: 15px;
+        height: 68vh;
+        padding: 15px;
     }
     
     .telaMenuHeader {
+        height: 18vh;
         margin-bottom: 10px;
     }
     
+    .telaMenuHeader .linkExit {
+        left: 12px;
+        top: 12px;
+    }
+    
+    .telaMenuControls {
+        gap: 15px;
+    }
+    
+    .telaMenuOptions {
+        gap: 12px;
+    }
+    
+    .botoesJogar {
+        gap: 12px;
+    }
+    
     .pixelButton {
+        width: 135px;
+        height: 48px;
         font-size: 12px;
-        height: 50px;
-        min-width: 160px;
+        border-width: 3px;
     }
     
     .telaMenuBtnPlay {
-        height: 65px;
+        height: 70px;
+    }
+    
+    .linkExit {
+        width: 50px;
+        height: 50px;
+    }
+    .telaMenuBtnExit {
+        height: 40px;
     }
 }
 
@@ -264,27 +363,60 @@ img:hover {
 @media (max-width: 400px) {
     .telaMenuMenu {
         border-width: 3px;
+        padding: 10px;
     }
     
     .telaMenuMain {
         border-width: 3px;
+        padding: 12px;
+    }
+    
+    .telaMenuHeader .linkExit {
+        left: 10px;
+        top: 10px;
     }
     
     .pixelButton {
+        width: 120px;
+        height: 44px;
+        font-size: 11px;
         border-width: 3px;
-        font-size: clamp(10px, 2.5vw, 14px);
+    }
+    
+    .telaMenuBtnPlay {
+        height: 65px;
+    }
+    
+    .linkExit {
+        width: 45px;
+        height: 45px;
     }
 }
 
 /* Orientação landscape em dispositivos pequenos */
 @media (max-height: 600px) and (orientation: landscape) {
     .telaMenuMenu {
-        max-height: 95vh;
+        height: 95vh;
+        padding: 10px;
     }
     
     .telaMenuHeader {
-        padding: 5px 0;
-        min-height: 60px;
+        height: 15vh;
+        margin-bottom: 8px;
+    }
+    
+    .telaMenuHeader .linkExit {
+        left: 10px;
+        top: 10px;
+    }
+    
+    .telaMenuMain {
+        height: 70vh;
+        padding: 15px;
+    }
+    
+    .telaMenuControls {
+        gap: 10px;
     }
     
     .telaMenuOptions {
@@ -292,19 +424,42 @@ img:hover {
     }
     
     .botoesJogar {
-        margin-top: 15px;
         gap: 10px;
+    }
+    
+    .pixelButton {
+        width: 120px;
+        height: 42px;
+        font-size: 11px;
+    }
+    
+    .telaMenuBtnPlay {
+        height: 65px;
+    }
+    
+    .telaMenuTitle {
+        height: 55px;
+    }
+    
+    .linkExit {
+        width: 45px;
+        height: 45px;
     }
 }
 
-/* Touch devices - aumenta área clicável */
+/* Touch devices */
 @media (hover: none) and (pointer: coarse) {
     .pixelButton {
-        min-height: 56px;
+        min-height: 50px;
         padding: 12px 18px;
     }
     
-    img {
+    .link {
+        touch-action: manipulation;
+    }
+    
+    .telaMenuBtnExit,
+    .telaMenuBtnPlay {
         touch-action: manipulation;
     }
 }

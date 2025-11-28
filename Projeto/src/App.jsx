@@ -8,7 +8,6 @@ import Tela_Ranking from './Pages/Tela_Ranking/Tela_Ranking.jsx';
 import Tela_Cadastro_Pergunta from './Pages/Tela_Cadastro_Pergunta/Tela_Cadastro_Pergunta.jsx';
 import Tela_Config_Quiz from './Pages/Tela_Config_Quiz/Tela_Config_Quiz.jsx';
 import Tela_Jogo from './Pages/Tela_Jogo/Tela_Jogo.jsx';
-import Tela_Fim_Jogo from './Pages/Tela_Fim_Jogo/Tela_Fim_Jogo.jsx';
 import Tela_Resultados from './Pages/Tela_Resultados/Tela_Resultados.jsx';
 import Tela_Admin from './Pages/Tela_Admin/Tela_Admin.jsx';
 import Tela_Quiz_Pronto from './Pages/Tela_Quiz_Pronto/Tela_Quiz_Pronto.jsx';
@@ -29,7 +28,6 @@ function App() {
       <Route path="/cadastroQuiz" element={<Tela_CRUD_Quiz/>} />
       <Route path="/configuraçãoQuiz" element={<Tela_Config_Quiz/>} />
       <Route path="/jogo" element={<Tela_Jogo/>} />
-      <Route path="/fimJogo" element={<Tela_Fim_Jogo/>} />
       <Route path="/resultados" element={<Tela_Resultados/>} />
       <Route path="/admin" element={<Tela_Admin/>} />
       <Route path="/quizPronto" element={<Tela_Quiz_Pronto/>} />
