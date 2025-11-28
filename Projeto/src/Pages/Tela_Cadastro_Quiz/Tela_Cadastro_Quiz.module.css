@@ -82,10 +82,10 @@
 }
 
 .exit-button {
-  height: 70px;
-  position: absolute;
-  top: 30px;
-  left: 40px;
+    height: 65px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
 }
 
 
@@ -131,7 +131,8 @@
 /* INFORMAÇÕES DO QUIZ */
 .infoQuiz {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  height: 30vh;
   gap: 15px;
   width: 100%;
   padding: 0 20px;
@@ -143,11 +144,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  
 }
 
 .infoQuiz label {
   color: #2a2d74;
-  font-size: clamp(13px, 1.5vw, 16px);
+  font-size: clamp(13px, 1.5vw, 25px);
   font-weight: bold;
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
   text-align: center;
@@ -159,9 +161,10 @@
   border: 5px solid #2a2d74;
   border-radius: 12px;
   padding: 10px 12px;
+  
 
   width: 100%;
-  min-height: 45px;
+  min-height: 65px;
   font-size: clamp(13px, 1.5vw, 15px);
   text-align: center;
 
@@ -188,7 +191,7 @@
   border-radius: 12px;
 
   width: 100%;
-  min-height: 45px;
+  min-height: 65px;
   padding: 10px 12px;
   font-size: clamp(13px, 1.5vw, 15px);
   text-align: center;
@@ -298,13 +301,8 @@
   transition: left 0.5s;
 }
 
-.perguntaItem:hover::before {
-  left: 100%;
-}
-
 .perguntaItem:hover {
-  transform: translateX(5px) scale(1.02);
-  background: linear-gradient(135deg, #c8eaff 0%, #d8f5ff 100%);
+  background: linear-gradient(135deg, #6591ac 0%, #569fb8 100%);
   box-shadow: 0 8px 20px rgba(42, 45, 116, 0.2);
 }
 
@@ -316,7 +314,6 @@
   background: linear-gradient(135deg, #7cc9ff 0%, #9dd9ff 100%) !important;
   border-color: #1b1f66 !important;
   box-shadow: 0 8px 20px rgba(27, 31, 102, 0.3) !important;
-  animation: pulse 0.5s ease;
 }
 
 /* QUIZ MONTADO */
@@ -442,10 +439,23 @@
   }
 
   .exit-button {
-    height: 60px;
+    height: 55px;
     top: 10px;
-    left: 15px;
+    left: 13px;
   }
+  .tela-cadastro-pergunta__select{
+    height: 45px;
+  }
+  .infoQuiz input{
+    height: 45px;
+  }
+  .infoQuiz label{
+    font-size: clamp(13px, 1.5vw, 18px);
+  }
+  .infoQuiz {
+    height: auto;
+  }
+
 }
 
 @media (max-width: 768px) {
@@ -518,9 +528,9 @@
   }
 
   .exit-button {
-    height: 40px;
+    height: 35px;
     top: 5px;
-    left: 15px;
+    left: 11px;
   }
 }
 

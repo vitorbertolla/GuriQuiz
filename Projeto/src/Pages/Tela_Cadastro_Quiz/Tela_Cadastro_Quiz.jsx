@@ -29,7 +29,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
 
     function submit(e) {
         e.preventDefault()
-        if (nomeQuiz.trim() === '' || descricaoQuiz.trim() === '' || !dificuldadeQuiz || !materiaQuiz) {
+        if (nomeQuiz.trim() === '' || descricaoQuiz.trim() === '' || !dificuldadeQuiz || !materiaQuiz || perguntasSelecionadas.length === 0) {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
@@ -44,10 +44,10 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
         if(editar && quizInicial){
             // Lógica para editar o quiz existente
             editarQuiz(quizInicial.id, dados)
-            console.log("Quiz editado");
+            alert("Quiz editado");
         }else{
             adicionarQuiz(dados.nome,dados.descricao,dados.dificuldade,dados.materia,dados.perguntas);
-            console.log("Quiz cadastrado:", dados);
+            alert("Quiz cadastrado:", dados);
         }
        
         onClose?.()
