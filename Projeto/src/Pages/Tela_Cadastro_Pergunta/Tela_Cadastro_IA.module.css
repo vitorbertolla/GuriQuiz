@@ -1,4 +1,6 @@
-/* Fundo escuro */
+/* ============================= */
+/*        FUNDO ESCURECIDO       */
+/* ============================= */
 .overlayIa {
   position: fixed;
   inset: 0; 
@@ -9,7 +11,9 @@
   z-index: 9999;
 }
 
-/* Janela flutuante centralizada */
+/* ============================= */
+/*     CONTAINER DO POPUP        */
+/* ============================= */
 .iaContainer {
   background: white;
   padding: 25px;
@@ -27,7 +31,9 @@
   flex-wrap: wrap;
 }
 
-/* Animação opcional */
+/* ============================= */
+/*          ANIMAÇÃO             */
+/* ============================= */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -39,83 +45,85 @@
   }
 }
 
-.iaSelect{
-    border: 3px solid #2a2d74;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 10px;
-    width: 400px;
-    transition: 0.2s;
+/* ============================= */
+/*         FORM ELEMENTS         */
+/* ============================= */
+
+.iaSelect {
+  border: 3px solid #2a2d74;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 400px;
+  transition: 0.2s;
 }
 
 .iaSelect:hover {
-    cursor: pointer;
-    scale: 1.01;
+  cursor: pointer;
+  scale: 1.01;
 }
 
 .iaTitle {
-    text-align: center;
-    padding-bottom: 100px;
-    font-size: 30px;
-    color: #2a2d74;
+  text-align: center;
+  padding-bottom: 100px;
+  font-size: 30px;
+  color: #2a2d74;
 }
 
 .iaInput {
-    border: 3px solid #2a2d74;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 20px;
-    width: 400px;
-    font-family: Arial, Helvetica, sans-serif;
+  border: 3px solid #2a2d74;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  width: 400px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.iaButton, .iaConcluir {
-    background-color: #2c7ef4;
-    color: #2a2d74;
-    border: 3px solid #2a2d74;
-    padding: 10px;
-    border-radius: 15px;
-    transition: 0.2s;
-    width: 100px;
-    text-align: center;
-    transition: 0.2s;
-    font-size: 13px;
+.iaButton,
+.iaConcluir {
+  background-color: #2c7ef4;
+  color: #2a2d74;
+  border: 3px solid #2a2d74;
+  padding: 10px;
+  border-radius: 15px;
+  transition: 0.2s;
+  width: 100px;
+  text-align: center;
+  font-size: 13px;
 }
 
-.iaButton:hover {
-    background-color: #0056b3;
-    color: white;
-    scale: 1.05;
-}
-
+.iaButton:hover,
 .iaConcluir:hover {
-    background-color: #0056b3;
-    color: white;
-    scale: 1.05;
+  background-color: #0056b3;
+  color: white;
+  scale: 1.05;
 }
 
 .formControl {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 30px;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  gap: 10px;
 }
 
 .iaTextoBotao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .iaBotoes {
-    padding: 10px;
-    display: flex;
-    gap: 10px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
 }
 
+/* ============================= */
+/*         RESPOSTA IA            */
+/* ============================= */
 .iaResposta {
   width: 30vw;
   height: 30vh;
@@ -126,7 +134,110 @@
 }
 
 .iaResposta p {
-   font-family: arial;
-   padding: 20px;
-   font-weight: bold;
+  font-family: arial;
+  padding: 20px;
+  font-weight: bold;
+}
+
+/* ======================================= */
+/*            RESPONSIVIDADE               */
+/* ======================================= */
+
+/* ----- Tablets (≤ 992px) ----- */
+@media (max-width: 992px) {
+  .iaContainer {
+    max-width: 70vw;
+    height: auto;
+    padding: 20px;
+  }
+
+  .iaSelect,
+  .iaInput {
+    width: 320px;
+    font-size: 16px;
+  }
+
+  .iaTitle {
+    font-size: 26px;
+    padding-bottom: 60px;
+  }
+
+  .iaResposta {
+    width: 50vw;
+    height: 30vh;
+  }
+}
+
+/* ----- Celulares grandes (≤ 768px) ----- */
+@media (max-width: 768px) {
+  .iaContainer {
+    max-width: 90vw;
+    height: auto;
+    padding: 15px;
+  }
+
+  .iaSelect,
+  .iaInput {
+    width: 260px;
+    font-size: 15px;
+    padding: 8px;
+  }
+
+  .iaTitle {
+    font-size: 22px;
+    padding-bottom: 40px;
+  }
+
+  .iaButton,
+  .iaConcluir {
+    width: 90px;
+    font-size: 12px;
+  }
+
+  .iaResposta {
+    width: 70vw;
+    height: 35vh;
+  }
+}
+
+/* ----- Celulares pequenos (≤ 480px) ----- */
+@media (max-width: 480px) {
+
+  .iaContainer {
+    width: 95%;
+    height: auto;
+    border-width: 5px;
+    padding: 12px;
+  }
+
+  .iaTitle {
+    font-size: 20px;
+    padding-bottom: 30px;
+  }
+
+  .iaSelect,
+  .iaInput {
+    width: 200px;
+    height: auto;
+    font-size: 14px;
+  }
+
+  .iaBotoes {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .iaButton,
+  .iaConcluir {
+    width: 100%;
+  }
+
+  .iaResposta {
+    width: 85vw;
+    height: 40vh;
+  }
+
+  .iaResposta p {
+    font-size: 14px;
+  }
 }
