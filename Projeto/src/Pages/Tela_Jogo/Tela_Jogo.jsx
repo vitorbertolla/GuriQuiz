@@ -13,7 +13,8 @@ export default function Tela_Jogo() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
-    const quizId = searchParams.get('id'); // declare early
+    const quizId = searchParams.get('id'); 
+    const [quizNome, setQuizNome] = useState(() => searchParams.get('nome') || "");
 
     const [perguntasFiltradas, setPerguntasFiltradas] = useState([]);
     const [perguntaAtual, setPerguntaAtual] = useState(0);
@@ -27,63 +28,61 @@ export default function Tela_Jogo() {
     const [tempoRestante, setTempoRestante] = useState(10 * 1000)
 
     useEffect(() => {
-        // começa carregando
-        setCarregandoPerguntas(true);
+    setCarregandoPerguntas(true);
 
-        // se não houver perguntas ainda, aguarda
-        if (!perguntas || perguntas.length === 0) {
+    if (!perguntas || perguntas.length === 0) {
+        setPerguntasFiltradas([]);
+        setCarregandoPerguntas(false);
+        return;
+    }
+
+    if (quizId && quizzes && quizzes.length > 0) {
+        // --- carregar quiz por id ---
+        const quizEncontrado = quizzes.find(q => String(q.id) === String(quizId));
+        if (!quizEncontrado) {
             setPerguntasFiltradas([]);
             setCarregandoPerguntas(false);
             return;
         }
 
-        if (quizId) {
-            // --- branch: carregar quiz por id ---
-            const quizEncontrado = (quizzes || []).find(q => String(q.id) === String(quizId));
-            if (!quizEncontrado) {
-                setPerguntasFiltradas([]);
-                setCarregandoPerguntas(false);
-                return;
-            }
+        // Atualiza o nome do quiz sempre que encontrado
+        setQuizNome(quizEncontrado.nome || "Quiz sem nome");
 
-            let perguntasDoQuiz = quizEncontrado.perguntas || [];
-            if (!Array.isArray(perguntasDoQuiz)) {
-                perguntasDoQuiz = Object.values(perguntasDoQuiz);
-            }
-            perguntasDoQuiz = [...perguntasDoQuiz].sort(() => Math.random() - 0.5);
-            setPerguntasFiltradas(perguntasDoQuiz);
-            setCarregandoPerguntas(false);
-            return;
+        let perguntasDoQuiz = quizEncontrado.perguntas || [];
+        if (!Array.isArray(perguntasDoQuiz)) {
+            perguntasDoQuiz = Object.values(perguntasDoQuiz);
         }
 
-        // --- branch: carregar por filtros via query params ---
-        const materiasParam = searchParams.get('materias');
-        const dificuldadesParam = searchParams.get('dificuldade');
-        const numeroPerguntasParam = parseInt(searchParams.get('numeroPerguntas'), 10);
-
-        const materias = materiasParam ? materiasParam.split(',').map(s => s.trim()).filter(Boolean) : null; // null = aceita todas
-        const dificuldades = dificuldadesParam ? dificuldadesParam.split(',').map(s => s.trim()).filter(Boolean) : null; // null = aceita todas
-        const numeroPerguntas = !isNaN(numeroPerguntasParam) && numeroPerguntasParam > 0 ? numeroPerguntasParam : perguntas.length;
-
-        let filtradas = perguntas.filter((p) => {
-            const okMateria = !materias || materias.length === 0 ? true : materias.includes(p.materia);
-            const okDificuldade = !dificuldades || dificuldades.length === 0 ? true : dificuldades.includes(p.dificuldade);
-            return okMateria && okDificuldade;
-        });
-
-        if (!filtradas || filtradas.length === 0) {
-            // fallback: usa todas se nenhum filtro encontrar resultado
-            filtradas = [...perguntas];
-        }
-
-        filtradas = filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas);
-        setPerguntasFiltradas(filtradas);
+        setPerguntasFiltradas([...perguntasDoQuiz].sort(() => Math.random() - 0.5));
         setCarregandoPerguntas(false);
+        return;
+    }
 
-    }, [perguntas, quizzes, searchParams, quizId]);
+    // --- carregar por filtros via query params ---
+    const materiasParam = searchParams.get('materias');
+    const dificuldadesParam = searchParams.get('dificuldade');
+    const numeroPerguntasParam = parseInt(searchParams.get('numeroPerguntas'), 10);
+
+    const materias = materiasParam ? materiasParam.split(',').map(s => s.trim()).filter(Boolean) : null;
+    const dificuldades = dificuldadesParam ? dificuldadesParam.split(',').map(s => s.trim()).filter(Boolean) : null;
+    const numeroPerguntas = !isNaN(numeroPerguntasParam) && numeroPerguntasParam > 0 ? numeroPerguntasParam : perguntas.length;
+
+    let filtradas = perguntas.filter((p) => {
+        const okMateria = !materias || materias.length === 0 ? true : materias.includes(p.materia);
+        const okDificuldade = !dificuldades || dificuldades.length === 0 ? true : dificuldades.includes(p.dificuldade);
+        return okMateria && okDificuldade;
+    });
+
+    if (!filtradas || filtradas.length === 0) {
+        filtradas = [...perguntas];
+    }
+
+    setPerguntasFiltradas(filtradas.sort(() => Math.random() - 0.5).slice(0, numeroPerguntas));
+    setCarregandoPerguntas(false);
+
+}, [perguntas, quizzes, quizId, searchParams]);
 
 
-    // Auto-avanço e lógica do jogo (mantidas, sem mudanças funcionais)
     if (carregandoPerguntas) {
         return (
             <div className={styles.background}>
@@ -112,7 +111,6 @@ export default function Tela_Jogo() {
     const handleAlternativaClick = (letraAlternativa) => {
         if (mostrarResultado) return;
 
-
         setRespostaClicada(letraAlternativa);
         setMostrarResultado(true);
 
@@ -135,7 +133,6 @@ export default function Tela_Jogo() {
         }, 2000);
     };
 
-
     const handleProxima = (resultadosAtualizados = resultados, pontuacaoAtualizada = pontuacao) => {
         if (perguntaAtual + 1 < perguntasFiltradas.length) {
             setPerguntaAtual((prev) => prev + 1);
@@ -145,10 +142,11 @@ export default function Tela_Jogo() {
             setTempoRestante(10 * 1000);
         } else {
             navigate(`/resultados?pontuacao=${Math.round(pontuacaoAtualizada)}&total=${perguntasFiltradas.length}`, {
-                state: { resultados: resultadosAtualizados, quizId: quizId }
+                state: { resultados: resultadosAtualizados, quizId: quizId, nomequiz: quizNome }
             });
         }
     };
+
     const handleTempoEsgotado = () => {
         if (mostrarResultado) return;
 
@@ -162,14 +160,12 @@ export default function Tela_Jogo() {
             acertou: false
         }
         const todosResultados = [...resultados, novoResultado];
-        // garantir que resultados já inclui o último antes de avançar/navegar
         setResultados(todosResultados);
 
         setTimeout(() => {
             handleProxima(todosResultados, pontuacao);
         }, 2000);
     };
-
 
     const getDificuldadeValue = (dificuldade) => {
         switch (dificuldade) {
