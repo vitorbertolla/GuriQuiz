@@ -4,22 +4,26 @@
     background-repeat: no-repeat; 
     background-position: center;
     image-rendering: pixelated;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     justify-content: center;
     display: flex;
     align-items: center;
+    padding: 20px;
 }
 
 .container {
-    height: 90vh;
-    width: 90VH;
+    height: auto;
+    min-height: 90vh;
+    width: 100%;
+    max-width: 90vh;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 70px;
+    padding: 20px;
 }
 
 .dica {
@@ -58,9 +62,15 @@
 .header {
     display: flex;
     gap: 30px;
-    width: 70vw;
+    width: 100%;
+    max-width: 70vw;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+}
+
+.info {
+    width: 100%;
 }
 
 .info h1 {
@@ -86,13 +96,12 @@
 
 .alternativas {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    width: 60vw;
+    width: 100%;
+    max-width: 60vw;
     align-items: center;
 }
-
-
 
 .alternativaLetra {
     background-color: rgb(29, 70, 216);
@@ -102,6 +111,7 @@
     font-size: 25px;
     text-align: center;
     border: 5px solid white;
+    flex-shrink: 0;
 }
 
 .alternativaLetra:hover{
@@ -109,17 +119,15 @@
 }
 
 .alternativaBtn {
-    width: 28vw;
+    width: 100%;
     padding: 20px;
-
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* letra + texto alinhado */
+    justify-content: flex-start;
     gap: 10px;
     text-align: left;
     transition: 0.2s;
 }
-
 
 .alternativaBtn:hover {
     scale: 1.05;
@@ -155,7 +163,6 @@
   box-shadow: 0 6px 14px rgba(255, 75, 75, 0.5);
 }
 
-
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -167,9 +174,9 @@
     justify-content: center;
     align-items: center;
     z-index: 999;
+    padding: 20px;
 }
 
-/* Janela do modal */
 .modalContent {
     background: white;
     color: black;
@@ -185,7 +192,6 @@
     gap: 20px;
 }
 
-/* Botão de fechar */
 .modalClose {
     position: absolute;
     top: 10px;
@@ -206,4 +212,168 @@
 
 .carregandodica {
     padding: 10px;
+}
+
+/* RESPONSIVIDADE */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .container {
+        gap: 40px;
+        max-width: 95%;
+    }
+
+    .header {
+        max-width: 90vw;
+        gap: 20px;
+    }
+
+    .dica,
+    .dificuldadeContainer label {
+        min-width: 20vw;
+        width: 20vw;
+    }
+
+    .dificuldadeContainer progress {
+        width: 20vw;
+    }
+
+    .alternativas {
+        max-width: 80vw;
+        gap: 15px;
+    }
+
+    .alternativaLetra {
+        padding: 20px;
+        font-size: 20px;
+    }
+}
+
+/* Celulares grandes */
+@media (max-width: 768px) {
+    .background {
+        padding: 10px;
+    }
+
+    .container {
+        gap: 30px;
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+        max-width: 95vw;
+    }
+
+    .dica,
+    .dificuldadeContainer label {
+        min-width: 200px;
+        width: 80vw;
+        max-width: 300px;
+    }
+
+    .dificuldadeContainer progress {
+        width: 80vw;
+        max-width: 300px;
+    }
+
+    .info h1 {
+        font-size: 14px;
+        padding: 15px;
+    }
+
+    .info h2 {
+        font-size: 30px;
+    }
+
+    .alternativas {
+        grid-template-columns: 1fr;
+        max-width: 90vw;
+        gap: 15px;
+    }
+
+    .alternativaBtn {
+        padding: 15px;
+    }
+
+    .alternativaLetra {
+        padding: 15px;
+        font-size: 18px;
+        border: 3px solid white;
+    }
+
+    .modalContent {
+        width: 85%;
+        padding: 30px;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+    .container {
+        gap: 20px;
+    }
+
+    .header {
+        gap: 10px;
+    }
+
+    .dica {
+        font-size: 14px;
+        padding: 8px;
+        max-height: 50px;
+    }
+
+    .dificuldadeContainer label {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .dificuldadeContainer progress {
+        height: 25px;
+    }
+
+    .info h1 {
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .info h2 {
+        font-size: 24px;
+    }
+
+    .pontuacao span {
+        font-size: 14px;
+    }
+
+    .alternativaBtn {
+        padding: 12px;
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    .alternativaLetra {
+        padding: 12px;
+        font-size: 16px;
+        border: 2px solid white;
+    }
+
+    .modalContent {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .modalContent h2 {
+        font-size: 20px;
+    }
+
+    .modalContent p {
+        font-size: 14px;
+    }
+
+    .carregandodica {
+        font-size: 12px;
+        padding: 8px;
+    }
 }

@@ -1,5 +1,5 @@
 .container {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -9,6 +9,7 @@
     background-repeat: no-repeat; 
     background-position: center;
     image-rendering: pixelated;
+    padding: 20px;
 }
 
 .container * {
@@ -17,8 +18,10 @@
 
 .main {
     display: flex;
-    height: 85vh;
-    width: 85vw;
+    height: auto;
+    min-height: 85vh;
+    width: 100%;
+    max-width: 85vw;
     justify-content: flex-start;
     align-items: center;
     gap: 110px;
@@ -27,7 +30,8 @@
 .title {
     color: white;
     font-size: 70px;
-    height: 85vh;
+    height: auto;
+    min-height: 85vh;
     width: 40vw;
     align-self: flex-start;
 }
@@ -40,7 +44,8 @@
 
 .resultado {
     background-color: #2e1b5b;
-    height: 35vh;
+    height: auto;
+    min-height: 35vh;
     width: 20vw;
     color: white;
     padding: 30px;
@@ -75,4 +80,208 @@
 .resultItem {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* RESPONSIVIDADE */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .main {
+        gap: 60px;
+        max-width: 90vw;
+    }
+
+    .title {
+        font-size: 55px;
+        width: 45vw;
+    }
+
+    .pontuacao {
+        font-size: 25px;
+        padding-right: 50px;
+    }
+
+    .resultado {
+        width: 25vw;
+        padding: 25px;
+    }
+
+    .btnMenu {
+        width: 22vw;
+    }
+
+    .btnOverlay {
+        width: 25vw;
+    }
+}
+
+/* Tablets pequenos */
+@media (max-width: 900px) {
+    .main {
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+        justify-content: center;
+        min-height: auto;
+    }
+
+    .title {
+        font-size: 50px;
+        width: 80vw;
+        min-height: auto;
+        text-align: center;
+    }
+
+    .pontuacao {
+        font-size: 24px;
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .resultado {
+        width: 70vw;
+        max-width: 500px;
+        padding: 25px;
+    }
+
+    .btnMenu {
+        width: 60vw;
+        max-width: 400px;
+    }
+
+    .btnOverlay {
+        width: 70vw;
+        max-width: 500px;
+    }
+}
+
+/* Celulares grandes */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .main {
+        gap: 30px;
+        max-width: 95vw;
+    }
+
+    .title {
+        font-size: 40px;
+        width: 85vw;
+    }
+
+    .pontuacao {
+        font-size: 22px;
+    }
+
+    .resultado {
+        width: 80vw;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .btnMenu {
+        width: 70vw;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .btnOverlay {
+        width: 80vw;
+    }
+}
+
+/* Celulares médios */
+@media (max-width: 600px) {
+    .title {
+        font-size: 35px;
+    }
+
+    .pontuacao {
+        font-size: 20px;
+    }
+
+    .resultado {
+        width: 85vw;
+        padding: 18px;
+        font-size: 14px;
+    }
+
+    .btnMenu {
+        width: 75vw;
+        font-size: 15px;
+    }
+
+    .btnOverlay {
+        width: 85vw;
+    }
+
+    .resultItem {
+        font-size: 14px;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .main {
+        gap: 20px;
+    }
+
+    .title {
+        font-size: 28px;
+        width: 90vw;
+    }
+
+    .pontuacao {
+        font-size: 18px;
+    }
+
+    .resultado {
+        width: 90vw;
+        padding: 15px;
+        font-size: 13px;
+    }
+
+    .btnMenu {
+        width: 80vw;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btnOverlay {
+        width: 90vw;
+        padding: 8px;
+    }
+
+    .resultItem {
+        font-size: 13px;
+        gap: 8px;
+    }
+}
+
+/* Celulares muito pequenos */
+@media (max-width: 360px) {
+    .title {
+        font-size: 24px;
+    }
+
+    .pontuacao {
+        font-size: 16px;
+    }
+
+    .resultado {
+        padding: 12px;
+        font-size: 12px;
+    }
+
+    .btnMenu {
+        font-size: 13px;
+        padding: 8px;
+    }
 }

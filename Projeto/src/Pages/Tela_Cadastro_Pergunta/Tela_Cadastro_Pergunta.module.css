@@ -15,7 +15,6 @@
 }
 
 .containerEdit {
-    /* Mesmo estilo de layout, mas sem o background image */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +28,7 @@
     background-color: #9cdbff;
     border: 7px solid #2a2d74;
     border-radius: 30px;
-    max-width: 950px; /* Largura máxima para desktop */
+    max-width: 950px;
     width: 100%;
     min-height: 80vh;
     display: flex;
@@ -93,7 +92,7 @@
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Alinha o formulário no topo */
+    align-items: flex-start;
 }
 
 .tela-cadastro-pergunta__form {
@@ -102,14 +101,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px; /* Espaçamento entre as seções do formulário */
+    gap: 25px;
 }
 
 /* LINHA PRINCIPAL DE INPUTS */
 .tela-cadastro-pergunta__form-row {
     display: flex;
-    flex-direction: row; /* Padrão em linha para telas grandes */
-    flex-wrap: wrap; /* Permite que os itens quebrem */
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
@@ -129,13 +128,13 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 10px rgba(42, 45, 116, 0.1);
     box-sizing: border-box;
-    flex-grow: 1; /* Permite que o elemento cresça */
-    min-width: 180px; /* Largura mínima em telas grandes */
+    flex-grow: 1;
+    min-width: 180px;
 }
 
 .input-pergunta {
-    flex-basis: 100%; /* Ocupa a linha inteira */
-    max-width: 600px; /* Limite na largura */
+    flex-basis: 100%;
+    max-width: 600px;
 }
 
 .selects-wrapper {
@@ -148,7 +147,7 @@
 }
 
 .form-select {
-    flex: 1; /* Divide o espaço entre os dois selects */
+    flex: 1;
     max-width: 280px;
     cursor: pointer;
     appearance: none;
@@ -311,120 +310,158 @@
 
 /* ======== MEDIA QUERIES ======== */
 
-/* Telas de tablet e menores (max-width 768px) */
-@media (max-width: 768px) {
+/* Tablets */
+@media (max-width: 1024px) {
     .tela-cadastro-pergunta {
-        padding: 20px 15px;
-        min-height: auto;
+        padding: 20px 25px;
     }
 
     .tela-cadastro-pergunta__title {
-        /* Garante que o título se ajuste bem */
-        font-size: clamp(20px, 5vw, 28px);
-        padding: 10px 20px;
+        font-size: clamp(22px, 4vw, 32px);
     }
 
-    /* Ajusta a posição do botão EXIT para o canto superior esquerdo do container */
+    .exit-icon {
+        height: 55px;
+    }
+}
+
+/* Telas de tablet e menores */
+@media (max-width: 768px) {
+    .container,
+    .containerEdit {
+        padding: 15px;
+    }
+
+    .tela-cadastro-pergunta {
+        padding: 20px 20px;
+    }
+
+    .tela-cadastro-pergunta__header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
     .tela-cadastro-pergunta__exit-link {
-        position: absolute;
-        top: 15px; /* Distância do topo */
-        left: 15px; /* Distância da esquerda */
+        position: static;
         transform: none;
+        align-self: flex-start;
     }
 
     .exit-icon {
         height: 50px;
     }
 
-    /* FORÇA O EMPILHAMENTO vertical dos inputs */
+    .tela-cadastro-pergunta__title {
+        width: 100%;
+        font-size: clamp(20px, 5vw, 28px);
+        padding: 10px 20px;
+        border-width: 5px;
+        align-self: center;
+    }
+
     .tela-cadastro-pergunta__form-row {
         flex-direction: column;
         gap: 15px;
-        width: 100%; /* Garante que o row ocupe toda a largura */
     }
 
-    /* Aplica a largura aos inputs e selects por classe, não genericamente */
     .input-pergunta {
         width: 100%;
-        max-width: 350px; /* Limite o tamanho mesmo com width: 100% */
+        max-width: 100%;
     }
 
     .selects-wrapper {
-        flex-direction: column; /* Empilha selects */
+        flex-direction: column;
         gap: 15px;
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
     }
 
     .form-select {
         width: 100%;
-        max-width: none; /* Remove o limite de max-width anterior para que ocupe o selects-wrapper */
-    }
-    
-    /* Centraliza os botões */
-    .alternativas-btn-wrapper {
-        width: 100%;
+        max-width: 100%;
     }
     
     .btn-alternativas {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
     }
 
-    /* Empilha os botões de ação e centraliza-os */
     .buttons-low,
     .buttons-edit {
         flex-direction: column;
         gap: 15px;
         width: 100%;
-        align-items: center; /* Centraliza os botões empilhados */
     }
 
     .btn-acao,
     .btn-cancelar {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
         padding: 15px 20px;
     }
 }
 
-/* Celulares pequenos (max-width 480px) */
+/* Celulares pequenos */
 @media (max-width: 480px) {
+    .container,
+    .containerEdit {
+        padding: 10px;
+    }
+
     .tela-cadastro-pergunta {
-        padding: 15px 10px;
+        padding: 15px 15px;
         border-width: 5px;
     }
 
-    .tela-cadastro-pergunta__title {
-        font-size: 20px; /* Um pouco menor para caber */
-        border-width: 4px;
-        padding: 8px 15px;
-    }
-
-    .tela-cadastro-pergunta__exit-link {
-        top: 10px;
-        left: 10px;
+    .tela-cadastro-pergunta__header {
+        gap: 12px;
     }
 
     .exit-icon {
         height: 40px;
     }
 
-    .input-pergunta,
-    .selects-wrapper,
-    .btn-alternativas,
-    .btn-acao,
-    .btn-cancelar {
-        /* Limita a largura máxima para que não fiquem muito grandes em dispositivos pequenos */
-        max-width: 280px; 
+    .tela-cadastro-pergunta__title {
+        font-size: 18px;
+        border-width: 4px;
+        padding: 8px 15px;
     }
 
-    /* Ajuste para o modal em telas minúsculas */
+    .input-pergunta,
+    .form-select {
+        font-size: 14px;
+        padding: 8px 12px;
+        min-height: 50px;
+    }
+
+    .btn-alternativas {
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .btn-acao,
+    .btn-cancelar {
+        font-size: 15px;
+        padding: 12px 18px;
+    }
+
     .alternativas {
-        padding: 15px;
+        padding: 20px 15px;
     }
     
+    .alternativaItem {
+        gap: 10px;
+    }
+
     .alternativaItem input[type="text"] {
         font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+
+    .ModalConfirmar {
+        font-size: 1rem;
+        padding: 10px;
     }
 }

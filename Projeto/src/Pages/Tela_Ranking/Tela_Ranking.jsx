@@ -146,11 +146,10 @@ export default function Tela_Ranking() {
             ))
           )}
         </div>
-        {/* ===================== GRÁFICO ===================== */}
         <Grafico quizSelecionado={quizSelecionado}/> 
 
 
-        <button className={styles.btnMenu} onClick={() => window.location.href = "/"}>
+        <button className={styles.btnMenu} onClick={() => window.location.href = "/menu"}>
           Menu
         </button>
 
