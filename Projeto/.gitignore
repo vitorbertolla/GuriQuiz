@@ -23,16 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-# Ignora todas as variações do .env
 .env
-.env.local
-.env.development
-.env.production
-.env.test
-.env.staging
-
-# Ignora também arquivos com valores específicos
-.env.*.local
-
-# Exceto um exemplo (opcional)
-!.env.example
