@@ -1,5 +1,4 @@
 import { auth, db } from "./firebaseConfig";
-import { Link } from "react-router-dom";
 import { 
   signInWithPopup, 
   GoogleAuthProvider,
