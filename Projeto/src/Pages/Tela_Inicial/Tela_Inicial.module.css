@@ -13,7 +13,7 @@ button {
 .containerPrincipal {
   height: 100vh;
   width: 100%;
-  background-image: url("/images/BackgroundInicio.jpeg");
+  background-image: url("/images/backgroundCeu.jpeg");
   background-size: cover;
   background-repeat: no-repeat; 
   background-position: center;
