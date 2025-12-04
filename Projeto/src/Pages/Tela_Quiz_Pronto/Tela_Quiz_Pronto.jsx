@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import styles from "./Tela_Quiz_Pronto.module.css";
 import Tela_ListaQuiz from "../Tela_Admin/Tela_ListaQuiz.jsx";
 import { useState, useEffect } from "react";
@@ -7,7 +7,6 @@ import { db } from "../../services/firebaseConfig.js";
 
 export default function Tela_Quiz_Pronto() {
     const [quizzes, setQuizzes] = useState([]);
-    const navigate = useNavigate();
 
     useEffect(() => {
         async function carregarQuizzes() {
@@ -42,7 +41,7 @@ export default function Tela_Quiz_Pronto() {
                     key={q.id}
                     style={{ cursor: "pointer" }}
                 >
-                    <Tela_ListaQuiz quiz={q} editar={false} />
+                    <Tela_ListaQuiz quiz={q} editar={false} id={q.id} />
                 </div>
       ))}
             </div>
