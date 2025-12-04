@@ -125,12 +125,15 @@
 /*         RESPOSTA IA            */
 /* ============================= */
 .iaResposta {
-  width: 30vw;
-  height: 30vh;
+  width: 25vw;
+  height: 50vh;
   position: fixed;
   background-color: white;
-  border: 3px solid #2a2d74;
+  border: 7px solid #2a2d74;
   border-radius: 10px;
+  top: 30%;
+  right: 2%;
+  overflow: auto;
 }
 
 .iaResposta p {
@@ -163,8 +166,11 @@
   }
 
   .iaResposta {
-    width: 50vw;
-    height: 30vh;
+    width: 60vw;
+    height: 15vh;
+    position: absolute;
+    top: 20px;
+    left: 20%;
   }
 }
 
@@ -196,7 +202,8 @@
 
   .iaResposta {
     width: 70vw;
-    height: 35vh;
+    height: 18vh;
+    left: 15%;
   }
 }
 

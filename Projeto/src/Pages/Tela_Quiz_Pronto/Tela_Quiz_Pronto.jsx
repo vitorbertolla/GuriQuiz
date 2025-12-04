@@ -40,7 +40,6 @@ export default function Tela_Quiz_Pronto() {
             {quizzes.map((q) => (
                 <div
                     key={q.id}
-                    onClick={() => navigate(`/jogo?id=${q.id}`)}
                     style={{ cursor: "pointer" }}
                 >
                     <Tela_ListaQuiz quiz={q} editar={false} />

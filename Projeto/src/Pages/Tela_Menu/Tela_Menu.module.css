@@ -251,9 +251,10 @@
     .telaMenuMain {
         border-width: 5px;
         border-radius: 20px;
-        height: 65vh;
+        height: 100vh;
         padding: 20px;
         width: 96%;
+        overflow: auto;
     }
     
     .telaMenuHeader {

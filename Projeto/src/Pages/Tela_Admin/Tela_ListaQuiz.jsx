@@ -50,7 +50,7 @@ const ListaQuiz = ({ quiz, removerQuiz, editarQuiz, adm}) => {
 
       {!adm && (
         <Link to="/jogo">
-          <button className={styles.btn}>
+          <button onClick={() => navigate(`/jogo?id=${q.id}`)} className={styles.btn}>
             Jogar
           </button>
         </Link>
