@@ -4,7 +4,7 @@
 
 
     export async function enviarPrompt(pergunta, setDica, setCarregando) {
-            const apikey = "AIzaSyAmLTtMthswzm5R4ER8ENHjl_93rtMQ_rQ"
+            const apikey = import.meta.env.VITE_API_KEY
             if (!pergunta) return;
             setCarregando(true)
             setDica("")

@@ -9,7 +9,7 @@ export default function IACria({ setDescricao, setMostrarIACreate, setDificuldad
     const [prompt, setPrompt] = useState("")
     const [resposta, setResposta] = useState("")
     const [carregando, setCarregando] = useState(false)
-    const apikey = "AIzaSyAmLTtMthswzm5R4ER8ENHjl_93rtMQ_rQ"
+    const apikey = import.meta.env.VITE_API_KEY
 
     const enviarPrompt = async () => {
         if (!prompt) return;
