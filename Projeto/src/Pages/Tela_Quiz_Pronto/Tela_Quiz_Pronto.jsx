@@ -36,14 +36,16 @@ export default function Tela_Quiz_Pronto() {
                 />
             </Link>
             <h1>Quizzes Cadastrados</h1>
-            {quizzes.map((q) => (
-                <div
-                    key={q.id}
-                    style={{ cursor: "pointer" }}
-                >
-                    <Tela_ListaQuiz quiz={q} editar={false} id={q.id} />
-                </div>
-      ))}
+            <div className= {styles.quizescadastrados}>
+                {quizzes.map((q) => (
+                    <div
+                        key={q.id}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <Tela_ListaQuiz quiz={q} editar={false} id={q.id} />
+                    </div>
+                      ))}
+            </div>
             </div>
     );
 }

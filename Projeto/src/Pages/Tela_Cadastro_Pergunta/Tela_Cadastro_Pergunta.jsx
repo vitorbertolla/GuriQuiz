@@ -151,7 +151,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                     type="submit"
                                     className={styles['btn-acao']}
                                 >
-                                    CONFIRMAR
+                                    CADASTRAR
                                 </button>
                             </div>
                         ) : (

@@ -103,3 +103,8 @@
 .btnJogar:hover {
   transform: scale(1.08);
 }
+
+.quizescadastrados {
+  height: 70vh;
+  overflow: auto;
+}
