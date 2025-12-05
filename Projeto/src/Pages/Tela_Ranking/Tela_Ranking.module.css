@@ -70,7 +70,7 @@
 }
 
 /* ============================= */
-/* ÁREA RANKING + GRÁFICO */
+/* ÁREA DO RANKING + GRÁFICO */
 /* ============================= */
 .contentArea {
     width: 100%;
@@ -82,37 +82,60 @@
 }
 
 /* ============================= */
-/* RANKING (MUITO MAIS VISÍVEL) */
-/* ============================= */
+/* RANKING */
 .resultado {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(6px);
     border: 2px solid rgba(255, 255, 255, 0.25);
-
     border-radius: 18px;
-    width: 100%;
-    max-width: 500px;  /* <<< MAIOR AGORA */
-    padding: 35px 28px;
 
+    width: 100%;
+    max-width: 500px;
+
+    padding: 35px 28px;
     color: #fff;
+
     display: flex;
     flex-direction: column;
     gap: 18px;
 
-    max-height: 75vh;  /* <<< AUMENTEI A ALTURA */
+    max-height: 75vh;
     overflow-y: auto;
 
     box-shadow: 0 6px 30px rgba(0,0,0,0.55);
 
-    font-size: 22px;   /* <<< LETRAS MAIORES */
+    font-size: 22px;
 }
 
-/* Cada item da tabela */
+/* ===== Scrollbar moderna (inserida aqui) ===== */
+.resultado::-webkit-scrollbar {
+    width: 10px;
+}
+
+.resultado::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.resultado::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(6px);
+    transition: background 0.2s;
+}
+
+.resultado::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+/* ============================================= */
+
 .resultItem {
     background: rgba(255, 255, 255, 0.18);
     padding: 15px 20px;
     border-radius: 10px;
-    font-size: 22px; /* <<< MAIOR PARA MELHOR VISIBILIDADE */
+    font-size: 22px;
     display: flex;
     justify-content: space-between;
     transition: 0.15s;
@@ -124,8 +147,7 @@
 }
 
 /* ============================= */
-/* GRÁFICO (MAIOR E MAIS DESTACADO) */
-/* ============================= */
+/* GRÁFICO */
 .graficoContainer {
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(6px);
@@ -133,7 +155,7 @@
 
     border-radius: 18px;
     width: 100%;
-    max-width: 650px; /* <<< AUMENTEI MUITO */
+    max-width: 650px;
 
     padding: 35px 28px;
     display: flex;
@@ -144,7 +166,7 @@
 }
 
 .graficoTitle {
-    font-size: 26px;   /* <<< MAIOR */
+    font-size: 26px;
     font-weight: bold;
     color: white;
     margin-bottom: 22px;
@@ -152,12 +174,10 @@
     white-space: nowrap;
 }
 
-/* Chart agora ocupa mais espaço */
 .grafico {
     width: 100%;
-    height: 420px !important;  /* <<< VISUALIZAÇÃO MUITO MELHOR */
+    height: 420px !important;
 }
-
 
 /* ============================= */
 /* BOTÃO MENU */
@@ -180,44 +200,81 @@
 }
 
 /* ============================= */
-/* MEDIA QUERIES */
+/* MEDIA QUERIES – RESPONSIVIDADE REAL */
 /* ============================= */
 
-/* Tablets */
-@media (max-width: 900px) {
+/* 1100px — Alinha tudo em coluna */
+@media (max-width: 1100px) {
+    .contentArea {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
 
     .resultado,
     .graficoContainer {
-        max-height: 50vh;
-    }
-
-    .resultItem {
-        font-size: 18px;
-        padding: 12px;
+        max-width: 100%;
     }
 }
 
-/* Celulares */
-@media (max-width: 600px) {
+/* 900px — Ajusta tamanhos médios */
+@media (max-width: 900px) {
+    .resultado,
+    .graficoContainer {
+        max-height: 55vh;
+    }
 
+    .resultItem {
+        font-size: 20px;
+        padding: 12px 16px;
+    }
+}
+
+/* 768px — Tablets */
+@media (max-width: 768px) {
     .main {
+        padding: 25px;
+    }
+
+    .title {
+        font-size: clamp(26px, 7vw, 42px);
+    }
+
+    .graficoContainer {
         padding: 25px 18px;
     }
 
-    .resultado {
-        max-height: 45vh;
-        padding: 15px;
+    .graficoTitle {
+        font-size: 22px;
+        text-align: center;
+        white-space: normal;
     }
 
+    .grafico {
+        height: 350px !important;
+    }
+
+    .resultado {
+        font-size: 18px;
+        padding: 22px;
+    }
+}
+
+/* 600px — Celulares */
+@media (max-width: 600px) {
     .resultItem {
         flex-direction: column;
         text-align: center;
         gap: 4px;
-        font-size: 16px;
+        font-size: 17px;
     }
 
     .graficoContainer {
-        padding: 18px;
+        padding: 20px 14px;
+    }
+
+    .grafico {
+        height: 300px !important;
     }
 
     .btnMenu {
@@ -226,141 +283,42 @@
     }
 }
 
-@media (max-width: 768px) {
-    .resultado {
-        max-width: 100%;
+/* 480px — Celulares pequenos */
+@media (max-width: 480px) {
+    .graficoTitle {
         font-size: 20px;
-        padding: 25px;
+    }
+
+    .resultado {
+        font-size: 16px;
+        padding: 18px;
     }
 
     .resultItem {
-        font-size: 18px;
-        padding: 12px 16px;
+        font-size: 15px;
     }
 
-    .graficoContainer {
-        max-width: 100%;
-        padding: 25px;
-    }
-
-    .grafico {
-        height: 320px !important;
+    .btnOverlay select {
+        font-size: 16px;
+        padding: 10px 14px;
     }
 }
 
-@media (max-width: 480px) {
-    .resultado {
-        font-size: 18px;
-    }
-
-    .resultItem {
-        font-size: 16px;
-    }
-
+/* 380px — Celulares muito pequenos */
+@media (max-width: 380px) {
     .grafico {
         height: 260px !important;
-    }
-}
-
-
-/* Celulares muito pequenos */
-@media (max-width: 380px) {
-    .resultItem {
-        font-size: 14px;
     }
 
     .graficoTitle {
         font-size: 18px;
     }
 
+    .resultItem {
+        font-size: 14px;
+    }
+
     .btnMenu {
         font-size: 14px;
     }
-}
-
-/* ============================= */
-/* RESPONSIVIDADE GERAL */
-/* ============================= */
-@media (max-width: 1100px) {
-  .contentArea {
-      flex-direction: column;
-      align-items: center;
-      gap: 25px;
-  }
-
-  .resultado, 
-  .graficoContainer {
-      max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .main {
-      padding: 25px 20px;
-  }
-
-  .title {
-      font-size: clamp(26px, 7vw, 42px);
-  }
-
-  .graficoContainer {
-      padding: 25px 16px;
-  }
-
-  .graficoTitle {
-      font-size: 22px !important;
-      text-align: center;
-      white-space: normal;
-  }
-
-  .grafico {
-      height: 360px !important;
-  }
-
-  /* Rótulos do eixo X não sobrepõem */
-  .recharts-cartesian-axis-tick-value {
-      font-size: 11px !important;
-  }
-
-  .resultado {
-      font-size: 18px;
-      padding: 25px 18px;
-  }
-
-  .resultItem {
-      font-size: 18px;
-      padding: 12px 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .graficoContainer {
-      padding: 20px 12px;
-  }
-
-  .grafico {
-      height: 300px !important;
-  }
-
-  .graficoTitle {
-      font-size: 20px !important;
-  }
-
-  .btnOverlay select {
-      font-size: 16px;
-      padding: 10px 14px;
-  }
-
-  .resultado {
-      font-size: 16px;
-      padding: 20px 16px;
-  }
-
-  .resultItem {
-      font-size: 16px;
-  }
-
-  .contentArea {
-      gap: 20px;
-  }
 }

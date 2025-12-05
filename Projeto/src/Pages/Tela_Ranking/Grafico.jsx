@@ -365,7 +365,7 @@ export default function Grafico() {
     ? `⚡ ${
         quizzes.find((q) => q.id === quizSelecionadoGrafico)?.nome || "Ranking"
       } ⚡`
-    : "⚡ Ranking Geral ⚡";
+    : "⚡ Graficos ⚡";
 
   return (
     <div className={styles.graficoContainer}>
@@ -490,7 +490,7 @@ export default function Grafico() {
               height={80}
               tick={{
                 fill: "#ffffff",
-                fontSize: 13,
+                fontSize: 9,
                 fontWeight: "bold",
               }}
               tickLine={false}
