@@ -195,7 +195,7 @@ export default function Tela_Jogo() {
                         <button
                             className={styles.dica}
                             onClick={() => {
-                                enviarPrompt(pergunta.descricao, setDica, setCarregando)
+                                enviarPrompt(pergunta.descricao, pergunta.alternativas, setDica, setCarregando)
                                 setCarregando(true)
                             }}
                             disabled={carregando}

@@ -35,7 +35,7 @@ export default function Tela_Quiz_Pronto() {
                     alt="Sair"
                 />
             </Link>
-            <h1>Quizzes Cadastrados</h1>
+            <h1 className={styles.titulo}>Quizzes Cadastrados</h1>
             <div className= {styles.quizescadastrados}>
                 {quizzes.map((q) => (
                     <div

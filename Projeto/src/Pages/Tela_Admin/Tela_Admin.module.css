@@ -1,3 +1,9 @@
+
+body{
+    background-color: #cabebe;
+    margin: 0;
+    padding: 0;
+}
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -9,7 +15,6 @@
   text-align: center;
   margin-bottom: 20px;
   font-size: 2rem;
-  color: #333;
 }
 
 .botoesTopo {
