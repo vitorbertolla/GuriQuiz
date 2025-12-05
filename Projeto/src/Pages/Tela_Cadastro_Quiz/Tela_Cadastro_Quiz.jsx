@@ -5,6 +5,7 @@ import { usePerguntas } from "../../services/crudPerguntas";
 import SelectMateria from '../Componentes/SelectMateria.jsx'
 import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 import { Link } from 'react-router-dom';
+import {SearchP, searchPergunta} from "../Componentes/Search.jsx";
 
 
 export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClose,adicionarQuiz: adicionarQuizProp,editarQuiz: editarQuizProp})  {
@@ -17,6 +18,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
     const [dificuldadeQuiz, setDificuldadeQuiz] = useState(quizInicial?.dificuldade || "");
     const [materiaQuiz, setMateriaQuiz] = useState(quizInicial?.materia || "");
     const [perguntasSelecionadas, setPerguntasSelecionadas] = useState(quizInicial?.perguntas || []);
+    const [perguntasSearch, setPerguntaSearch] = useState("")
 
     function alternarPergunta(pergunta) {
         const jaSelecionada = perguntasSelecionadas.some(p => p.id === pergunta.id)
@@ -101,8 +103,11 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
                     </div>
 
                     <div className={styles.perguntasDisponiveis}>
-                        <h3>Perguntas Disponíveis</h3>
-                        {perguntas.map((p) => (
+                        <h3>Perguntas Disponíveis ({perguntas.length})</h3>
+                        <SearchP 
+                            quizzesPergunta={perguntasSearch}
+                            setPerguntasSearch={setPerguntaSearch}/>
+                        {searchPergunta(perguntasSearch, perguntas).map((p) => (
                         <div
                             key={p.id}
                             className={`${styles.perguntaItem} ${

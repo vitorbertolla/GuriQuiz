@@ -4,9 +4,12 @@ import Tela_ListaQuiz from "../Tela_Admin/Tela_ListaQuiz.jsx";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../services/firebaseConfig.js";
+import {SearchQ, searchQuizz} from "../Componentes/Search.jsx";
 
 export default function Tela_Quiz_Pronto() {
     const [quizzes, setQuizzes] = useState([]);
+    const [quizzesSearch, setQuizzesSearch] = useState("");
+    
 
     useEffect(() => {
         async function carregarQuizzes() {
@@ -35,9 +38,15 @@ export default function Tela_Quiz_Pronto() {
                     alt="Sair"
                 />
             </Link>
-            <h1 className={styles.titulo}>Quizzes Cadastrados</h1>
+            <h1 className={styles.titulo}>Quizzes Cadastrados ({quizzes.length})</h1>
+            <SearchQ
+                quizzesSearch={quizzesSearch}
+                setQuizzesSearch={setQuizzesSearch}
+              
+            />
+
             <div className= {styles.quizescadastrados}>
-                {quizzes.map((q) => (
+                {searchQuizz(quizzesSearch, quizzes).map((q) => (
                     <div
                         key={q.id}
                         style={{ cursor: "pointer" }}
