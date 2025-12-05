@@ -127,7 +127,7 @@ export default function Grafico() {
         gap: "15px"
       }}>
         <h2 className={styles.graficoTitle} style={{ margin: 0 }}>
-          🏆 Top Jogadores 🏆
+          🏆 Gráfico de jogadores 🏆
         </h2>
 
         {/* Filtro independente do gráfico */}

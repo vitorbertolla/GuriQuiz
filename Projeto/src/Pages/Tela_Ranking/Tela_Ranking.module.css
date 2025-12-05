@@ -144,10 +144,12 @@
 }
 
 .graficoTitle {
-    font-size: 28px;   /* <<< MAIOR */
+    font-size: 26px;   /* <<< MAIOR */
     font-weight: bold;
     color: white;
     margin-bottom: 22px;
+    text-align: left;
+    white-space: nowrap;
 }
 
 /* Chart agora ocupa mais espaço */
