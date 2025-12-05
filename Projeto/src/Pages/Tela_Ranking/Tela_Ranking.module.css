@@ -144,10 +144,12 @@
 }
 
 .graficoTitle {
-    font-size: 28px;   /* <<< MAIOR */
+    font-size: 26px;   /* <<< MAIOR */
     font-weight: bold;
     color: white;
     margin-bottom: 22px;
+    text-align: left;
+    white-space: nowrap;
 }
 
 /* Chart agora ocupa mais espaço */
@@ -274,4 +276,91 @@
     .btnMenu {
         font-size: 14px;
     }
+}
+
+/* ============================= */
+/* RESPONSIVIDADE GERAL */
+/* ============================= */
+@media (max-width: 1100px) {
+  .contentArea {
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+  }
+
+  .resultado, 
+  .graficoContainer {
+      max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+      padding: 25px 20px;
+  }
+
+  .title {
+      font-size: clamp(26px, 7vw, 42px);
+  }
+
+  .graficoContainer {
+      padding: 25px 16px;
+  }
+
+  .graficoTitle {
+      font-size: 22px !important;
+      text-align: center;
+      white-space: normal;
+  }
+
+  .grafico {
+      height: 360px !important;
+  }
+
+  /* Rótulos do eixo X não sobrepõem */
+  .recharts-cartesian-axis-tick-value {
+      font-size: 11px !important;
+  }
+
+  .resultado {
+      font-size: 18px;
+      padding: 25px 18px;
+  }
+
+  .resultItem {
+      font-size: 18px;
+      padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .graficoContainer {
+      padding: 20px 12px;
+  }
+
+  .grafico {
+      height: 300px !important;
+  }
+
+  .graficoTitle {
+      font-size: 20px !important;
+  }
+
+  .btnOverlay select {
+      font-size: 16px;
+      padding: 10px 14px;
+  }
+
+  .resultado {
+      font-size: 16px;
+      padding: 20px 16px;
+  }
+
+  .resultItem {
+      font-size: 16px;
+  }
+
+  .contentArea {
+      gap: 20px;
+  }
 }
