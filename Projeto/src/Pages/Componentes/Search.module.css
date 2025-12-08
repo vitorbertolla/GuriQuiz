@@ -1,0 +1,70 @@
+/* =============================== */
+/*  ESTILOS COMPARTILHADOS ENTRE QUIZ E PERGUNTA */
+/* =============================== */
+
+.searchContainer {
+    background: #ffffffcc;
+    border: 4px solid #2b4c7e;
+    border-radius: 10px;
+    padding: 18px 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 10px #0004;
+}
+
+/* INPUT (compartilhado) */
+.searchContainer input {
+    width: 90%;                   /* 🔥 Não ocupa 100% */
+    display: block;               
+    margin: 0 auto;               /* 🔥 Centraliza */
+    padding: 12px 14px;
+    border: 4px solid #2b2b2b;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    font-size: clamp(12px, 2.5vw, 16px);
+    image-rendering: pixelated;
+    outline: none;
+    transition: transform 0.2s ease;
+}
+
+.searchContainer input::placeholder {
+    color: #444;
+}
+
+.searchContainer input:focus {
+    transform: scale(1.03);
+}
+
+/* =============================== */
+/*  ESTILOS INDIVIDUAIS */
+/* =============================== */
+
+/* SEARCH NA TELA DE QUIZZES */
+.searchControlQuiz {
+    width: 70vh;
+    max-width: 95%;
+}
+
+/* SEARCH NA TELA DE PERGUNTAS */
+.searchControlPergunta {
+    width: 100%;
+    height: 90%;
+    left: -100%;
+}
+
+/* =============================== */
+/*  RESPONSIVIDADE */
+/* =============================== */
+
+@media (max-width: 600px) {
+    .searchContainer {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .searchContainer input {
+        padding: 10px;
+    }
+}

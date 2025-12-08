@@ -5,6 +5,7 @@ import { usePerguntas } from "../../services/crudPerguntas";
 import SelectMateria from '../Componentes/SelectMateria.jsx'
 import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
 import { Link } from 'react-router-dom';
+import {SearchP, searchPergunta} from "../Componentes/Search.jsx";
 
 
 export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClose,adicionarQuiz: adicionarQuizProp,editarQuiz: editarQuizProp})  {
@@ -17,6 +18,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
     const [dificuldadeQuiz, setDificuldadeQuiz] = useState(quizInicial?.dificuldade || "");
     const [materiaQuiz, setMateriaQuiz] = useState(quizInicial?.materia || "");
     const [perguntasSelecionadas, setPerguntasSelecionadas] = useState(quizInicial?.perguntas || []);
+    const [perguntasSearch, setPerguntaSearch] = useState("")
 
     function alternarPergunta(pergunta) {
         const jaSelecionada = perguntasSelecionadas.some(p => p.id === pergunta.id)
@@ -57,8 +59,6 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
         setMateriaQuiz("");
         setNomeQuiz("");
         setPerguntasSelecionadas([]);
-    
-
     }
 
     return (
@@ -66,7 +66,7 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
             <form onSubmit={submit}>
                 <div className={styles.telaMonarQuiz}>
                     <Link to="/menu">
-                        {!editar && (<button><img className={styles['exit-button']} src="/images/botaoExit.png" alt="" ></img></button>)}
+                        {!editar && (<button type="button"><img className={styles['exit-button']} src="/images/botaoExit.png" alt="Sair" /></button>)}
                     </Link>
                     <h2>{editar? "editar quiz" : "cadastro de quiz"}</h2>
 
@@ -101,29 +101,43 @@ export default function Tela_CRUD_Quiz({editar = false,quizInicial = null,onClos
                     </div>
 
                     <div className={styles.perguntasDisponiveis}>
-                        <h3>Perguntas Disponíveis</h3>
-                        {perguntas.map((p) => (
-                        <div
-                            key={p.id}
-                            className={`${styles.perguntaItem} ${
-                            perguntasSelecionadas.some(sel => sel.id === p.id)
-                                ? styles.selecionada
-                                : ''
-                            }`}
-                            onClick={() => alternarPergunta(p)}
-                        >
-                            <p>{p.descricao}</p>
-                            <small>{p.materia} — {p.dificuldade}</small>
+                        <h3>Perguntas Disponíveis ({perguntas.length})</h3>
+                        
+                        <div className={styles.searchButtonContainer}>
+                            <div className={styles.searchWrapper}>
+                                <SearchP 
+                                    quizzesPergunta={perguntasSearch}
+                                    setPerguntasSearch={setPerguntaSearch}
+                                />
+                            </div>
+                            <button className={styles.btnQuizInline} type='submit'>
+                                {editar ? "Salvar Alterações" : "Cadastrar Quiz"}
+                            </button>
                         </div>
-                        ))}
+
+                        <div className={styles.perguntasLista}>
+                            {searchPergunta(perguntasSearch, perguntas).map((p) => (
+                                <div
+                                    key={p.id}
+                                    className={`${styles.perguntaItem} ${
+                                        perguntasSelecionadas.some(sel => sel.id === p.id)
+                                            ? styles.selecionada
+                                            : ''
+                                    }`}
+                                    onClick={() => alternarPergunta(p)}
+                                >
+                                    <p>{p.descricao}</p>
+                                    <small>{p.materia} — {p.dificuldade}</small>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-
                     {editar && (
-                        <button onClick={onClose}>Cancelar edição</button>
+                        <button type="button" className={styles.btnQuiz} onClick={onClose}>
+                            Cancelar edição
+                        </button>
                     )}
-                    <button  className={styles.btnQuiz} type='submit' >{editar? "salvar alterações" : "cadastrar quiz"}</button>
-                
                 </div>
             </form>
         </div>

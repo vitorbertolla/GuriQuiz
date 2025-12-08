@@ -394,14 +394,15 @@
     .buttons-low,
     .buttons-edit {
         flex-direction: column;
-        gap: 15px;
-        width: 100%;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
     }
 
     .btn-acao,
     .btn-cancelar {
-        width: 100%;
-        max-width: 100%;
+        width: 70vw;
+        max-width: 90%;
         padding: 15px 20px;
     }
 }
