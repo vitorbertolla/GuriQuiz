@@ -147,7 +147,7 @@ export default function IACria({ setDescricao, setMostrarIACreate, setDificuldad
                             }}
                             className={styles.iaButton}
                         >
-                            {carregando ? "Gerando..." : "Gerar"}
+                            {carregando ? "Gerando" : "Gerar"}
                         </button>
                         <button
                             className={styles.iaConcluir}
