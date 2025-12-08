@@ -100,6 +100,7 @@ export default function IACria({ setDescricao, setMostrarIACreate, setDificuldad
         <div className={styles.overlayIa}>
             <div className={styles.iaContainer}>
 
+                <button className={styles.btnX}onClick={() => setMostrarIACreate(false)}>X</button>    
                 <h1 className={styles.iaTitle}>Gerador de Perguntas</h1>
 
                 <div className={styles.iaTextoBotao}>

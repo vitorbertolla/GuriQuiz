@@ -25,7 +25,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
 
     function submit(e) {
         e.preventDefault()
-        if (!descricao || !dificuldade || !materia) {
+        if ( descricao.trim() === "" || !dificuldade || !materia) {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
@@ -66,7 +66,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
         setCorreta('')
     }
     function confirmarAlternativas() {
-        if (!alternativaA || !alternativaB || !alternativaC || !alternativaD) {
+        if (alternativaA.trim() === "" || alternativaB.trim() === "" || alternativaC.trim() === "" || alternativaD.trim() === "") {
             alert('Por favor, preencha todas as alternativas antes de confirmar.');
             return;
         }else if (!correta) {
@@ -210,21 +210,24 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
 
                         {/* COMPONENTE IA */}
                         {mostrarIACreate &&(
-                            <IAcria 
-                            // ... (Props do IAcria permanecem as mesmas)
-                            setDescricao={setDescricao}
-                            setMostrarIACreate={setMostrarIACreate}
-                            setDificuldade={setDificuldade} 
-                            setMateria={setMateria}  
-                            materia={materia}
-                            dificuldade={dificuldade}
-                            setCorreta={setCorreta}
-                            setAlternativas={setAlternativas}
-                            setAlternativaA={setAlternativaA}
-                            setAlternativaB={setAlternativaB}
-                            setAlternativaC={setAlternativaC}
-                            setAlternativaD={setAlternativaD}
-                            />
+                            <div>
+                                
+                                <IAcria 
+                                // ... (Props do IAcria permanecem as mesmas)
+                                setDescricao={setDescricao}
+                                setMostrarIACreate={setMostrarIACreate}
+                                setDificuldade={setDificuldade} 
+                                setMateria={setMateria}  
+                                materia={materia}
+                                dificuldade={dificuldade}
+                                setCorreta={setCorreta}
+                                setAlternativas={setAlternativas}
+                                setAlternativaA={setAlternativaA}
+                                setAlternativaB={setAlternativaB}
+                                setAlternativaC={setAlternativaC}
+                                setAlternativaD={setAlternativaD}
+                                />
+                            </div>
                         )}
                     </form>
                 </main>
