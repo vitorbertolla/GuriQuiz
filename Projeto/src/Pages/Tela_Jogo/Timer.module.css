@@ -1,0 +1,63 @@
+/* CONTAINER */
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CÍRCULO DO TIMER */
+.timerCircle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, #3c4bff, #1b1f6b);
+  border: 4px solid rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 6px rgba(60,75,255,.2),
+    0 0 20px rgba(60,75,255,.6),
+    inset 0 0 12px rgba(0,0,0,.6);
+  animation: pulse 1s infinite alternate;
+}
+
+/* TEXTO DO TEMPO */
+.timerText {
+  font-family: 'brick-sans', monospace;
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow:
+    2px 2px 0 #000,
+    0 0 10px rgba(255,255,255,.6);
+}
+
+/* PULSO LEVE */
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+.urgente {
+  background: radial-gradient(circle at top, #ff5b5b, #8b0000);
+  box-shadow:
+    0 0 0 6px rgba(255,0,0,.25),
+    0 0 25px rgba(255,0,0,.8),
+    inset 0 0 12px rgba(0,0,0,.7);
+  animation: shake .3s infinite alternate;
+}
+
+@keyframes shake {
+  from { transform: translateX(-1px); }
+  to { transform: translateX(1px); }
+}
+@media (max-width: 480px) {
+  .timerCircle {
+    width: 70px;
+    height: 70px;
+  }
+
+  .timerText {
+    font-size: 26px;
+  }
+}

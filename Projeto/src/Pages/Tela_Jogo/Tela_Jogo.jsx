@@ -181,9 +181,10 @@ export default function Tela_Jogo() {
     };
 
     return (
-        <div className={styles.background}>
-            <div className={styles.container}>
-                <div className={styles.header}>
+    <div className={styles.background}>
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <div className={styles.topControls}>
                     <Timer
                         key={perguntaAtual}
                         tempoRestante={tempoRestante}
@@ -191,42 +192,16 @@ export default function Tela_Jogo() {
                         setTempoRestante={setTempoRestante}
                         onTempoEsgotado={handleTempoEsgotado}
                     />
-                    <div>
-                        <button
-                            className={styles.dica}
-                            onClick={() => {
-                                enviarPrompt(pergunta.descricao, pergunta.alternativas, setDica, setCarregando)
-                                setCarregando(true)
-                            }}
-                            disabled={carregando}
-                        >
-                            DICA
-                        </button>
-                        {carregando && (<p className={styles.carregandodica}>Carregando dica...</p>)}
-                    </div>
-                    {dica !== "" && (
-                        <div className={styles.modalOverlay}>
-                            <div className={styles.modalContent}>
-                                <button
-                                    className={styles.modalClose}
-                                    onClick={() => setDica("")}
-                                >
-                                    X
-                                </button>
-
-                                <h2>Dica</h2>
-                                <p>{dica}</p>
-                            </div>
-                        </div>
-                    )}
-
-                    <div className={styles.info}>
-                        <h1>{pergunta.descricao}</h1>
-                        <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
-                        <div className={styles.pontuacao}>
-                            <span>Pontuação: {pontuacao}</span>
-                        </div>
-                    </div>
+                    <button
+                        className={styles.dica}
+                        onClick={() => {
+                            enviarPrompt(pergunta.descricao, pergunta.alternativas, setDica, setCarregando)
+                            setCarregando(true)
+                        }}
+                        disabled={carregando}
+                    >
+                        💡 DICA
+                    </button>
                     <div className={styles.dificuldadeContainer}>
                         <label htmlFor="dificuldade">Dificuldade:</label>
                         <progress
@@ -236,27 +211,54 @@ export default function Tela_Jogo() {
                         ></progress>
                     </div>
                 </div>
-                <div className={styles.alternativas}>
-                    {pergunta.alternativas?.map((alt, index) => (
-                        <button
-                            key={index}
-                            className={`${styles.alternativaBtn} ${mostrarResultado && respostaClicada === alt.letra
-                                    ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
-                                    : mostrarResultado && alt.letra === pergunta.correta
-                                        ? styles.correta
-                                        : ''
-                                }`}
-                            onClick={() => handleAlternativaClick(alt.letra)}
-                            disabled={mostrarResultado}
-                        >
-                            <strong className={styles.alternativaLetra} style={{ marginRight: 8 }}>
-                                {alt.letra}
-                            </strong>
-                            {alt.texto}
-                        </button>
-                    ))}
+                
+                {carregando && (<p className={styles.carregandodica}>⏳ Carregando dica...</p>)}
+                
+                {dica !== "" && (
+                    <div className={styles.modalOverlay}>
+                        <div className={styles.modalContent}>
+                            <button
+                                className={styles.modalClose}
+                                onClick={() => setDica("")}
+                            >
+                                ✕
+                            </button>
+
+                            <h2>💡 Dica</h2>
+                            <p>{dica}</p>
+                        </div>
+                    </div>
+                )}
+
+                <div className={styles.info}>
+                    <h1>{pergunta.descricao}</h1>
+                    <h2>{perguntaAtual + 1} / {perguntasFiltradas.length}</h2>
+                    <div className={styles.pontuacao}>
+                        <span>🏆 Pontuação: {Math.round(pontuacao)}</span>
+                    </div>
                 </div>
             </div>
+            <div className={styles.alternativas}>
+                {pergunta.alternativas?.map((alt, index) => (
+                    <button
+                        key={index}
+                        className={`${styles.alternativaBtn} ${mostrarResultado && respostaClicada === alt.letra
+                                ? (alt.letra === pergunta.correta ? styles.correta : styles.incorreta)
+                                : mostrarResultado && alt.letra === pergunta.correta
+                                    ? styles.correta
+                                    : ''
+                            }`}
+                        onClick={() => handleAlternativaClick(alt.letra)}
+                        disabled={mostrarResultado}
+                    >
+                        <strong className={styles.alternativaLetra}>
+                            {alt.letra}
+                        </strong>
+                        {alt.texto}
+                    </button>
+                ))}
+            </div>
         </div>
-    )
+    </div>
+)
 }

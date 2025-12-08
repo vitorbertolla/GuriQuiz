@@ -1,6 +1,7 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect} from "react";
+import styles from './Timer.module.css'
 
-export default function Timer({ tempoRestante,duracao, setTempoRestante, onTempoEsgotado }) {
+export default function Timer({ tempoRestante, duracao, setTempoRestante, onTempoEsgotado }) {
     useEffect(() => {
         setTempoRestante(duracao);
     }, [duracao, setTempoRestante]);
@@ -11,7 +12,7 @@ export default function Timer({ tempoRestante,duracao, setTempoRestante, onTempo
             setTempoRestante(tempoRestante - 1000);
         }, 1000)
         return () => clearTimeout(id);
-    },[tempoRestante, setTempoRestante]);
+    }, [tempoRestante, setTempoRestante]);
 
     useEffect(() => {
         if (tempoRestante === 0) {  
@@ -22,10 +23,15 @@ export default function Timer({ tempoRestante,duracao, setTempoRestante, onTempo
     const FormatarTempo = (ms) => {
         let segundos = Math.floor((tempoRestante / 1000));
         return `${segundos}`
-
     }
 
-    return( 
-        <div>{FormatarTempo(tempoRestante)}</div>
+    return (
+        <div className={styles.timer}>
+            <div className={`${styles.timerCircle} ${tempoRestante <= 3000 ? styles.urgente : ""}`}>
+                <span className={styles.timerText}>
+                    {FormatarTempo(tempoRestante)}
+                </span>
+            </div>
+        </div>
     )
 }
