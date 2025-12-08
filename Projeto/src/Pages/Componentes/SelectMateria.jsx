@@ -1,10 +1,19 @@
 export default function SelectMateria({ materia, setMateria, className }) {
     const OPCOES_MATERIA = [
-        { value: "matematica", label: "Matemática" },
-        { value: "portugues", label: "Português" },
-        { value: "fisica", label: "Física" },
-        { value: "conhecimentos Gerais", label: "Conhecimentos Gerais" },
-        { value: "biologia", label: "biologia" },
+
+  { value: "matematica", label: "Matemática" },
+  { value: "portugues", label: "Português" },
+  { value: "fisica", label: "Física" },
+  { value: "quimica", label: "Química" },
+  { value: "biologia", label: "Biologia" },
+  { value: "historia", label: "História" },
+  { value: "geografia", label: "Geografia" },
+  { value: "filosofia", label: "Filosofia" },
+  { value: "sociologia", label: "Sociologia" },
+  { value: "informatica", label: "Informática" },
+  { value: "conhecimentos_gerais", label: "Conhecimentos Gerais" }
+
+
     ];
 
   return (

@@ -141,6 +141,7 @@ const emailValidation = async (email) => {
                         /></button>
                     </div>
                 </form>
+                <p className={styles.loginLink}>Já tem uma conta? <a href="Login">Login</a></p>
             </div>
         </div>
     )

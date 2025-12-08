@@ -176,6 +176,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                         {modalAberto && (
                             <div className={styles.overlayAlternativas}>
                                 <div className={styles.alternativas}>
+                                    <button onClick={() => setModalAberto(false)}>X</button>
                                     <h3>Configurar Alternativas</h3>
                                     {['A', 'B', 'C', 'D'].map((letra, index) => {
                                         const setAlternativa = [setAlternativaA, setAlternativaB, setAlternativaC, setAlternativaD][index];

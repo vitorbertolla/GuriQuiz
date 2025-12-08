@@ -76,6 +76,7 @@ export default function Tela_Login (){
                         </button>
                     </div>
                     </form>
+                    <p className={styles.loginLink}>Não tem uma conta? <a href="Cadastrar">Cadastro</a></p>
                 </div>
             </div>
         )

@@ -21,11 +21,6 @@ export default function Tela_Resultados() {
   const pontuacao = parseInt(searchParams.get('pontuacao')) || 0
 
   async function score() {
-    if (!quizId) {
-      alert("Para salvar o resultado é necessário jogar um quiz pronto!");
-      return;
-    }
-    
     const user = auth.currentUser;
     if (!user) {
       alert("Você precisa estar logado para salvar o resultado!");
@@ -105,9 +100,11 @@ export default function Tela_Resultados() {
             <button onClick={() => navigate('/menu')} className={styles.btnMenu}>
               MENU
             </button>
-            <button onClick={score} className={styles.btnMenu}>
-              Salvar Resultados
-            </button>
+              {quizId && (
+                <button onClick={score} className={styles.btnMenu}>
+                   Salvar Resultados
+              </button>
+              )}
           </div>
         </div>
       </div>

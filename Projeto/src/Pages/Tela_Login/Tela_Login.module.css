@@ -142,3 +142,19 @@
     margin: 0;
   }
 }
+.loginLink {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  padding: 20px;
+}
+
+.loginLink a {
+  color: #3050ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
