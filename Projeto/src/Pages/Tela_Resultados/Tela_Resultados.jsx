@@ -3,7 +3,9 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import { db } from "../../services/firebaseConfig";
 import { auth } from "../../services/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDoc } from "firebase/firestore";
+import { getUserDocRef } from "../../services/authentication.js";
+import { updateProfile } from "firebase/auth";
 
 export default function Tela_Resultados() {
   const [searchParams] = useSearchParams()
@@ -12,9 +14,6 @@ export default function Tela_Resultados() {
   
   const quizId = location.state?.quizId;
   const nomeQuiz = searchParams.get('nome');  
-  
-  console.log("quizId:", quizId);
-  console.log("nomeQuiz:", nomeQuiz); // ← ADICIONADO: log para debug
   
   const total = parseInt(searchParams.get('total')) || 0
   const resultados = location.state?.resultados || []
@@ -34,17 +33,46 @@ export default function Tela_Resultados() {
     }
     
     try {
+      // determina nick com fallback e consulta no Firestore se houver
+      let nick = "Anônimo";
+
+      // tentativa 1: displayName
+      if (user.displayName && user.displayName.trim()) {
+        nick = user.displayName.trim();
+      } else if (user.email) {
+        // tentativa 2: prefixo do email
+        nick = user.email.split("@")[0];
+      }
+
+      // tentativa 3: verificar documento do usuário no Firestore (campo 'nick')
+      try {
+        const userDocRef = getUserDocRef(user.uid);
+        const userSnap = await getDoc(userDocRef);
+        if (userSnap.exists()) {
+          const savedNick = userSnap.data()?.nick;
+          if (savedNick && String(savedNick).trim()) {
+            nick = String(savedNick).trim();
+          }
+        }
+      } catch (e) {
+        console.warn("Não foi possível ler nick do documento de usuário:", e);
+      }
+
+      if (!user.displayName && nick && nick !== "Anônimo") {
+        try { await updateProfile(user, { displayName: nick }); } catch(e) { /* ignore */ }
+      }
+
       const ref = await addDoc(collection(db, "ranking"), {
         score: pontuacao,
-        nomeQuiz: nomeQuiz || "Quiz sem nome", // ← MUDOU: era quiznome: nome
+        nomeQuiz: nomeQuiz || "Quiz sem nome",
         userId: user.uid,
         quizId: quizId,
-        nick: user.displayName || "Anônimo",
-        timestamp: new Date() // ← ADICIONADO: data de criação
+        nick: nick,
+        timestamp: new Date()
       });
       
       alert("Resultado salvo com sucesso!");
-      console.log("Documento adicionado com ID:", ref.id); // ← MUDOU: era ref.nick
+      console.log("Documento adicionado com ID:", ref.id);
     } catch (error) {
       console.error("Erro ao salvar:", error);
       alert("Erro ao salvar resultado: " + error.message);
