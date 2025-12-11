@@ -31,7 +31,7 @@ export default function Tela_Menu() {
                   <button className={styles.pixelButton}>CADASTRO QUIZ</button>
               </Link>
               <Link to="/ranking" className={`${styles.link} ${styles.linkOption}`}>
-                  <button className={styles.pixelButton}>RAKING GERAL</button>
+                  <button className={styles.pixelButton}>RANKING GERAL</button>
               </Link>
             </div>
             <div className={styles.botoesJogar}>

@@ -4,12 +4,15 @@ import ListaQuiz from "./Tela_ListaQuiz";
 import { usePerguntas } from "../../services/crudPerguntas";
 import { useQuizzes } from "../../services/crudQuiz";
 import { useState } from "react";
+import {SearchP, searchPergunta} from "../Componentes/Search.jsx";
 
 export default function Tela_Admin() {
   const { perguntas, removerPergunta, editarPergunta } = usePerguntas();
   const { quizzes, removerQuiz, editarQuiz } = useQuizzes();
   const [crudPergunta, setCrudPergunta] = useState(false);
   const [crudQuiz, setCrudQuiz] = useState(false);
+  const [perguntasSearch, setPerguntaSearch] = useState("")
+
 
   return (
     <div className={styles.container}>
@@ -34,8 +37,12 @@ export default function Tela_Admin() {
       {crudPergunta && (
         <>
           <h2>Perguntas Cadastradas</h2>
+          <SearchP 
+            quizzesPergunta={perguntasSearch}
+            setPerguntasSearch={setPerguntaSearch}
+        />
           <div className={styles.cardContainer}>
-            {perguntas.map((p) => (
+            {searchPergunta(perguntasSearch, perguntas).map((p) => (
               <ListaPerguntas
                 key={p.id}
                 pergunta={p}

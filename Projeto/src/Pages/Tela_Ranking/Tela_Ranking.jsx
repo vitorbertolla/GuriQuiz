@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import {
   collection,
   query,
@@ -108,7 +109,9 @@ export default function Tela_Ranking() {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <button className={styles.btnX} onClick={() => window.location.href = "/menu" }>X</button>
+        <Link to ="/menu">
+          <button className={styles.btnX}>X</button>
+        </Link>
         <h1 className={styles.title}>Ranking</h1>
 
         {/* ===================== SELECT DE QUIZZES ===================== */}

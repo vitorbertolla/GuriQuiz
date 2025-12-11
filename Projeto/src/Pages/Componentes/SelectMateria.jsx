@@ -11,7 +11,7 @@ export default function SelectMateria({ materia, setMateria, className }) {
   { value: "filosofia", label: "Filosofia" },
   { value: "sociologia", label: "Sociologia" },
   { value: "informatica", label: "Informática" },
-  { value: "conhecimentos_gerais", label: "Conhecimentos Gerais" }
+  { value: "conhecimentos Gerais", label: "Conhecimentos Gerais" }
 
 
     ];

@@ -87,7 +87,7 @@ const handleSubmit = async (e) => {
 
 const passwordValidation = () => {
     if(senha.length < 6){
-        alert("A senha deve conter pelo menos 8 dígitos")
+        alert("A senha deve conter pelo menos 6 dígitos")
         return false
     }
     else{return true}

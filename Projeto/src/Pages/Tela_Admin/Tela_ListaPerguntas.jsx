@@ -3,6 +3,7 @@ import Tela_Cadastro_Pergunta from "../Tela_Cadastro_Pergunta/Tela_Cadastro_Perg
 import styles from "./Lista.module.css";
 import stylesModal from "./TelaModal.module.css";
 
+
 const ListaPerguntas = ({ pergunta, removerPergunta, editarPergunta }) => {
   const [editarPerguntaAtiva, setEditarPerguntaAtiva] = useState(false);
 
