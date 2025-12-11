@@ -1,36 +1,57 @@
+// Importa estilos
 import styles from './Tela_Cadastro_Pergunta.module.css'
+
+// Importa o componente da IA
 import IAcria from './Tela_Cadastro_IA.jsx'
+
+// Hooks do React
 import { useState } from 'react'
+
+// Hook personalizado para CRUD das perguntas
 import {usePerguntas} from '../../services/crudPerguntas.js'
+
+// Componentes de seleção
 import SelectMateria from '../Componentes/SelectMateria.jsx'
 import SelectDificuldade from '../Componentes/SelectDificuldade.jsx'
+
+// Para navegação
 import { Link } from "react-router-dom";
 
 export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar = false, adicionarPergunta: adicionarPerguntaProp, editarPergunta: editarPerguntaProp}) {
-    // ... (Hooks e estados permanecem os mesmos)
+
+    // Usa os hooks do CRUD caso não receba funções como props
     const hooks = usePerguntas()
     const adicionarPergunta = adicionarPerguntaProp || hooks.adicionarPergunta
     const editarPergunta = editarPerguntaProp || hooks.editarPergunta
+
+    // Estados da tela
     const [descricao, setDescricao] = useState(perguntaInicial?.descricao || '');
     const [dificuldade, setDificuldade] = useState(perguntaInicial?.dificuldade || '');
     const [materia, setMateria] = useState(perguntaInicial?.materia || '');
     const [alternativas, setAlternativas] = useState(perguntaInicial?.alternativas || []);
     const [correta, setCorreta] = useState(perguntaInicial?.correta || ''); 
+
+    // Alternativas individuais (A, B, C, D)
     const [alternativaA, setAlternativaA] = useState(perguntaInicial?.alternativas?.[0]?.texto || '')
     const [alternativaB, setAlternativaB] = useState(perguntaInicial?.alternativas?.[1]?.texto || '')
     const [alternativaC, setAlternativaC] = useState(perguntaInicial?.alternativas?.[2]?.texto || '')
     const [alternativaD, setAlternativaD] = useState(perguntaInicial?.alternativas?.[3]?.texto || '')
+
+    // Controle dos modais
     const [modalAberto, setModalAberto] = useState(false) 
     const [mostrarIACreate, setMostrarIACreate] = useState(false)
 
+    // Função principal de envio do formulário
     function submit(e) {
         e.preventDefault()
+
+        // Validação inicial
         if ( descricao.trim() === "" || !dificuldade || !materia) {
             alert('Por favor, preencha todos os campos obrigatórios.')
             return
         }
         
-        // Garante que as alternativas estejam atualizadas antes de enviar
+        // Cria array atualizado das alternativas
         const alternativasAtualizadas = [
             { letra: 'A', texto: alternativaA },
             { letra: 'B', texto: alternativaB },
@@ -45,16 +66,22 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
             alternativas: alternativasAtualizadas,
             correta
         }
+
+        // Se estiver editando, chama função apropriada
         if (editar && perguntaInicial) {
             editarPergunta(perguntaInicial.id, dados);
             alert('Pergunta editada com sucesso!');
-        } else {
+        } 
+        // Senão, cadastra nova pergunta
+        else {
             adicionarPergunta(descricao, dificuldade, materia, alternativasAtualizadas, correta);
             alert('Pergunta cadastrada com sucesso!');
         }
       
-          onClose?.();
-        // Resetar os campos após o cadastro
+        // Fecha modal/página
+        onClose?.();
+
+        // Limpa todos os campos
         setDescricao('')
         setDificuldade('')
         setMateria('')
@@ -65,14 +92,18 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
         setAlternativaD('')
         setCorreta('')
     }
+
+    // Função do modal de alternativas
     function confirmarAlternativas() {
         if (alternativaA.trim() === "" || alternativaB.trim() === "" || alternativaC.trim() === "" || alternativaD.trim() === "") {
             alert('Por favor, preencha todas as alternativas antes de confirmar.');
             return;
-        }else if (!correta) {
+        } else if (!correta) {
             alert('Por favor, selecione a alternativa correta antes de confirmar.');
             return;
         }
+
+        // Atualiza estado principal de alternativas
         setAlternativas([
             { letra: 'A', texto: alternativaA },
             { letra: 'B', texto: alternativaB },
@@ -83,9 +114,14 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
     }
 
     return (
+        // Container muda classe dependendo se está editando
         <div className={editar ? styles.containerEdit : styles.container}>
             <div className={styles['tela-cadastro-pergunta']}>
+
+                {/* Header da página */}
                 <header className={styles['tela-cadastro-pergunta__header']}>
+
+                    {/* Botão de sair só aparece quando NÃO está editando */}
                     {!editar && (
                         <Link to="/menu" className={styles['tela-cadastro-pergunta__exit-link']}>
                             <button className={styles['tela-cadastro-pergunta__exit-button']}>
@@ -93,6 +129,8 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </button>
                         </Link>
                     )}
+
+                    {/* Títulos diferentes para cadastrar ou editar */}
                     {!editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Cadastro de Perguntas</h1>)}
                     {editar && (<h1 className={styles['tela-cadastro-pergunta__title']}>Editar Pergunta</h1>)}
                 </header>
@@ -102,7 +140,8 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                         className={styles['tela-cadastro-pergunta__form']}
                         onSubmit={submit}
                     >
-                        {/* LINHA PRINCIPAL - Pergunta e Seletores */}
+
+                        {/* Linha com a descrição da pergunta e selects */}
                         <div className={styles['tela-cadastro-pergunta__form-row']}>
                             <input
                                 className={styles['input-pergunta']}
@@ -111,7 +150,8 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 value={descricao}
                                 onChange={(e) => setDescricao(e.target.value)}
                             />
-                            {/* Os componentes SelectMateria/Dificuldade devem aceitar uma prop 'className' e aplicá-la ao seu elemento raiz */}
+
+                            {/* Selects de dificuldade e matéria */}
                             <div className={styles['selects-wrapper']}>
                                 <SelectDificuldade
                                     className={styles['form-select']}
@@ -126,7 +166,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </div>
                         </div>
 
-                        {/* BOTÃO ALTERNATIVAS */}
+                        {/* Botão para abrir o modal de alternativas */}
                         <div className={styles['alternativas-btn-wrapper']}>
                             <button
                                 type="button"
@@ -137,9 +177,11 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </button>
                         </div>
             
-                        {/* BOTÕES DE AÇÃO (Cadastro/Edição) */}
+                        {/* Botões da parte inferior */}
                         {!editar ? (
                             <div className={styles['buttons-low']}>
+
+                                {/* Alterna o modal da IA */}
                                 <button
                                     type="button"
                                     className={styles['btn-acao']}
@@ -147,6 +189,8 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 >
                                     Criar com IA
                                 </button>
+
+                                {/* Envia cadastro */}
                                 <button
                                     type="submit"
                                     className={styles['btn-acao']}
@@ -155,6 +199,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 </button>
                             </div>
                         ) : (
+                            // Opções quando está editando
                             <div className={styles['buttons-edit']}>
                                 <button 
                                     type="submit" 
@@ -162,6 +207,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                 >
                                     Salvar Alterações
                                 </button>
+
                                 <button 
                                     type="button" 
                                     onClick={onClose} 
@@ -172,12 +218,15 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </div>
                         )}
 
-                        {/* MODAL ALTERNATIVAS */}
+                        {/* Modal de alternativas */}
                         {modalAberto && (
                             <div className={styles.overlayAlternativas}>
                                 <div className={styles.alternativas}>
+
                                     <button onClick={() => setModalAberto(false)}>X</button>
                                     <h3>Configurar Alternativas</h3>
+
+                                    {/* Loop para inputs A-D */}
                                     {['A', 'B', 'C', 'D'].map((letra, index) => {
                                         const setAlternativa = [setAlternativaA, setAlternativaB, setAlternativaC, setAlternativaD][index];
                                         const alternativaValue = [alternativaA, alternativaB, alternativaC, alternativaD][index];
@@ -201,6 +250,7 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                                             </label>
                                         );
                                     })}
+
                                     <button className={styles.ModalConfirmar} type="button" onClick={confirmarAlternativas}>
                                         Confirmar
                                     </button>
@@ -208,24 +258,22 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                             </div>
                         )}
 
-                        {/* COMPONENTE IA */}
+                        {/* Modal da IA */}
                         {mostrarIACreate &&(
                             <div>
-                                
                                 <IAcria 
-                                // ... (Props do IAcria permanecem as mesmas)
-                                setDescricao={setDescricao}
-                                setMostrarIACreate={setMostrarIACreate}
-                                setDificuldade={setDificuldade} 
-                                setMateria={setMateria}  
-                                materia={materia}
-                                dificuldade={dificuldade}
-                                setCorreta={setCorreta}
-                                setAlternativas={setAlternativas}
-                                setAlternativaA={setAlternativaA}
-                                setAlternativaB={setAlternativaB}
-                                setAlternativaC={setAlternativaC}
-                                setAlternativaD={setAlternativaD}
+                                    setDescricao={setDescricao}
+                                    setMostrarIACreate={setMostrarIACreate}
+                                    setDificuldade={setDificuldade} 
+                                    setMateria={setMateria}
+                                    materia={materia}
+                                    dificuldade={dificuldade}
+                                    setCorreta={setCorreta}
+                                    setAlternativas={setAlternativas}
+                                    setAlternativaA={setAlternativaA}
+                                    setAlternativaB={setAlternativaB}
+                                    setAlternativaC={setAlternativaC}
+                                    setAlternativaD={setAlternativaD}
                                 />
                             </div>
                         )}
@@ -233,5 +281,5 @@ export default function Tela_Cadastro_Pergunta({perguntaInicial, onClose, editar
                 </main>
             </div>
         </div>
-    )  
+    )  
 }
