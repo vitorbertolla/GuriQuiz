@@ -1,6 +1,9 @@
 // Importa o arquivo CSS específico da tela
 import styles from './Tela_Cadastro.module.css'
 
+// Importa componente Link para navegação
+import { Link } from 'react-router-dom';
+
 // Importa hooks do React
 import { useState, useEffect } from 'react'
 
@@ -229,7 +232,12 @@ export default function Tela_Cadastro() {
 
                 {/* Link para login */}
                 <p className={styles.loginLink}>
-                    Já tem uma conta? <a href="Login">Login</a>
+                    Já tem uma conta? 
+                    <a>
+                        <Link to='/login'>
+                            Login                        
+                        </Link>
+                    </a>
                 </p>
 
             </div>

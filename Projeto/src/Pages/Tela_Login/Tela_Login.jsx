@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { auth } from "../../services/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { loginComEmail, loginComGoogle, logout } from "../../services/authentication";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export default function Tela_Login (){
 
@@ -117,7 +117,12 @@ export default function Tela_Login (){
 
         {/* Link para cadastro */}
         <p className={styles.loginLink}>
-          Não tem uma conta? <a href="Cadastrar">Cadastro</a>
+          Não tem uma conta? 
+          <a>
+            <Link to='/cadastrar'>
+               Cadastro
+            </Link>
+          </a>
         </p>
 
       </div>
